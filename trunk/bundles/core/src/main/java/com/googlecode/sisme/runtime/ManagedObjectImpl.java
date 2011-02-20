@@ -15,22 +15,6 @@
  */
 package com.googlecode.sisme.runtime;
 
-import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
-
-import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.provider.JAXBDefinitionParser;
-import com.googlecode.sisme.provider.ManagedObjectFactory;
-import com.googlecode.sisme.provider.ManagedObjectMetadata;
-
-public class InterfaceParser extends JAXBDefinitionParser {
-    public InterfaceParser() {
-        super(InterfaceModel.class);
-    }
-    
-    public ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+public class ManagedObjectImpl {
 
 }

@@ -13,14 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
+package com.googlecode.sisme.core.model;
 
-import javax.xml.validation.Schema;
+import java.util.List;
 
-import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public interface DefinitionParser {
-    Schema getSchema();
-    ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata);
+@XmlRootElement(name="interface")
+public class InterfaceModel extends ManagedObjectModel {
+    @XmlElement(name="operation")
+    private List<OperationModel> operations;
+
+    public List<OperationModel> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(List<OperationModel> operations) {
+        this.operations = operations;
+    }
 }
