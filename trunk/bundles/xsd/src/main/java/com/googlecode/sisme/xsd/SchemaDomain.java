@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.description;
+package com.googlecode.sisme.xsd;
 
-public interface Domain<T extends Type> {
-    T lookup(String name);
+import com.googlecode.sisme.description.Domain;
+
+public class SchemaDomain implements Domain<SchemaType> {
+
+    public SchemaType lookup(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
 }
