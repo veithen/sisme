@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.description;
+package com.googlecode.sisme.java;
 
-public interface Domain<T extends Type> {
-    T lookup(String name);
+import com.googlecode.sisme.description.Type;
+
+public class JavaType implements Type {
+    private final Class<?> clazz;
+
+    public JavaType(Class<?> clazz) {
+        this.clazz = clazz;
+    }
 }
