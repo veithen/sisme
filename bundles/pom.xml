@@ -27,7 +27,15 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
+        <module>sample</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
