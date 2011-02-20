@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
-
-import javax.xml.validation.Schema;
+package com.googlecode.sisme.framework;
 
 import org.osgi.framework.BundleContext;
 import org.w3c.dom.Element;
 
-public interface DefinitionParser {
-    Schema getSchema();
-    ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata);
+public abstract class AbstractDefinitionParser implements DefinitionParser {
+
+    protected final <T> ManagedObjectRef<T> parse(BundleContext context, Element element) {
+        // TODO
+        return null;
+    }
 }

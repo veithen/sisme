@@ -22,6 +22,8 @@ import javax.xml.namespace.QName;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
+import com.googlecode.sisme.framework.ManagedObjectFactory;
+
 public final class ProviderUtils {
     private ProviderUtils() {}
     

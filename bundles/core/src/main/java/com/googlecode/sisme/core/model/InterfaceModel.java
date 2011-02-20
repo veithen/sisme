@@ -20,11 +20,13 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectModel;
+
 @XmlRootElement(name="interface")
 public class InterfaceModel extends ManagedObjectModel {
-    @XmlElement(name="operation")
     private List<OperationModel> operations;
 
+    @XmlElement(name="operation")
     public List<OperationModel> getOperations() {
         return operations;
     }

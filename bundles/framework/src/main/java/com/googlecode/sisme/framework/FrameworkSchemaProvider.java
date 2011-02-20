@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
+package com.googlecode.sisme.framework;
 
-public class ManagedObjectRef<T> {
-    public T get() {
-        // TODO
-        return null;
-    }
+import org.w3c.dom.Document;
+
+public interface FrameworkSchemaProvider {
+    String getFilename();
+    Document getSchema();
 }

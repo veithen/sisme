@@ -19,9 +19,9 @@ import org.osgi.framework.BundleContext;
 import org.w3c.dom.Element;
 
 import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.provider.JAXBDefinitionParser;
-import com.googlecode.sisme.provider.ManagedObjectFactory;
-import com.googlecode.sisme.provider.ManagedObjectMetadata;
+import com.googlecode.sisme.framework.ManagedObjectFactory;
+import com.googlecode.sisme.framework.ManagedObjectMetadata;
+import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
 
 public class InterfaceParser extends JAXBDefinitionParser {
     public InterfaceParser() {

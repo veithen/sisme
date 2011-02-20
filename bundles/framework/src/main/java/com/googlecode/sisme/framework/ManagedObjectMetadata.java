@@ -13,21 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.core.model;
+package com.googlecode.sisme.framework;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="object")
-public class ManagedObjectModel {
-    @XmlAttribute
-    private String name;
+public class ManagedObjectMetadata {
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void addDependency(ManagedObjectRef ref) {
+        
     }
 }
