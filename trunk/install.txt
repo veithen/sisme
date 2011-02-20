@@ -1,0 +1,18 @@
+1. Download and extract the Felix Framework Distribution.
+
+2. Start the OSGi runtime:
+
+$ java -jar bin/felix.jar
+
+3. Install the following prerequisite bundles:
+
+install http://repo1.maven.org/maven2/org/apache/felix/org.apache.felix.http.jetty/2.2.0/org.apache.felix.http.jetty-2.2.0.jar
+install http://repo1.maven.org/maven2/org/apache/felix/org.apache.felix.http.whiteboard/2.2.0/org.apache.felix.http.whiteboard-2.2.0.jar
+install http://repo2.maven.org/maven2/org/apache/geronimo/specs/geronimo-activation_1.1_spec/1.1/geronimo-activation_1.1_spec-1.1.jar
+install http://repo2.maven.org/maven2/org/apache/geronimo/specs/geronimo-stax-api_1.0_spec/1.0.1/geronimo-stax-api_1.0_spec-1.0.1.jar
+install http://repo2.maven.org/maven2/org/apache/geronimo/specs/geronimo-jaxb_2.1_spec/1.0/geronimo-jaxb_2.1_spec-1.0.jar
+install http://repo1.maven.org/maven2/org/apache/servicemix/bundles/org.apache.servicemix.bundles.jaxb-impl/2.1.13_1/org.apache.servicemix.bundles.jaxb-impl-2.1.13_1.jar
+
+4. Install the SiSME bundles:
+
+install file:///Users/veithen/.m2/repository/com/googlecode/sisme/core/0.1-SNAPSHOT/core-0.1-SNAPSHOT.jar
