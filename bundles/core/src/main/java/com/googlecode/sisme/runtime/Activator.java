@@ -15,15 +15,25 @@
  */
 package com.googlecode.sisme.runtime;
 
+import java.util.Properties;
+
 import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import com.googlecode.sisme.provider.FrameworkSchemaProvider;
+import com.googlecode.sisme.provider.JAXBFrameworkSchemaProvider;
 import com.googlecode.sisme.provider.ProviderUtils;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
+        String namespace = "http://sisme.googlecode.com/core";
+        FrameworkSchemaProvider schemaProvider = new JAXBFrameworkSchemaProvider("com.googlecode.sisme.core.model", namespace);
+        Properties props = new Properties();
+        props.put("namespace", namespace);
+        context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
+        
 //        ProviderUtils.registerManagedObjectFactory(context, new InterfaceFactory(),
 //                new QName("http://sisme.googlecode.com/core", "interface"));
     }

@@ -19,15 +19,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.validation.Schema;
 
-import com.sun.xml.bind.api.JAXBRIContext;
-
 public abstract class JAXBDefinitionParser extends AbstractDefinitionParser {
-    private final JAXBRIContext jaxbContext;
+    private final JAXBContext jaxbContext;
     private final Schema schema;
     
     public JAXBDefinitionParser(Class<?> elementClass) {
         try {
-            jaxbContext = (JAXBRIContext)JAXBContext.newInstance(elementClass);
+            jaxbContext = JAXBContext.newInstance(elementClass);
         } catch (JAXBException ex) {
             throw new Error("Unable to create JAXBContext for " + elementClass, ex);
         }
