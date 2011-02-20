@@ -13,11 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
+package com.googlecode.sisme.framework;
 
-public class ManagedObjectMetadata {
+import javax.xml.validation.Schema;
 
-    public void addDependency(ManagedObjectRef ref) {
-        
-    }
+import org.osgi.framework.BundleContext;
+import org.w3c.dom.Element;
+
+
+public interface DefinitionParser {
+    Schema getSchema();
+    ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata);
 }

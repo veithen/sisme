@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name="operation")
 public class OperationModel {
-    @XmlAttribute
     private String name;
 
+    @XmlAttribute
     public String getName() {
         return name;
     }

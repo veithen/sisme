@@ -13,7 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
+package com.googlecode.sisme.framework.jaxb2.model;
 
-public abstract class ManagedObjectFactory {
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(name="object", namespace="http://sisme.googlecode.com/core")
+public class ManagedObjectModel {
+    private String name;
+
+    @XmlAttribute
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

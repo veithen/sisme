@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
+package com.googlecode.sisme.framework.jaxb2;
 
 import java.io.IOException;
 
@@ -26,6 +26,8 @@ import javax.xml.transform.Result;
 import javax.xml.transform.dom.DOMResult;
 
 import org.w3c.dom.Document;
+
+import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 
 public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
     private static class SchemaOutput extends SchemaOutputResolver {
@@ -42,7 +44,9 @@ public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
         public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
             if (this.namespaceUri.equals(namespaceUri)) {
                 filename = suggestedFileName;
-                return new DOMResult(document);
+                DOMResult result = new DOMResult(document);
+                result.setSystemId(suggestedFileName);
+                return result;
             } else {
                 return null;
             }
@@ -56,13 +60,13 @@ public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
     private final Document document;
     private final String filename;
     
-    public JAXBFrameworkSchemaProvider(String pkg, String namespaceUri) throws JAXBException {
+    public JAXBFrameworkSchemaProvider(String namespaceUri, Class<?>... classes) throws JAXBException {
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         } catch (ParserConfigurationException ex) {
             throw new Error("Unable to create DOM document", ex);
         }
-        JAXBContext context = (JAXBContext)JAXBContext.newInstance(pkg);
+        JAXBContext context = JAXBUtil.createContext(classes);
         SchemaOutput output = new SchemaOutput(namespaceUri, document);
         try {
             context.generateSchema(output);
