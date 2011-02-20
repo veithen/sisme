@@ -13,14 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.provider;
+package com.googlecode.sisme.core.model;
 
-import javax.xml.validation.Schema;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 
-import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
+@XmlType(name="object")
+public class ManagedObjectModel {
+    @XmlAttribute
+    private String name;
 
-public interface DefinitionParser {
-    Schema getSchema();
-    ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata);
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
