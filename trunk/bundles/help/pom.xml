@@ -37,4 +37,19 @@
             <version>2.5</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>SiSME Help</Bundle-Name>
+                        <Bundle-Activator>com.googlecode.sisme.help.Activator</Bundle-Activator>
+                        <Export-Package></Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
