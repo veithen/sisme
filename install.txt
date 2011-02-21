@@ -27,9 +27,10 @@ install file:///Users/veithen/.m2/repository/com/googlecode/sisme/help/0.1-SNAPS
 
 ALTERNATIVE
 
-obr:repos add file:///path_to_sisme/obr/dependencies.xml
-obr:repos add file:///path_to_m2_repo/repository.xml
+repos add file:///path_to_sisme/obr/dependencies.xml
+repos add file:///path_to_m2_repo/repository.xml
 
-deploy -s "Apache Felix Http Jetty"
-deploy -s "Apache Felix Http Whiteboard"
-deploy -s "SiSME Core"
+deploy -s org.apache.felix.http.jetty
+deploy -s org.apache.felix.http.whiteboard
+deploy -s com.googlecode.sisme.core
+deploy -s com.googlecode.sisme.help
