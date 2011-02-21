@@ -22,4 +22,98 @@
         <require extend="false" filter="(&amp;(package=org.osgi.service.log)(version&gt;=1.3.0))" multiple="false" name="package" optional="false">Import package org.osgi.service.log ;version=1.3.0</require>
         <require extend="false" filter="(&amp;(package=org.osgi.util.tracker)(version&gt;=1.4.0))" multiple="false" name="package" optional="false">Import package org.osgi.util.tracker ;version=1.4.0</require>
     </resource>
+    <resource id="org.apache.geronimo.specs.geronimo-stax-api_1.0_spec/1.0.1" symbolicname="org.apache.geronimo.specs.geronimo-stax-api_1.0_spec" presentationname="geronimo-stax-api_1.0_spec" uri="http://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-stax-api_1.0_spec/1.0.1/geronimo-stax-api_1.0_spec-1.0.1.jar" version="1.0.1">
+        <description>Provides open-source implementations of Sun specifications.</description>
+        <size>28804</size>
+        <documentation>http://www.apache.org</documentation>
+        <license>http://www.apache.org/licenses/LICENSE-2.0.txt</license>
+        <capability name="bundle">
+            <p n="symbolicname" v="org.apache.geronimo.specs.geronimo-stax-api_1.0_spec"/>
+            <p n="presentationname" v="geronimo-stax-api_1.0_spec"/>
+            <p n="version" t="version" v="1.0.1"/>
+            <p n="manifestversion" v="2"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.stream.util"/>
+            <p n="version" t="version" v="1.0.0"/>
+            <p n="uses:" v="javax.xml.stream.events,javax.xml.namespace,javax.xml.stream"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.stream.events"/>
+            <p n="version" t="version" v="1.0.0"/>
+            <p n="uses:" v="javax.xml.namespace,javax.xml.stream"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.stream"/>
+            <p n="version" t="version" v="1.0.0"/>
+            <p n="uses:" v="javax.xml.stream.util,javax.xml.stream.events,javax.xml.namespace,javax.xml.transform"/>
+        </capability>
+        <require name="package" filter="(&amp;(package=javax.xml.namespace))" extend="false" multiple="false" optional="false">Import package javax.xml.namespace</require>
+        <require name="package" filter="(&amp;(package=javax.xml.stream)(version&gt;=1.0.0))" extend="false" multiple="false" optional="false">Import package javax.xml.stream;version=1.0</require>
+        <require name="package" filter="(&amp;(package=javax.xml.stream.events)(version&gt;=1.0.0))" extend="false" multiple="false" optional="false">Import package javax.xml.stream.events;version=1.0</require>
+        <require name="package" filter="(&amp;(package=javax.xml.stream.util)(version&gt;=1.0.0))" extend="false" multiple="false" optional="false">Import package javax.xml.stream.util;version=1.0</require>
+        <require name="package" filter="(&amp;(package=javax.xml.transform))" extend="false" multiple="false" optional="false">Import package javax.xml.transform</require>
+    </resource>
+    <resource id="org.apache.geronimo.specs.geronimo-jaxb_2.1_spec/1.0.0" presentationname="Apache JAXB 2.1 Spec" symbolicname="org.apache.geronimo.specs.geronimo-jaxb_2.1_spec" uri="http://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-jaxb_2.1_spec/1.0/geronimo-jaxb_2.1_spec-1.0.jar" version="1.0.0">
+        <description>Java API for XML binding 2.1 API</description>
+        <size>78484</size>
+        <documentation>http://geronimo.apache.org/maven/specs/geronimo-jaxb_2.1_spec/1.0</documentation>
+        <license>http://www.apache.org/licenses/LICENSE-2.0.txt</license>
+        <category id="org.apache.geronimo.specs"/>
+        <capability name="bundle">
+            <p n="manifestversion" v="2"/>
+            <p n="presentationname" v="Apache JAXB 2.1 Spec"/>
+            <p n="symbolicname" v="org.apache.geronimo.specs.geronimo-jaxb_2.1_spec"/>
+            <p n="version" t="version" v="1.0.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.bind.annotation"/>
+            <p n="uses" v="javax.xml.bind,javax.xml.transform,javax.xml.transform.dom,org.w3c.dom,javax.xml.parsers"/>
+            <p n="version" t="version" v="2.1.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.bind.annotation.adapters"/>
+            <p n="uses" v="javax.xml.bind"/>
+            <p n="version" t="version" v="2.1.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.bind.helpers"/>
+            <p n="uses" v="javax.xml.bind.annotation.adapters,javax.xml.bind.attachment,javax.xml.validation,org.xml.sax,javax.xml.bind,javax.xml.stream,javax.xml.transform.stream,javax.xml.transform.dom,org.w3c.dom,javax.xml.transform.sax,javax.xml.transform,javax.xml.parsers"/>
+            <p n="version" t="version" v="2.1.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.bind.util"/>
+            <p n="uses" v="org.xml.sax,javax.xml.transform.sax,javax.xml.bind,org.xml.sax.helpers,org.xml.sax.ext"/>
+            <p n="version" t="version" v="2.1.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.bind.attachment"/>
+            <p n="uses" v="javax.activation"/>
+            <p n="version" t="version" v="2.1.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.xml.bind"/>
+            <p n="uses" v="javax.xml.validation,javax.xml.namespace,javax.xml.bind.annotation,javax.xml.transform.stream,javax.xml.transform,javax.xml.bind.annotation.adapters,org.w3c.dom,javax.xml.bind.attachment,org.xml.sax,javax.xml.stream"/>
+            <p n="version" t="version" v="2.1.0"/>
+        </capability>
+        <require extend="false" filter="(&amp;(package=javax.activation)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package javax.activation ;version=1.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.bind)(version&gt;=2.1.0))" multiple="false" name="package" optional="false">Import package javax.xml.bind ;version=2.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.bind.annotation)(version&gt;=2.1.0))" multiple="false" name="package" optional="false">Import package javax.xml.bind.annotation ;version=2.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.bind.annotation.adapters)(version&gt;=2.1.0))" multiple="false" name="package" optional="false">Import package javax.xml.bind.annotation.adapters ;version=2.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.bind.attachment)(version&gt;=2.1.0))" multiple="false" name="package" optional="false">Import package javax.xml.bind.attachment ;version=2.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.bind.helpers)(version&gt;=2.1.0))" multiple="false" name="package" optional="false">Import package javax.xml.bind.helpers ;version=2.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.bind.util)(version&gt;=2.1.0))" multiple="false" name="package" optional="false">Import package javax.xml.bind.util ;version=2.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.namespace)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.namespace</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.parsers)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.parsers</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.stream)(version&gt;=1.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.stream ;version=1.0.0</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.transform)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.transform</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.transform.dom)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.transform.dom</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.transform.sax)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.transform.sax</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.transform.stream)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.transform.stream</require>
+        <require extend="false" filter="(&amp;(package=javax.xml.validation)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package javax.xml.validation</require>
+        <require extend="false" filter="(&amp;(package=org.w3c.dom)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.w3c.dom</require>
+        <require extend="false" filter="(&amp;(package=org.xml.sax)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.xml.sax</require>
+        <require extend="false" filter="(&amp;(package=org.xml.sax.ext)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.xml.sax.ext</require>
+        <require extend="false" filter="(&amp;(package=org.xml.sax.helpers)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.xml.sax.helpers</require>
+    </resource>
 </repository>
