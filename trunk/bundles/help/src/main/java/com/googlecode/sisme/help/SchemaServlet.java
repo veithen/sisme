@@ -22,10 +22,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 
 import org.osgi.framework.ServiceReference;
@@ -63,10 +65,12 @@ public class SchemaServlet extends HttpServlet {
             for (Object service : tracker.getServices()) {
                 FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)service;
                 if (schemaProvider.getFilename().equals(filename)) {
-                    Transformer transformer;
                     try {
-                        transformer = TransformerFactory.newInstance().newTransformer();
-                        transformer.transform(new DOMSource(schemaProvider.getSchema()), new StreamResult(response.getOutputStream()));
+                        SAXTransformerFactory factory = (SAXTransformerFactory)TransformerFactory.newInstance();
+                        TransformerHandler transformerHandler = factory.newTransformerHandler();
+                        transformerHandler.setResult(new StreamResult(response.getOutputStream()));
+                        factory.newTransformer().transform(new DOMSource(schemaProvider.getSchema()),
+                                new SAXResult(new SchemaPrettyPrinter(transformerHandler)));
                     } catch (TransformerException ex) {
                         throw new ServletException(ex);
                     }
