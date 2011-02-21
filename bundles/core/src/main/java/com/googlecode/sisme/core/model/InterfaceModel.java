@@ -19,12 +19,25 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectModel;
+import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
 
 @XmlRootElement(name="interface")
+@XmlType(name="", propOrder={"domain", "operations"})
 public class InterfaceModel extends ManagedObjectModel {
+    private ManagedObjectRefModel domain;
     private List<OperationModel> operations;
+
+    @XmlElement
+    public ManagedObjectRefModel getDomain() {
+        return domain;
+    }
+
+    public void setDomain(ManagedObjectRefModel domain) {
+        this.domain = domain;
+    }
 
     @XmlElement(name="operation")
     public List<OperationModel> getOperations() {

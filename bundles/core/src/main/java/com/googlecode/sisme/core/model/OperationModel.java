@@ -15,12 +15,18 @@
  */
 package com.googlecode.sisme.core.model;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="operation")
+@XmlType(name="operation", propOrder={"input", "output", "faults"})
 public class OperationModel {
     private String name;
+    private MessageModel input;
+    private MessageModel output;
+    private List<MessageModel> faults;
 
     @XmlAttribute
     public String getName() {
@@ -29,5 +35,32 @@ public class OperationModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @XmlElement
+    public MessageModel getInput() {
+        return input;
+    }
+
+    public void setInput(MessageModel input) {
+        this.input = input;
+    }
+
+    @XmlElement
+    public MessageModel getOutput() {
+        return output;
+    }
+
+    public void setOutput(MessageModel output) {
+        this.output = output;
+    }
+
+    @XmlElement(name="fault")
+    public List<MessageModel> getFaults() {
+        return faults;
+    }
+
+    public void setFaults(List<MessageModel> faults) {
+        this.faults = faults;
     }
 }

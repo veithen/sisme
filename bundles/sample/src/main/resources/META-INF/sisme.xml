@@ -17,21 +17,22 @@
 <definitions xmlns="http://sisme.googlecode.com/core"
              targetNamespace="http://sisme.googlecode.com/sample"
              xmlns:java="http://sisme.googlecode.com/java"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<!--              xsi:schemaLocation="http://sisme.googlecode.com/core core.xsd" -->
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/schema1.xsd">
     
-    <interface name="Calculator_Java" domain="java:system">
+    <interface name="Calculator_Java">
+        <domain ref="java:system"/>
         <operation name="add">
             <input>
-                <rpc-message>
+                <message>
                     <part name="operand1" type="java.lang.Integer"/>
                     <part name="operand2" type="java.lang.Integer"/>
-                </rpc-message>
+                </message>
             </input>
             <output>
-                <rpc-message>
+                <message>
                     <part name="result" type="java.lang.Integer"/>
-                </rpc-message>
+                </message>
             </output>
         </operation>
     </interface>
