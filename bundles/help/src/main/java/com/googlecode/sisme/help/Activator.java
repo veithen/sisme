@@ -15,11 +15,23 @@
  */
 package com.googlecode.sisme.help;
 
+import java.util.Properties;
+
+import javax.servlet.Servlet;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
+
+import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
+        ServiceTracker tracker = new ServiceTracker(context, FrameworkSchemaProvider.class.getName(), null);
+        tracker.open();
+        Properties props = new Properties();
+        props.put("alias", "/sisme/schema");
+        context.registerService(Servlet.class.getName(), new SchemaServlet(tracker), props);
     }
 
     public void stop(BundleContext context) throws Exception {

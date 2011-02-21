@@ -16,16 +16,63 @@
 package com.googlecode.sisme.help;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
+
+import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 
 @SuppressWarnings("serial")
 public class SchemaServlet extends HttpServlet {
+    private final ServiceTracker tracker;
+    
+    public SchemaServlet(ServiceTracker tracker) {
+        this.tracker = tracker;
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getPathInfo();
+        String pathInfo = request.getPathInfo();
+        if (pathInfo == null || pathInfo.length() == 0 || pathInfo.equals("/")) {
+            response.setContentType("text/plain");
+            PrintWriter out = response.getWriter();
+            for (ServiceReference reference : tracker.getServiceReferences()) {
+                FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)tracker.getService(reference);
+                if (schemaProvider != null) {
+                    out.println(reference.getProperty("namespace") + " " + schemaProvider.getFilename());
+                }
+            }
+        } else {
+            String filename;
+            if (pathInfo.startsWith("/")) {
+                filename = pathInfo.substring(1);
+            } else {
+                filename = pathInfo;
+            }
+            for (Object service : tracker.getServices()) {
+                FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)service;
+                if (schemaProvider.getFilename().equals(filename)) {
+                    Transformer transformer;
+                    try {
+                        transformer = TransformerFactory.newInstance().newTransformer();
+                        transformer.transform(new DOMSource(schemaProvider.getSchema()), new StreamResult(response.getOutputStream()));
+                    } catch (TransformerException ex) {
+                        throw new ServletException(ex);
+                    }
+                    break;
+                }
+            }
+        }
     }
 }
