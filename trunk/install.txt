@@ -4,6 +4,10 @@
 
 $ java -jar bin/felix.jar
 
+When using an HTTP proxy:
+
+$ java -Dhttp.proxyHost=<host> -Dhttp.proxyPort=<port> -jar bin/felix.jar
+
 3. Install the following prerequisite bundles:
 
 install http://repo1.maven.org/maven2/org/apache/felix/org.apache.felix.http.jetty/2.2.0/org.apache.felix.http.jetty-2.2.0.jar
@@ -18,3 +22,9 @@ install file:///Users/veithen/.m2/repository/com/googlecode/sisme/framework/0.1-
 install file:///Users/veithen/.m2/repository/com/googlecode/sisme/framework.jaxb2/0.1-SNAPSHOT/framework.jaxb2-0.1-SNAPSHOT.jar
 install file:///Users/veithen/.m2/repository/com/googlecode/sisme/core/0.1-SNAPSHOT/core-0.1-SNAPSHOT.jar
 install file:///Users/veithen/.m2/repository/com/googlecode/sisme/help/0.1-SNAPSHOT/help-0.1-SNAPSHOT.jar
+
+
+
+ALTERNATIVE
+
+obr:repos add file:///path_to_sisme/obr/dependencies.xml
