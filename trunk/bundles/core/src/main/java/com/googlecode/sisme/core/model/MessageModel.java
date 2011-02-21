@@ -13,21 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.jaxb2.model;
+package com.googlecode.sisme.core.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="object", namespace="http://sisme.googlecode.com/core")
-public abstract class ManagedObjectModel {
-    private String name;
+@XmlType(name="message")
+public class MessageModel {
+    private List<PartModel> parts;
 
-    @XmlAttribute
-    public String getName() {
-        return name;
+    @XmlElement(name="part")
+    public List<PartModel> getParts() {
+        return parts;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setParts(List<PartModel> parts) {
+        this.parts = parts;
     }
 }
