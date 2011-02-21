@@ -15,17 +15,13 @@
  */
 package com.googlecode.sisme.help;
 
-import java.io.IOException;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+public class Activator implements BundleActivator {
+    public void start(BundleContext context) throws Exception {
+    }
 
-@SuppressWarnings("serial")
-public class SchemaServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getPathInfo();
+    public void stop(BundleContext context) throws Exception {
     }
 }
