@@ -14,26 +14,25 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<definitions xmlns="http://sisme.googlecode.com/core"
-             targetNamespace="http://sisme.googlecode.com/sample"
-             xmlns:java="http://sisme.googlecode.com/java"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/schema1.xsd">
+<sisme:definitions xmlns:tns="http://sisme.googlecode.com/sample"
+                   targetNamespace="http://sisme.googlecode.com/sample"
+                   xmlns:sisme="http://sisme.googlecode.com/framework"
+                   xmlns:core="http://sisme.googlecode.com/core"
+                   xmlns:java="http://sisme.googlecode.com/java"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://sisme.googlecode.com/framework http://localhost:8080/sisme/schema/framework.xsd
+                                       http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/core.xsd">
     
-    <interface name="Calculator_Java">
+    <core:interface name="Calculator_Java">
         <domain ref="java:system"/>
         <operation name="add">
             <input>
-                <message>
-                    <part name="operand1" type="java.lang.Integer"/>
-                    <part name="operand2" type="java.lang.Integer"/>
-                </message>
+                <part name="operand1" type="java.lang.Integer"/>
+                <part name="operand2" type="java.lang.Integer"/>
             </input>
             <output>
-                <message>
-                    <part name="result" type="java.lang.Integer"/>
-                </message>
+                <part name="result" type="java.lang.Integer"/>
             </output>
         </operation>
-    </interface>
-</definitions>
+    </core:interface>
+</sisme:definitions>
