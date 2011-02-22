@@ -27,6 +27,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
+        <module>deployer</module>
         <module>framework</module>
         <module>framework.jaxb2</module>
         <module>help</module>
