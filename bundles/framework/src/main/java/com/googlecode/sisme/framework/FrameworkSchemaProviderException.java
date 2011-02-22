@@ -15,17 +15,21 @@
  */
 package com.googlecode.sisme.framework;
 
-import org.w3c.dom.Document;
+public class FrameworkSchemaProviderException extends Exception {
+    private static final long serialVersionUID = -4330582092278501600L;
 
-public interface FrameworkSchemaProvider {
-	String P_NAMESPACE = "namespace";
-	
-    /**
-     * The property for the (suggested) filename of the schema. Note that
-     * {@link #getSchema(ImportResolver)} must always make use of the {@link ImportResolver} to
-     * determine the actual file name used for the schema.
-     */
-	String P_FILENAME = "filename";
-	
-    Document getSchema(ImportResolver resolver) throws FrameworkSchemaProviderException;
+    public FrameworkSchemaProviderException() {
+    }
+
+    public FrameworkSchemaProviderException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public FrameworkSchemaProviderException(String message) {
+        super(message);
+    }
+
+    public FrameworkSchemaProviderException(Throwable cause) {
+        super(cause);
+    }
 }

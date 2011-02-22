@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.help;
 
-import org.w3c.dom.Document;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface FrameworkSchemaProvider {
-	String P_NAMESPACE = "namespace";
-	
-    /**
-     * The property for the (suggested) filename of the schema. Note that
-     * {@link #getSchema(ImportResolver)} must always make use of the {@link ImportResolver} to
-     * determine the actual file name used for the schema.
-     */
-	String P_FILENAME = "filename";
-	
-    Document getSchema(ImportResolver resolver) throws FrameworkSchemaProviderException;
+import com.googlecode.sisme.framework.ImportResolver;
+
+public class ImportResolverImpl implements ImportResolver {
+    private final Map<String,String> locations = new HashMap<String,String>();
+    
+    public void addLocation(String namespaceUri, String location) {
+        locations.put(namespaceUri, location);
+    }
+    
+    public String getLocation(String namespaceUri) {
+        return locations.get(namespaceUri);
+    }
 }

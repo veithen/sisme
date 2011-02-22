@@ -26,6 +26,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
 
+// TODO: doesn't support ImportResolver yet
 public class StaticFrameworkSchemaProvider implements FrameworkSchemaProvider {
 	private final Document schema;
 
@@ -43,7 +44,7 @@ public class StaticFrameworkSchemaProvider implements FrameworkSchemaProvider {
 		}
 	}
 
-	public Document getSchema() {
+	public Document getSchema(ImportResolver importResolver) {
 		return schema;
 	}
 }

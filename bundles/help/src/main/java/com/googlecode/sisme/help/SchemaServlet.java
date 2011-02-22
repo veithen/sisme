@@ -34,6 +34,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.FrameworkSchemaProviderException;
 
 @SuppressWarnings("serial")
 public class SchemaServlet extends HttpServlet {
@@ -59,23 +60,30 @@ public class SchemaServlet extends HttpServlet {
             } else {
                 requestedFilename = pathInfo;
             }
+            ImportResolverImpl importResolver = new ImportResolverImpl();
+            FrameworkSchemaProvider schemaProvider = null;
             for (ServiceReference reference : tracker.getServiceReferences()) {
+                String namespaceUri = (String)reference.getProperty(FrameworkSchemaProvider.P_NAMESPACE);
             	String filename = (String)reference.getProperty(FrameworkSchemaProvider.P_FILENAME);
+            	importResolver.addLocation(namespaceUri, filename);
                 if (filename.equals(requestedFilename)) {
-                    FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)tracker.getService(reference);
-                    if (schemaProvider != null) {
-	                    try {
-	                        SAXTransformerFactory factory = (SAXTransformerFactory)TransformerFactory.newInstance();
-	                        TransformerHandler transformerHandler = factory.newTransformerHandler();
-	                        transformerHandler.setResult(new StreamResult(response.getOutputStream()));
-	                        factory.newTransformer().transform(new DOMSource(schemaProvider.getSchema()),
-	                                new SAXResult(new SchemaPrettyPrinter(transformerHandler)));
-	                    } catch (TransformerException ex) {
-	                        throw new ServletException(ex);
-	                    }
-	                    break;
-                    }
+                    schemaProvider = (FrameworkSchemaProvider)tracker.getService(reference);
                 }
+            }
+            if (schemaProvider != null) {
+                try {
+                    SAXTransformerFactory factory = (SAXTransformerFactory)TransformerFactory.newInstance();
+                    TransformerHandler transformerHandler = factory.newTransformerHandler();
+                    transformerHandler.setResult(new StreamResult(response.getOutputStream()));
+                    factory.newTransformer().transform(new DOMSource(schemaProvider.getSchema(importResolver)),
+                            new SAXResult(new SchemaPrettyPrinter(transformerHandler)));
+                } catch (TransformerException ex) {
+                    throw new ServletException(ex);
+                } catch (FrameworkSchemaProviderException ex) {
+                    throw new ServletException(ex);
+                }
+            } else {
+                // TODO
             }
         }
     }
