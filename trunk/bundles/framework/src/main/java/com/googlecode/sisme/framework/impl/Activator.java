@@ -15,13 +15,20 @@
  */
 package com.googlecode.sisme.framework.impl;
 
+import java.util.Properties;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
+
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
-        // TODO Auto-generated method stub
-        
+        FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider("framework.xsd", Activator.class.getResource("framework.xsd"));
+        Properties props = new Properties();
+        props.put("namespace", "http://sisme.googlecode.com/framework");
+        context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
     }
 
     public void stop(BundleContext context) throws Exception {
