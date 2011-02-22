@@ -20,7 +20,7 @@ import org.osgi.framework.BundleContext;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
-        context.addBundleListener(new Deployer());
+        new Deployer(context).open();
     }
 
     public void stop(BundleContext context) throws Exception {

@@ -19,27 +19,25 @@ import java.net.URL;
 import java.util.Properties;
 
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
-import org.osgi.framework.BundleListener;
+import org.osgi.util.tracker.BundleTracker;
 
 import com.googlecode.sisme.framework.Definitions;
 
-public class Deployer implements BundleListener {
-    public void bundleChanged(BundleEvent event) {
-        switch (event.getType()) {
-            case BundleEvent.STARTED:
-                registerDefinitions(event.getBundle());
-                break;
-            case BundleEvent.STOPPING:
-                // TODO
-                break;
-        }
+public class Deployer extends BundleTracker {
+    public Deployer(BundleContext context) {
+        super(context, Bundle.ACTIVE, null);
     }
-    
-    private void registerDefinitions(Bundle bundle) {
+
+    @Override
+    public Object addingBundle(Bundle bundle, BundleEvent event) {
+        // No need to unregister the service; this will be done anyway by the OSGi runtime
+        // when the bundle is stopped.
         URL url = bundle.getEntry("META-INF/sisme.xml");
         if (url != null) {
             bundle.getBundleContext().registerService(Definitions.class.getName(), new StaticDefinitions(url), new Properties());
         }
+        return bundle;
     }
 }
