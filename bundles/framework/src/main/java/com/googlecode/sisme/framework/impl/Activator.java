@@ -24,16 +24,19 @@ import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
+    private DefinitionsTracker definitionsTracker;
+    
     public void start(BundleContext context) throws Exception {
         FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider(Activator.class.getResource("framework.xsd"));
         Properties props = new Properties();
         props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/framework");
         props.put(FrameworkSchemaProvider.P_FILENAME, "framework.xsd");
         context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
+        definitionsTracker = new DefinitionsTracker(context);
+        definitionsTracker.open();
     }
 
     public void stop(BundleContext context) throws Exception {
-        // TODO Auto-generated method stub
-        
+        definitionsTracker.close();
     }
 }
