@@ -34,6 +34,7 @@
                     <instructions>
                         <Bundle-Name>SiSME Framework</Bundle-Name>
                         <Export-Package>com.googlecode.sisme.framework</Export-Package>
+                        <Bundle-Activator>com.googlecode.sisme.framework.impl.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

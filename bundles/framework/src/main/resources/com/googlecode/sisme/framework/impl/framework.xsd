@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://sisme.googlecode.com/framework" targetNamespace="http://sisme.googlecode.com/framework" version="1.0">
+    <xs:element name="definitions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:any namespace="##other" processContents="strict"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType abstract="true" name="object">
+        <xs:sequence/>
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="objectRef">
+        <xs:sequence>
+            <xs:any namespace="##other" processContents="strict"/>
+        </xs:sequence>
+        <xs:attribute name="ref" type="xs:QName"/>
+    </xs:complexType>
+</xs:schema>
