@@ -3,8 +3,9 @@
     <xs:element name="definitions">
         <xs:complexType>
             <xs:sequence>
-                <xs:any namespace="##other" processContents="strict"/>
+                <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="targetNamespace" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType abstract="true" name="object">
@@ -13,7 +14,7 @@
     </xs:complexType>
     <xs:complexType name="objectRef">
         <xs:sequence>
-            <xs:any namespace="##other" processContents="strict"/>
+            <xs:any namespace="##other" processContents="strict" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="ref" type="xs:QName"/>
     </xs:complexType>
