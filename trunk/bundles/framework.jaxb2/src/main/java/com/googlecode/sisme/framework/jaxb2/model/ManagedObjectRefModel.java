@@ -22,7 +22,7 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
-@XmlType(name="objectRef", namespace="http://sisme.googlecode.com/core")
+@XmlType(name="objectRef")
 public class ManagedObjectRefModel {
     private QName ref;
     private Element definition;

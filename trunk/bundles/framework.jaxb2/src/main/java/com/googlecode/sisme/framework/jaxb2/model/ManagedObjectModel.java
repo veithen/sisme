@@ -18,7 +18,7 @@ package com.googlecode.sisme.framework.jaxb2.model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="object", namespace="http://sisme.googlecode.com/core")
+@XmlType(name="object")
 public abstract class ManagedObjectModel {
     private String name;
 
