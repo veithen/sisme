@@ -55,7 +55,7 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME JAXB2 model support</Bundle-Name>
+                        <Bundle-Name>SiSME Framework JAXB2 Support</Bundle-Name>
                         <Embed-Dependency>jaxb-impl</Embed-Dependency>
                         <Import-Package>!com.sun.xml.fastinfoset.*,!org.jvnet.fastinfoset,!org.jvnet.staxex,*</Import-Package>
                     </instructions>

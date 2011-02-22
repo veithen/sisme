@@ -25,4 +25,17 @@
     <artifactId>sample</artifactId>
     <name>SiSME :: Bundles :: Sample</name>
     <packaging>bundle</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>SiSME Sample Bundle</Bundle-Name>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
