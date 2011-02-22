@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.impl;
 
 import org.w3c.dom.Element;
 
-public interface Definition {
-    String P_ELEMENT_NAMESPACE = "elementNamespace";
-    String P_ELEMENT_NAME = "elementName";
-    String P_TARGET_NAMESPACE = "targetNamespace";
-    
-    Element getContent();
+import com.googlecode.sisme.framework.Definition;
+
+public class DefinitionImpl implements Definition {
+    private final Element element;
+
+    public DefinitionImpl(Element element) {
+        this.element = element;
+    }
+
+    public Element getContent() {
+        return element;
+    }
 }

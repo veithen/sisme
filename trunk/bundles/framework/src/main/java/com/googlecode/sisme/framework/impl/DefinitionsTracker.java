@@ -15,6 +15,10 @@
  */
 package com.googlecode.sisme.framework.impl;
 
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
@@ -28,7 +32,22 @@ public class DefinitionsTracker extends ServiceTracker {
 
     @Override
     public Object addingService(ServiceReference reference) {
-        // TODO Auto-generated method stub
-        return super.addingService(reference);
+        Definitions definitions = (Definitions)context.getService(reference);
+        DefinitionSet definitionSet = new DefinitionSet(reference.getBundle().getBundleContext());
+        try {
+            // TODO: if an exception is thrown, we may already have registered some services
+            TransformerFactory.newInstance().newTransformer().transform(definitions.getSource(),
+                    new SAXResult(new DefinitionsContentHandler(definitionSet)));
+        } catch (TransformerException ex) {
+            // TODO
+            throw new Error(ex);
+        }
+        return definitionSet;
+    }
+
+    @Override
+    public void removedService(ServiceReference reference, Object service) {
+        ((DefinitionSet)service).unregister();
+        context.ungetService(reference);
     }
 }
