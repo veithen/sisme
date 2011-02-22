@@ -25,9 +25,10 @@ import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
-        FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider("framework.xsd", Activator.class.getResource("framework.xsd"));
+        FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider(Activator.class.getResource("framework.xsd"));
         Properties props = new Properties();
-        props.put("namespace", "http://sisme.googlecode.com/framework");
+        props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/framework");
+        props.put(FrameworkSchemaProvider.P_FILENAME, "framework.xsd");
         context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
     }
 
