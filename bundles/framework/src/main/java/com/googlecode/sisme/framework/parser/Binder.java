@@ -13,24 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.runtime;
+package com.googlecode.sisme.framework.parser;
 
 import org.osgi.framework.BundleContext;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.framework.ManagedObjectMetadata;
-import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
-import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
+class Binder implements DefinitionParserContext {
+    private final BundleContext bundleContext;
 
-public class InterfaceParser extends JAXBDefinitionParser {
-    public InterfaceParser() {
-        super(InterfaceModel.class);
+    public BundleContext getBundleContext() {
+        return bundleContext;
     }
-    
-    public ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata) {
+
+    public <T> Dependency<T> createDependency(Class<T> clazz, Element element) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public void addManagedObject(String clazz, Object object) {
+        addManagedObjectFactory(clazz, new ManagedObjectWrapper(object));
+    }
+
+    public void addManagedObjectFactory(String clazz, ManagedObjectFactory factory) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
