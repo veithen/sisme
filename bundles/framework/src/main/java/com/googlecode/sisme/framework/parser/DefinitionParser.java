@@ -40,6 +40,23 @@ public abstract class DefinitionParser {
         public void unregister() {
             
         }
+
+        public void addManagedObject(String clazz, Object object) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        public void addManagedObjectFactory(String clazz,
+                ManagedObjectFactory factory) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        public <T> Dependency<T> createDependency(Class<T> clazz,
+                Element element) {
+            // TODO Auto-generated method stub
+            return null;
+        }
     }
     
     private final ServiceTracker tracker;

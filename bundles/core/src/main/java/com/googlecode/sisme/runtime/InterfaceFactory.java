@@ -22,7 +22,7 @@ import com.googlecode.sisme.description.Domain;
 import com.googlecode.sisme.framework.ManagedObjectRef;
 import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
 
-public class InterfaceFactory extends ManagedObjectFactory {
+public class InterfaceFactory implements ManagedObjectFactory {
     private final ManagedObjectRef<Domain> domain;
     private final List<OperationFactory> operations = new ArrayList<OperationFactory>();
 
@@ -32,5 +32,10 @@ public class InterfaceFactory extends ManagedObjectFactory {
 
     public void addOperation(OperationFactory operation) {
         operations.add(operation);
+    }
+
+    public Object createObject() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

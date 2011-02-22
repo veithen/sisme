@@ -21,6 +21,10 @@ import org.w3c.dom.Element;
 class Binder implements DefinitionParserContext {
     private final BundleContext bundleContext;
 
+    public Binder(BundleContext bundleContext) {
+        this.bundleContext = bundleContext;
+    }
+
     public BundleContext getBundleContext() {
         return bundleContext;
     }
