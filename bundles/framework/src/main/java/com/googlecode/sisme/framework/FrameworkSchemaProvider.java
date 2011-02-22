@@ -18,6 +18,8 @@ package com.googlecode.sisme.framework;
 import org.w3c.dom.Document;
 
 public interface FrameworkSchemaProvider {
-    String getFilename();
+	String P_NAMESPACE = "namespace";
+	String P_FILENAME = "filename";
+	
     Document getSchema();
 }

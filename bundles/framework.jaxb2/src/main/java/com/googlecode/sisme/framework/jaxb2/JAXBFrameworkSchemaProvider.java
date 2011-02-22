@@ -32,20 +32,20 @@ import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
     private static class SchemaOutput extends SchemaOutputResolver {
         private final String namespaceUri;
+        private final String filename;
         private final Document document;
-        private String filename;
         
-        public SchemaOutput(String namespaceUri, Document document) {
+        public SchemaOutput(String namespaceUri, String filename, Document document) {
             this.namespaceUri = namespaceUri;
+            this.filename = filename;
             this.document = document;
         }
 
         @Override
         public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
             if (this.namespaceUri.equals(namespaceUri)) {
-                filename = suggestedFileName;
                 DOMResult result = new DOMResult(document);
-                result.setSystemId(suggestedFileName);
+                result.setSystemId(filename);
                 return result;
             } else {
                 return null;
@@ -58,26 +58,21 @@ public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
     }
     
     private final Document document;
-    private final String filename;
     
-    public JAXBFrameworkSchemaProvider(String namespaceUri, Class<?>... classes) throws JAXBException {
+    public JAXBFrameworkSchemaProvider(String namespaceUri, String filename, Class<?>... classes) throws JAXBException {
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         } catch (ParserConfigurationException ex) {
             throw new Error("Unable to create DOM document", ex);
         }
         JAXBContext context = JAXBUtil.createContext(classes);
-        SchemaOutput output = new SchemaOutput(namespaceUri, document);
+        SchemaOutput output = new SchemaOutput(namespaceUri, filename, document);
         try {
             context.generateSchema(output);
         } catch (IOException ex) {
             throw new Error("Unable to generate schema", ex);
         }
         filename = output.getFilename();
-    }
-
-    public String getFilename() {
-        return filename;
     }
 
     public Document getSchema() {

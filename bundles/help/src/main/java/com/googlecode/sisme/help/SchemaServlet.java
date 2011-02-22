@@ -50,31 +50,31 @@ public class SchemaServlet extends HttpServlet {
             response.setContentType("text/plain");
             PrintWriter out = response.getWriter();
             for (ServiceReference reference : tracker.getServiceReferences()) {
-                FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)tracker.getService(reference);
-                if (schemaProvider != null) {
-                    out.println(reference.getProperty("namespace") + " " + schemaProvider.getFilename());
-                }
+                out.println(reference.getProperty(FrameworkSchemaProvider.P_NAMESPACE) + " " + reference.getProperty(FrameworkSchemaProvider.P_FILENAME));
             }
         } else {
-            String filename;
+            String requestedFilename;
             if (pathInfo.startsWith("/")) {
-                filename = pathInfo.substring(1);
+                requestedFilename = pathInfo.substring(1);
             } else {
-                filename = pathInfo;
+                requestedFilename = pathInfo;
             }
-            for (Object service : tracker.getServices()) {
-                FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)service;
-                if (schemaProvider.getFilename().equals(filename)) {
-                    try {
-                        SAXTransformerFactory factory = (SAXTransformerFactory)TransformerFactory.newInstance();
-                        TransformerHandler transformerHandler = factory.newTransformerHandler();
-                        transformerHandler.setResult(new StreamResult(response.getOutputStream()));
-                        factory.newTransformer().transform(new DOMSource(schemaProvider.getSchema()),
-                                new SAXResult(new SchemaPrettyPrinter(transformerHandler)));
-                    } catch (TransformerException ex) {
-                        throw new ServletException(ex);
+            for (ServiceReference reference : tracker.getServiceReferences()) {
+            	String filename = (String)reference.getProperty(FrameworkSchemaProvider.P_FILENAME);
+                if (filename.equals(requestedFilename)) {
+                    FrameworkSchemaProvider schemaProvider = (FrameworkSchemaProvider)tracker.getService(reference);
+                    if (schemaProvider != null) {
+	                    try {
+	                        SAXTransformerFactory factory = (SAXTransformerFactory)TransformerFactory.newInstance();
+	                        TransformerHandler transformerHandler = factory.newTransformerHandler();
+	                        transformerHandler.setResult(new StreamResult(response.getOutputStream()));
+	                        factory.newTransformer().transform(new DOMSource(schemaProvider.getSchema()),
+	                                new SAXResult(new SchemaPrettyPrinter(transformerHandler)));
+	                    } catch (TransformerException ex) {
+	                        throw new ServletException(ex);
+	                    }
+	                    break;
                     }
-                    break;
                 }
             }
         }

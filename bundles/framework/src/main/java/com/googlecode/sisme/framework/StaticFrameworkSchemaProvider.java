@@ -27,11 +27,9 @@ import javax.xml.transform.stream.StreamSource;
 import org.w3c.dom.Document;
 
 public class StaticFrameworkSchemaProvider implements FrameworkSchemaProvider {
-	private final String filename;
 	private final Document schema;
 
-	public StaticFrameworkSchemaProvider(String filename, URL url) {
-		this.filename = filename;
+	public StaticFrameworkSchemaProvider(URL url) {
 		try {
 			schema = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 		} catch (ParserConfigurationException ex) {
@@ -43,10 +41,6 @@ public class StaticFrameworkSchemaProvider implements FrameworkSchemaProvider {
 			// TODO: we may get here if the user supplied url is incorrect or the document not well formed
 			throw new Error(ex);
 		}
-	}
-
-	public String getFilename() {
-		return filename;
 	}
 
 	public Document getSchema() {
