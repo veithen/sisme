@@ -27,11 +27,10 @@ import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
         String namespace = "http://sisme.googlecode.com/core";
-        String filename = "core.xsd";
-        FrameworkSchemaProvider schemaProvider = new JAXBFrameworkSchemaProvider(namespace, filename, InterfaceModel.class);
+        FrameworkSchemaProvider schemaProvider = new JAXBFrameworkSchemaProvider(namespace, InterfaceModel.class);
         Properties props = new Properties();
         props.put(FrameworkSchemaProvider.P_NAMESPACE, namespace);
-        props.put(FrameworkSchemaProvider.P_FILENAME, filename);
+        props.put(FrameworkSchemaProvider.P_FILENAME, "core.xsd");
         context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
         
 //        ProviderUtils.registerManagedObjectFactory(context, new InterfaceFactory(),

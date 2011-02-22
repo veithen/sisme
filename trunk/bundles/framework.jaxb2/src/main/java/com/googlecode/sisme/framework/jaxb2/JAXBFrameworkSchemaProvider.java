@@ -15,6 +15,7 @@
  */
 package com.googlecode.sisme.framework.jaxb2;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
@@ -24,58 +25,60 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.ImportResolver;
 
 public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
     private static class SchemaOutput extends SchemaOutputResolver {
         private final String namespaceUri;
-        private final String filename;
+        private final ImportResolver importResolver;
         private final Document document;
         
-        public SchemaOutput(String namespaceUri, String filename, Document document) {
+        public SchemaOutput(String namespaceUri, ImportResolver importResolver, Document document) {
             this.namespaceUri = namespaceUri;
-            this.filename = filename;
+            this.importResolver = importResolver;
             this.document = document;
         }
 
         @Override
         public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+            Result result;
             if (this.namespaceUri.equals(namespaceUri)) {
-                DOMResult result = new DOMResult(document);
-                result.setSystemId(filename);
-                return result;
+                result = new DOMResult(document);
             } else {
-                return null;
+                // TODO: there may be better ways to discard the output...
+                result = new StreamResult(new ByteArrayOutputStream());
             }
-        }
-
-        public String getFilename() {
-            return filename;
+            result.setSystemId(importResolver.getLocation(namespaceUri));
+            return result;
         }
     }
     
-    private final Document document;
+    private final JAXBContext context;
+    private final String namespaceUri;
     
-    public JAXBFrameworkSchemaProvider(String namespaceUri, String filename, Class<?>... classes) throws JAXBException {
+    public JAXBFrameworkSchemaProvider(String namespaceUri, Class<?>... classes) throws JAXBException {
+        context = JAXBUtil.createContext(classes);
+        this.namespaceUri = namespaceUri;
+    }
+
+    public Document getSchema(ImportResolver importResolver) {
+        Document document;
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         } catch (ParserConfigurationException ex) {
             throw new Error("Unable to create DOM document", ex);
         }
-        JAXBContext context = JAXBUtil.createContext(classes);
-        SchemaOutput output = new SchemaOutput(namespaceUri, filename, document);
+        SchemaOutput output = new SchemaOutput(namespaceUri, importResolver, document);
         try {
             context.generateSchema(output);
         } catch (IOException ex) {
             throw new Error("Unable to generate schema", ex);
         }
-        filename = output.getFilename();
-    }
-
-    public Document getSchema() {
         return document;
     }
 }
