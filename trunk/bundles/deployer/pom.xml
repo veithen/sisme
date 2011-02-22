@@ -22,9 +22,16 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>framework</artifactId>
-    <name>SiSME :: Bundles :: Framework</name>
+    <artifactId>deployer</artifactId>
+    <name>SiSME :: Bundles :: Bundle Deployer</name>
     <packaging>bundle</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>framework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -32,8 +39,9 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME Framework</Bundle-Name>
-                        <Export-Package>com.googlecode.sisme.framework</Export-Package>
+                        <Bundle-Name>SiSME Bundle Deployer</Bundle-Name>
+                        <Bundle-Activator>com.googlecode.sisme.deployer.Activator</Bundle-Activator>
+                        <Export-Package></Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
