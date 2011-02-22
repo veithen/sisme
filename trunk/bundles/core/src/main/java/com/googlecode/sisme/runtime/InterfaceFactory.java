@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.sisme.description.Domain;
-import com.googlecode.sisme.framework.ManagedObjectFactory;
 import com.googlecode.sisme.framework.ManagedObjectRef;
+import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
 
 public class InterfaceFactory extends ManagedObjectFactory {
     private final ManagedObjectRef<Domain> domain;

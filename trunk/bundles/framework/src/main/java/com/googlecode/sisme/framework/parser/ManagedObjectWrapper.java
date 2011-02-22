@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.parser;
 
-import javax.xml.validation.Schema;
+class ManagedObjectWrapper implements ManagedObjectFactory {
+    private final Object object;
+    
+    public ManagedObjectWrapper(Object object) {
+        this.object = object;
+    }
 
-import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
-
-import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
-
-
-public interface DefinitionParser {
-    Schema getSchema();
-    ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata);
+    public Object createObject() {
+        return object;
+    }
 }

@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.parser;
 
-import javax.xml.validation.Schema;
-
-import org.osgi.framework.BundleContext;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
-
-
-public interface DefinitionParser {
-    Schema getSchema();
-    ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata);
+public interface DefinitionParserContext {
+    // element must represent an XML element of type objectRef
+    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
+    
+    void addManagedObject(String clazz, Object object);
+    
+    void addManagedObjectFactory(String clazz, ManagedObjectFactory factory);
 }

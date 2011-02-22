@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.runtime;
+package com.googlecode.sisme.framework.parser;
 
-import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
+import org.osgi.framework.Filter;
+import org.osgi.util.tracker.ServiceTracker;
 
-import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.framework.ManagedObjectMetadata;
-import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
-import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
+class DependencyImpl<T> extends ServiceTracker implements Dependency<T> {
+    private final Class<T> clazz;
+    private final Filter filter;
+    private final Binder binder;
 
-public class InterfaceParser extends JAXBDefinitionParser {
-    public InterfaceParser() {
-        super(InterfaceModel.class);
+    public DependencyImpl(Class<T> clazz, Filter filter, Binder binder) {
+        super(binder.getBundleContext(), filter, null);
+        this.clazz = clazz;
+        this.filter = filter;
+        this.binder = binder;
     }
-    
-    public ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata) {
+
+    public T get() {
         // TODO Auto-generated method stub
         return null;
     }
-
 }
