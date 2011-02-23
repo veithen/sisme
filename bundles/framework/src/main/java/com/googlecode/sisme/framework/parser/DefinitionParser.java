@@ -30,35 +30,6 @@ import org.w3c.dom.Element;
 import com.googlecode.sisme.framework.Definition;
 
 public abstract class DefinitionParser {
-    private static class Registrations implements DefinitionParserContext {
-        
-        public void registerService(String clazz, Object service, Dictionary properties) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        public void unregister() {
-            
-        }
-
-        public void addManagedObject(String clazz, Object object) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        public void addManagedObjectFactory(String clazz,
-                ManagedObjectFactory factory) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        public <T> Dependency<T> createDependency(Class<T> clazz,
-                Element element) {
-            // TODO Auto-generated method stub
-            return null;
-        }
-    }
-    
     private final ServiceTracker tracker;
     
     public DefinitionParser(final BundleContext context, QName elementQName) {
@@ -73,13 +44,14 @@ public abstract class DefinitionParser {
             public Object addingService(ServiceReference reference) {
                 Definition definition = (Definition)context.getService(reference);
                 Element content = definition.getContent();
-                Registrations registrations = new Registrations();
-                parse(registrations, content);
-                return registrations;
+                Binder binder = new Binder(context); // TODO: wrong context
+                parse(binder, content);
+                binder.start();
+                return binder;
             }
             
             public void removedService(ServiceReference reference, Object service) {
-                ((Registrations)service).unregister();
+                ((Binder)service).stop();
                 context.ungetService(reference);
             }
             

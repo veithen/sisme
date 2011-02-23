@@ -15,18 +15,63 @@
  */
 package com.googlecode.sisme.framework.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
 import org.osgi.framework.BundleContext;
 import org.w3c.dom.Element;
 
+/**
+ * Tracks a set of dependencies and automatically registers a service when each
+ * dependency is satisfied exactly once.
+ * 
+ * @author Andreas Veithen
+ */
 class Binder implements DefinitionParserContext {
     private final BundleContext bundleContext;
+    private final List<DependencyImpl<?>> dependencies = new ArrayList<DependencyImpl<?>>();
+    private final List<ManagedObject> managedObjects = new ArrayList<ManagedObject>();
+    private boolean started;
 
-    public Binder(BundleContext bundleContext) {
+    Binder(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
     }
 
-    public BundleContext getBundleContext() {
+    BundleContext getBundleContext() {
         return bundleContext;
+    }
+    
+    synchronized void rebind() {
+    	boolean satisfied = true;
+    	for (DependencyImpl<?> dependency : dependencies) {
+    	    if (!dependency.isSatisfied()) {
+    	        satisfied = false;
+    	        break;
+    	    }
+    	}
+    	if (!started && satisfied) {
+    	    
+    	    for (DependencyImpl<?> dependency : dependencies) {
+    	        dependency.bind();
+    	    }
+    	    
+    	} else if (started && !satisfied) {
+    	    
+            for (DependencyImpl<?> dependency : dependencies) {
+                dependency.unbind();
+            }
+    	    
+    	    
+    	}
+    }
+    
+    void start() {
+        
+    }
+    
+    void stop() {
+        
     }
 
     public <T> Dependency<T> createDependency(Class<T> clazz, Element element) {
@@ -39,8 +84,9 @@ class Binder implements DefinitionParserContext {
     }
 
     public void addManagedObjectFactory(String clazz, ManagedObjectFactory factory) {
-        // TODO Auto-generated method stub
+        Properties properties = new Properties();
         
+        managedObjects.add(new ManagedObject(this, new String[] { clazz }, factory, properties));
     }
 
 }
