@@ -64,7 +64,7 @@ class DependencyImpl<T> extends ServiceTracker implements Dependency<T> {
             candidates.add(reference);
             binder.rebind();
         }
-        return null;
+        return reference;
     }
 
     @Override
