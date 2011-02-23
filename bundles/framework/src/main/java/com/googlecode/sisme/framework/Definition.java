@@ -20,7 +20,8 @@ import org.w3c.dom.Element;
 public interface Definition {
     String P_ELEMENT_NAMESPACE = "elementNamespace";
     String P_ELEMENT_NAME = "elementName";
-    String P_TARGET_NAMESPACE = "targetNamespace";
+    String P_NAMESPACE = "namespace";
+    String P_NAME = "name";
     
     Element getContent();
 }

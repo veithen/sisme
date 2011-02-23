@@ -17,12 +17,14 @@ package com.googlecode.sisme.core.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.namespace.QName;
+
+import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.description.Part;
 
 @XmlType(name="part")
 public class PartModel {
     private String name;
-    private QName type;
+    private String type;
 
     @XmlAttribute
     public String getName() {
@@ -34,11 +36,15 @@ public class PartModel {
     }
     
     @XmlAttribute
-    public QName getType() {
+    public String getType() {
         return type;
     }
     
-    public void setType(QName type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public Part build(Domain<?> domain) {
+        return new Part(name, domain.lookup(type));
     }
 }

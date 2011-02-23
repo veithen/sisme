@@ -18,6 +18,7 @@ package com.googlecode.sisme.framework.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -42,7 +43,12 @@ public class DefinitionSet {
         Properties props = new Properties();
         props.setProperty(Definition.P_ELEMENT_NAMESPACE, element.getNamespaceURI());
         props.setProperty(Definition.P_ELEMENT_NAME, element.getLocalName());
-        props.setProperty(Definition.P_TARGET_NAMESPACE, targetNamespace);
+        props.setProperty(Definition.P_NAMESPACE, targetNamespace);
+        String name = element.getAttributeNS(null, "name");
+        if (name.length() == 0) {
+            name = UUID.randomUUID().toString();
+        }
+        props.setProperty(Definition.P_NAME, name);
         registrations.add(targetBundleContext.registerService(Definition.class.getName(), new DefinitionImpl(element), props));
     }
     

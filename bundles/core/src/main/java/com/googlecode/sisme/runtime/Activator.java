@@ -25,6 +25,8 @@ import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
+    private InterfaceParser interfaceParser;
+    
     public void start(BundleContext context) throws Exception {
         String namespace = "http://sisme.googlecode.com/core";
         FrameworkSchemaProvider schemaProvider = new JAXBFrameworkSchemaProvider(namespace, InterfaceModel.class);
@@ -33,8 +35,8 @@ public class Activator implements BundleActivator {
         props.put(FrameworkSchemaProvider.P_FILENAME, "core.xsd");
         context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
         
-//        ProviderUtils.registerManagedObjectFactory(context, new InterfaceFactory(),
-//                new QName("http://sisme.googlecode.com/core", "interface"));
+        interfaceParser = new InterfaceParser(context);
+        interfaceParser.start();
     }
 
     public void stop(BundleContext context) throws Exception {

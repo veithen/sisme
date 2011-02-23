@@ -33,7 +33,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-Name>SiSME Framework</Bundle-Name>
-                        <Export-Package>!com.googlecode.sisme.framework,*</Export-Package>
+                        <Private-Package>com.googlecode.sisme.framework.impl</Private-Package>
                         <Bundle-Activator>com.googlecode.sisme.framework.impl.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>

@@ -15,10 +15,16 @@
  */
 package com.googlecode.sisme.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.description.Message;
+import com.googlecode.sisme.description.Part;
+import com.googlecode.sisme.description.RPCMessage;
 
 @XmlType(name="message")
 public class MessageModel {
@@ -31,5 +37,14 @@ public class MessageModel {
 
     public void setParts(List<PartModel> parts) {
         this.parts = parts;
+    }
+    
+    public Message build(Domain<?> domain) {
+        List<Part> parts = new ArrayList<Part>(this.parts.size());
+        for (PartModel part : this.parts) {
+            parts.add(part.build(domain));
+        }
+        // TODO: there are some missing pieces here
+        return new RPCMessage(parts, null);
     }
 }

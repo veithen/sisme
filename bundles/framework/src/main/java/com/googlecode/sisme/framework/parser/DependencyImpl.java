@@ -24,7 +24,6 @@ import org.osgi.util.tracker.ServiceTracker;
 
 class DependencyImpl<T> extends ServiceTracker implements Dependency<T> {
     private final Class<T> clazz;
-    private final Filter filter;
     private final Binder binder;
     private final List<ServiceReference> candidates = new ArrayList<ServiceReference>();
     private ServiceReference boundService;
@@ -33,7 +32,6 @@ class DependencyImpl<T> extends ServiceTracker implements Dependency<T> {
     DependencyImpl(Class<T> clazz, Filter filter, Binder binder) {
         super(binder.getBundleContext(), filter, null);
         this.clazz = clazz;
-        this.filter = filter;
         this.binder = binder;
     }
     

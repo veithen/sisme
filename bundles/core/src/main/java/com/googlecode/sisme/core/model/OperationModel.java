@@ -15,11 +15,16 @@
  */
 package com.googlecode.sisme.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.description.Message;
+import com.googlecode.sisme.description.Operation;
 
 @XmlType(name="operation", propOrder={"input", "output", "faults"})
 public class OperationModel {
@@ -62,5 +67,14 @@ public class OperationModel {
 
     public void setFaults(List<MessageModel> faults) {
         this.faults = faults;
+    }
+
+    public Operation build(Domain<?> domain) {
+        List<Message> faults = new ArrayList<Message>(this.faults.size());
+        for (MessageModel fault : this.faults) {
+            faults.add(fault.build(domain));
+        }
+        return new Operation(name, input == null ? null : input.build(domain),
+                output == null ? null : output.build(domain), faults);
     }
 }
