@@ -28,5 +28,5 @@ public interface DefinitionParserContext {
     
     void addManagedObject(String clazz, Object object);
     
-    void addManagedObjectFactory(String clazz, ManagedObjectFactory factory);
+    void addManagedObject(String clazz, ManagedObjectFactory factory);
 }

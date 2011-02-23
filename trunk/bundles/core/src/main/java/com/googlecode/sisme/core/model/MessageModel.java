@@ -40,9 +40,11 @@ public class MessageModel {
     }
     
     public Message build(Domain<?> domain) {
-        List<Part> parts = new ArrayList<Part>(this.parts.size());
-        for (PartModel part : this.parts) {
-            parts.add(part.build(domain));
+        List<Part> parts = new ArrayList<Part>();
+        if (this.parts != null) {
+            for (PartModel part : this.parts) {
+                parts.add(part.build(domain));
+            }
         }
         // TODO: there are some missing pieces here
         return new RPCMessage(parts, null);

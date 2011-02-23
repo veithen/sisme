@@ -32,4 +32,19 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>SiSME Java Support</Bundle-Name>
+                        <Private-Package>com.googlecode.sisme.java.impl</Private-Package>
+                        <Bundle-Activator>com.googlecode.sisme.java.impl.Activator</Bundle-Activator>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

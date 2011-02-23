@@ -70,9 +70,11 @@ public class OperationModel {
     }
 
     public Operation build(Domain<?> domain) {
-        List<Message> faults = new ArrayList<Message>(this.faults.size());
-        for (MessageModel fault : this.faults) {
-            faults.add(fault.build(domain));
+        List<Message> faults = new ArrayList<Message>();
+        if (this.faults != null) {
+            for (MessageModel fault : this.faults) {
+                faults.add(fault.build(domain));
+            }
         }
         return new Operation(name, input == null ? null : input.build(domain),
                 output == null ? null : output.build(domain), faults);
