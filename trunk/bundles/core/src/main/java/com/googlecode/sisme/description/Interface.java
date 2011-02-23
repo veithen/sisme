@@ -15,6 +15,12 @@
  */
 package com.googlecode.sisme.description;
 
-public class Interface {
+import java.util.List;
 
+public class Interface {
+    private final List<Operation> operations;
+
+    public Interface(List<Operation> operations) {
+        this.operations = operations;
+    }
 }

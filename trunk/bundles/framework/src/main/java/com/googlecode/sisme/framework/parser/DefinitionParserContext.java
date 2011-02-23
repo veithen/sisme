@@ -15,11 +15,16 @@
  */
 package com.googlecode.sisme.framework.parser;
 
+import javax.xml.namespace.QName;
+
 import org.w3c.dom.Element;
 
 public interface DefinitionParserContext {
+    <T> Dependency<T> createDependency(Class<T> clazz, QName ref, Element content);
+    
     // element must represent an XML element of type objectRef
-    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
+    // TODO
+//    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
     
     void addManagedObject(String clazz, Object object);
     

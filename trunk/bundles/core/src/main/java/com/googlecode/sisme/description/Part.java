@@ -17,9 +17,9 @@ package com.googlecode.sisme.description;
 
 public class Part {
     private final String name;
-    private final String type;
+    private final Type type;
     
-    public Part(String name, String type) {
+    public Part(String name, Type type) {
         this.name = name;
         this.type = type;
     }

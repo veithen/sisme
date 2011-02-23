@@ -15,79 +15,40 @@
  */
 package com.googlecode.sisme.framework.jaxb2;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.SchemaOutputResolver;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
+import javax.xml.namespace.QName;
 
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
+import org.osgi.framework.BundleContext;
+import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.AbstractDefinitionParser;
+import com.googlecode.sisme.framework.parser.DefinitionParser;
+import com.googlecode.sisme.framework.parser.DefinitionParserContext;
 
-public abstract class JAXBDefinitionParser extends AbstractDefinitionParser {
-    private class SchemaBuilder extends SchemaOutputResolver {
-        private final DocumentBuilder documentBuilder;
-        private final List<Document> schemaDocuments = new ArrayList<Document>();
-        
-        public SchemaBuilder() {
-            try {
-                documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            } catch (ParserConfigurationException ex) {
-                throw new Error("Unable to create document builder");
-            }
-        }
-
-        @Override
-        public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-            Document document = documentBuilder.newDocument();
-            schemaDocuments.add(document);
-            DOMResult result = new DOMResult(document);
-            result.setSystemId(suggestedFileName);
-            return result;
-        }
-        
-        public Schema buildSchema() throws SAXException {
-            SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-            List<Source> schemaSources = new ArrayList<Source>();
-            for (Document document : schemaDocuments) {
-                schemaSources.add(new DOMSource(document));
-            }
-            return factory.newSchema(schemaSources.toArray(new Source[schemaSources.size()]));
-        }
-    }
-    
+public abstract class JAXBDefinitionParser<T> extends DefinitionParser {
     private final JAXBContext jaxbContext;
-    private final Schema schema;
+    private final Class<T> elementClass;
     
-    public JAXBDefinitionParser(Class<?> elementClass) {
+    // TODO: it should not be necessary to provide the element QName
+    public JAXBDefinitionParser(BundleContext context, QName elementQName, Class<T> elementClass) {
+        super(context, elementQName);
+        this.elementClass = elementClass;
         try {
             jaxbContext = JAXBUtil.createContext(elementClass);
         } catch (JAXBException ex) {
             throw new Error("Unable to create JAXBContext for " + elementClass, ex);
         }
-        try {
-            SchemaBuilder schemaBuilder = new SchemaBuilder();
-            jaxbContext.generateSchema(schemaBuilder);
-            schema = schemaBuilder.buildSchema();
-        } catch (Exception ex) {
-            throw new Error("Unable to generate schema for " + elementClass, ex);
-        }
     }
 
-    public final Schema getSchema() {
-        return schema;
+    @Override
+    protected final void parse(DefinitionParserContext context, Element content) {
+        try {
+            parse(new JAXBDefinitionParserContext(context), elementClass.cast(jaxbContext.createUnmarshaller().unmarshal(content)));
+        } catch (JAXBException ex) {
+            // TODO: implement appropriate error handling in DefinitionParser
+            throw new RuntimeException(ex);
+        }
     }
+    
+    protected abstract void parse(JAXBDefinitionParserContext context, T model);
 }

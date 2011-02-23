@@ -15,8 +15,6 @@
  */
 package com.googlecode.sisme.framework.parser;
 
-import java.util.Dictionary;
-
 import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleContext;
@@ -42,9 +40,12 @@ public abstract class DefinitionParser {
         }
         tracker = new ServiceTracker(context, filter, new ServiceTrackerCustomizer() {
             public Object addingService(ServiceReference reference) {
+                String namespace = (String)reference.getProperty(Definition.P_NAMESPACE);
+                String name = (String)reference.getProperty(Definition.P_NAME);
                 Definition definition = (Definition)context.getService(reference);
                 Element content = definition.getContent();
-                Binder binder = new Binder(context); // TODO: wrong context
+                // Managed objects are always registered into the same bundle context as the original definition
+                Binder binder = new Binder(reference.getBundle().getBundleContext(), new QName(namespace, name));
                 parse(binder, content);
                 binder.start();
                 return binder;

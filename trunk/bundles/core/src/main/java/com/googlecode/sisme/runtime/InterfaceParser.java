@@ -15,22 +15,31 @@
  */
 package com.googlecode.sisme.runtime;
 
+import javax.xml.namespace.QName;
+
 import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
 
 import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.framework.ManagedObjectMetadata;
+import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.description.Interface;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
+import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParserContext;
+import com.googlecode.sisme.framework.parser.Dependency;
 import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
 
-public class InterfaceParser extends JAXBDefinitionParser {
-    public InterfaceParser() {
-        super(InterfaceModel.class);
-    }
-    
-    public ManagedObjectFactory parse(BundleContext context, Element element, ManagedObjectMetadata metadata) {
-        // TODO Auto-generated method stub
-        return null;
+public class InterfaceParser extends JAXBDefinitionParser<InterfaceModel> {
+    public InterfaceParser(BundleContext context) {
+        super(context, new QName("http://sisme.googlecode.com/core", "interface"), InterfaceModel.class);
     }
 
+    @Override
+    protected void parse(JAXBDefinitionParserContext context, final InterfaceModel model) {
+        // TODO: Java 5 generics issue here!
+        final Dependency<Domain> domain = context.createDependency(Domain.class, model.getDomain());
+        context.addManagedObject(Interface.class.getName(), new ManagedObjectFactory() {
+            public Object createObject() {
+                return model.build(domain.get());
+            }
+        });
+    }
 }

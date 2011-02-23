@@ -11,8 +11,7 @@ class ManagedObject {
     private final Dictionary properties;
     private ServiceRegistration registration;
 
-    public ManagedObject(Binder binder, String[] clazzes,
-            ManagedObjectFactory factory, Dictionary properties) {
+    public ManagedObject(Binder binder, String[] clazzes, ManagedObjectFactory factory, Dictionary properties) {
         this.binder = binder;
         this.clazzes = clazzes;
         this.factory = factory;
