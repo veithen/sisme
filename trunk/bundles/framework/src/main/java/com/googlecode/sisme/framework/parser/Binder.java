@@ -66,11 +66,13 @@ class Binder implements DefinitionParserContext {
     	        dependency.bind();
     	    }
     	    registerManagedObjects();
+    	    started = true;
     	} else if (started && !satisfied) {
     	    unregisterManagedObjects();
             for (DependencyImpl<?> dependency : dependencies) {
                 dependency.unbind();
             }
+            started = false;
     	}
     }
     
