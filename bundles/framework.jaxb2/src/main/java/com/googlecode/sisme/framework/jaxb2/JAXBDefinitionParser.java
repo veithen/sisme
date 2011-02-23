@@ -17,6 +17,8 @@ package com.googlecode.sisme.framework.jaxb2;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleContext;
@@ -43,7 +45,10 @@ public abstract class JAXBDefinitionParser<T> extends DefinitionParser {
     @Override
     protected final void parse(DefinitionParserContext context, Element content) {
         try {
-            parse(new JAXBDefinitionParserContext(context), elementClass.cast(jaxbContext.createUnmarshaller().unmarshal(content)));
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            // "Default" here refers to JAXB 1.0. JAXB 2.0 is more lenient by default.
+            unmarshaller.setEventHandler(new DefaultValidationEventHandler());
+            parse(new JAXBDefinitionParserContext(context), elementClass.cast(unmarshaller.unmarshal(content)));
         } catch (JAXBException ex) {
             // TODO: implement appropriate error handling in DefinitionParser
             throw new RuntimeException(ex);
