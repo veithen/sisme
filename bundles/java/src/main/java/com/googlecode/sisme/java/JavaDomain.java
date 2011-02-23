@@ -31,7 +31,7 @@ public class JavaDomain implements Domain<JavaType> {
     }
 
     public synchronized JavaType lookup(String name) {
-        JavaType type = parent.lookup(name);
+        JavaType type = parent == null ? null : parent.lookup(name);
         if (type != null) {
             return type;
         } else {

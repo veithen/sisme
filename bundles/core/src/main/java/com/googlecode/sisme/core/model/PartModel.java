@@ -45,6 +45,7 @@ public class PartModel {
     }
 
     public Part build(Domain<?> domain) {
+        // TODO: need to handle the case where the type is not found!
         return new Part(name, domain.lookup(type));
     }
 }

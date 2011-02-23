@@ -135,10 +135,10 @@ class Binder implements DefinitionParserContext {
     }
 
     public void addManagedObject(String clazz, Object object) {
-        addManagedObjectFactory(clazz, new ManagedObjectWrapper(object));
+        addManagedObject(clazz, new ManagedObjectWrapper(object));
     }
 
-    public void addManagedObjectFactory(String clazz, ManagedObjectFactory factory) {
+    public void addManagedObject(String clazz, ManagedObjectFactory factory) {
         Properties properties = new Properties();
         properties.setProperty("namespace", managedObjectName.getNamespaceURI());
         properties.setProperty("name", managedObjectName.getLocalPart());

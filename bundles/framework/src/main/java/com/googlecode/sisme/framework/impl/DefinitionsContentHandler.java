@@ -28,10 +28,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 public class DefinitionsContentHandler implements ContentHandler {
     private DefinitionSet definitionSet;
     private int level;
+    private AttributesImpl rootAttributes;
     private Document definitionDocument;
     private TransformerHandler definitionContentHandler;
     
@@ -49,15 +51,11 @@ public class DefinitionsContentHandler implements ContentHandler {
     }
     
     public void startPrefixMapping(String prefix, String uri) throws SAXException {
-        if (definitionContentHandler != null) {
-            definitionContentHandler.startPrefixMapping(prefix, uri);
-        }
+        // The ContentHandler produced by SAXTransformerFactory doesn't really care about
+        // prefix mappings.
     }
     
     public void endPrefixMapping(String prefix) throws SAXException {
-        if (definitionContentHandler != null) {
-            definitionContentHandler.endPrefixMapping(prefix);
-        }
     }
     
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
@@ -67,6 +65,8 @@ public class DefinitionsContentHandler implements ContentHandler {
                 throw new SAXException("No targetNamespace attribute found");
             }
             definitionSet.setTargetNamespace(targetNamespace);
+            rootAttributes = new AttributesImpl();
+            rootAttributes.setAttributes(atts);
         } else if (level == 1) {
             try {
                 definitionDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -80,6 +80,20 @@ public class DefinitionsContentHandler implements ContentHandler {
             }
             definitionContentHandler.setResult(new DOMResult(definitionDocument));
             definitionContentHandler.startDocument();
+            // Copy namespace declarations from the root element so that we can preserve the namespace
+            // context. Otherwise, QName resolution for attribute values will fail.
+            AttributesImpl newAtts = new AttributesImpl();
+            newAtts.setAttributes(atts);
+            for (int i=0; i<rootAttributes.getLength(); i++) {
+                String attQName = rootAttributes.getQName(i);
+                if (attQName.equals("xmlns") || attQName.startsWith("xmlns:")) {
+                    if (newAtts.getIndex(attQName) == -1) {
+                        newAtts.addAttribute(rootAttributes.getURI(i), rootAttributes.getLocalName(i), attQName,
+                                rootAttributes.getType(i), rootAttributes.getValue(i));
+                    }
+                }
+            }
+            atts = newAtts;
         }
         if (level != 0) {
             definitionContentHandler.startElement(uri, localName, qName, atts);

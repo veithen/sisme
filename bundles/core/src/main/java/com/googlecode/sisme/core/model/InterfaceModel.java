@@ -53,9 +53,11 @@ public class InterfaceModel extends ManagedObjectModel {
     }
     
     public Interface build(Domain<?> domain) {
-        List<Operation> operations = new ArrayList<Operation>(this.operations.size());
-        for (OperationModel operation : this.operations) {
-            operations.add(operation.build(domain));
+        List<Operation> operations = new ArrayList<Operation>();
+        if (this.operations != null) {
+            for (OperationModel operation : this.operations) {
+                operations.add(operation.build(domain));
+            }
         }
         return new Interface(operations);
     }

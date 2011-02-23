@@ -35,7 +35,7 @@ public class JAXBDefinitionParserContext {
         parent.addManagedObject(clazz, object);
     }
 
-    public void addManagedObjectFactory(String clazz, ManagedObjectFactory factory) {
-        parent.addManagedObjectFactory(clazz, factory);
+    public void addManagedObject(String clazz, ManagedObjectFactory factory) {
+        parent.addManagedObject(clazz, factory);
     }
 }
