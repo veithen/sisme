@@ -68,7 +68,8 @@
                             !org.apache.xpath.*,
                             *
                         </Import-Package>
-                        <Export-Package></Export-Package>
+                        <Export-Package>com.googlecode.sisme.derby</Export-Package>
+                        <Bundle-Activator>com.googlecode.sisme.derby.impl.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

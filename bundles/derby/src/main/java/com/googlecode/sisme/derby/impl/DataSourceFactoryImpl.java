@@ -15,12 +15,12 @@
  */
 package com.googlecode.sisme.derby.impl;
 
-import com.googlecode.sisme.derby.DatabaseHandle;
+import com.googlecode.sisme.derby.DataSourceFactory;
 
-public class DatabaseHandleImpl implements DatabaseHandle {
+public class DataSourceFactoryImpl implements DataSourceFactory {
     private DatabaseImpl database;
 
-    public DatabaseHandleImpl(DatabaseImpl database) {
+    public DataSourceFactoryImpl(DatabaseImpl database) {
         this.database = database;
     }
 

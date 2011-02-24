@@ -17,9 +17,13 @@ package com.googlecode.sisme.derby.impl;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 
+import com.googlecode.sisme.derby.DataSourceFactory;
 import com.googlecode.sisme.derby.Database;
 
 public class DatabaseImpl implements Database {
@@ -50,16 +54,33 @@ public class DatabaseImpl implements Database {
      */
     public static final int STATUS_INUSE = 4;
     
+    private final String name;
     private final File directory;
     private int status;
+    private ServiceRegistration registration;
 
-    public DatabaseImpl(File directory) {
+    public DatabaseImpl(String name, File directory) {
+        this.name = name;
         this.directory = directory;
         if (directory.exists()) {
             status = STATUS_OFFLINE;
         } else {
             status = STATUS_NOT_CREATED;
         }
+    }
+    
+    void register(BundleContext context) {
+        Properties props = new Properties();
+        props.put(Database.P_NAME, name);
+        registration = context.registerService(Database.class.getName(), this, props);
+    }
+    
+    void unregister() {
+        registration.unregister();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public synchronized int getStatus() {
@@ -95,13 +116,13 @@ public class DatabaseImpl implements Database {
         }
     }
     
-    synchronized void acquire() throws SQLException {
+    synchronized DataSourceFactory acquire() throws SQLException {
         if (status == STATUS_INUSE) {
             throw new IllegalStateException();
         } else {
             activate();
             status = STATUS_INUSE;
-            return new DatabaseHandleImpl(this);
+            return new DataSourceFactoryImpl(this);
         }
     }
     
