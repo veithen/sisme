@@ -28,6 +28,7 @@
     <modules>
         <module>core</module>
         <module>deployer</module>
+        <module>derby</module>
         <module>framework</module>
         <module>framework.jaxb2</module>
         <module>help</module>

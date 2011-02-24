@@ -116,4 +116,29 @@
         <require extend="false" filter="(&amp;(package=org.xml.sax.ext)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.xml.sax.ext</require>
         <require extend="false" filter="(&amp;(package=org.xml.sax.helpers)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.xml.sax.helpers</require>
     </resource>
+    <resource id="org.apache.geronimo.specs.geronimo-jta_1.1_spec/1.1.1" presentationname="geronimo-jta_1.1_spec" symbolicname="org.apache.geronimo.specs.geronimo-jta_1.1_spec" uri="http://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar" version="1.1.1">
+        <description>Provides open-source implementations of Sun specifications.</description>
+        <size>16030</size>
+        <documentation>http://www.apache.org</documentation>
+        <source>scm:svn:https://svn.apache.org/repos/asf/geronimo/specs/tags/geronimo-jta_1.1_spec-1.1.1</source>
+        <license>http://www.apache.org/licenses/LICENSE-2.0.txt</license>
+        <category id="org.apache.geronimo.specs"/>
+        <capability name="bundle">
+            <p n="manifestversion" v="2"/>
+            <p n="presentationname" v="geronimo-jta_1.1_spec"/>
+            <p n="symbolicname" v="org.apache.geronimo.specs.geronimo-jta_1.1_spec"/>
+            <p n="version" t="version" v="1.1.1"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.transaction.xa"/>
+            <p n="version" t="version" v="1.1.0"/>
+        </capability>
+        <capability name="package">
+            <p n="package" v="javax.transaction"/>
+            <p n="uses:" v="javax.transaction.xa"/>
+            <p n="version" t="version" v="1.1.0"/>
+        </capability>
+        <require extend="false" filter="(&amp;(package=javax.transaction)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package javax.transaction ;version=1.1.0</require>
+        <require extend="false" filter="(&amp;(package=javax.transaction.xa)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package javax.transaction.xa ;version=1.1.0</require>
+    </resource>
 </repository>
