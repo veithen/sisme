@@ -25,7 +25,7 @@
                                        http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/core.xsd
                                        http://sisme.googlecode.com/derby http://localhost:8080/sisme/schema/derby.xsd">
     <derby:database name="sample">
-        <name>sample</name>
+        <databaseName>sample</databaseName>
     </derby:database>
     <core:interface name="Calculator_Java">
         <domain ref="java:system"/>
