@@ -13,19 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.derby;
+package com.googlecode.sisme.derby.impl;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+public class DataSourceDefinitionParser {
 
-public class Activator implements BundleActivator {
-	public void start(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void stop(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 }
