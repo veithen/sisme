@@ -15,31 +15,6 @@
  */
 package com.googlecode.sisme.derby;
 
-public interface Database {
-    /**
-     * The database has not been created yet.
-     */
-    public static final int STATUS_NOT_CREATED = 0;
-    
-    /**
-     * The database exists but is not online.
-     */
-    public static final int STATUS_OFFLINE = 1;
-    
-    /**
-     * The database exists and is online.
-     */
-    public static final int STATUS_ONLINE = 2;
-    
-    /**
-     * The database has just been created and is online.
-     */
-    public static final int STATUS_NEW = 3;
-    
-    /**
-     * The database is in use.
-     */
-    public static final int STATUS_INUSE = 4;
-
-    int getStatus();
+public interface DatabaseHandle {
+    void release();
 }
