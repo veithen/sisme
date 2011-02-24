@@ -19,17 +19,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectModel;
+
 @XmlRootElement(name="database")
 @XmlType(name="")
-public class DatabaseModel {
-    private String name;
+public class DatabaseModel extends ManagedObjectModel {
+    private String databaseName;
 
     @XmlElement(required=true)
-    public String getName() {
-        return name;
+    public String getDatabaseName() {
+        return databaseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
     }
 }
