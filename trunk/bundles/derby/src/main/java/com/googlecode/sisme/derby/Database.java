@@ -15,31 +15,40 @@
  */
 package com.googlecode.sisme.derby;
 
+/**
+ * Provides administrative access to an available Derby database.
+ * 
+ * @author Andreas Veithen
+ */
 public interface Database {
+    String P_NAME = "name";
+    
     /**
      * The database has not been created yet.
      */
-    public static final int STATUS_NOT_CREATED = 0;
+    int STATUS_NOT_CREATED = 0;
     
     /**
      * The database exists but is not online.
      */
-    public static final int STATUS_OFFLINE = 1;
+    int STATUS_OFFLINE = 1;
     
     /**
      * The database exists and is online.
      */
-    public static final int STATUS_ONLINE = 2;
+    int STATUS_ONLINE = 2;
     
     /**
      * The database has just been created and is online.
      */
-    public static final int STATUS_NEW = 3;
+    int STATUS_NEW = 3;
     
     /**
      * The database is in use.
      */
-    public static final int STATUS_INUSE = 4;
-
+    int STATUS_INUSE = 4;
+    
+    String getName();
+    
     int getStatus();
 }

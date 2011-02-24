@@ -15,10 +15,13 @@
  */
 package com.googlecode.sisme.derby.impl;
 
+import java.sql.SQLException;
+
 import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleContext;
 
+import com.googlecode.sisme.derby.DataSourceFactory;
 import com.googlecode.sisme.derby.model.DatabaseModel;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParserContext;
@@ -33,8 +36,12 @@ public class DatabaseDefinitionParser extends JAXBDefinitionParser<DatabaseModel
 
     @Override
     protected void parse(JAXBDefinitionParserContext context, DatabaseModel model) {
-        // TODO Auto-generated method stub
-        
+        // TODO: need to handle the lifecycle here
+        try {
+            context.addManagedObject(DataSourceFactory.class.getName(), manager.acquireDatabase(model.getName()));
+        } catch (SQLException ex) {
+            // TODO Auto-generated catch block
+            throw new Error(ex);
+        }
     }
-
 }

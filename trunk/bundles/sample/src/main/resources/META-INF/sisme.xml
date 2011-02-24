@@ -19,10 +19,14 @@
                    xmlns:sisme="http://sisme.googlecode.com/framework"
                    xmlns:core="http://sisme.googlecode.com/core"
                    xmlns:java="http://sisme.googlecode.com/java"
+                   xmlns:derby="http://sisme.googlecode.com/derby"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://sisme.googlecode.com/framework http://localhost:8080/sisme/schema/framework.xsd
-                                       http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/core.xsd">
-    
+                                       http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/core.xsd
+                                       http://sisme.googlecode.com/derby http://localhost:8080/sisme/schema/derby.xsd">
+    <derby:database name="sample">
+        <name>sample</name>
+    </derby:database>
     <core:interface name="Calculator_Java">
         <domain ref="java:system"/>
         <operation name="add">

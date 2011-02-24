@@ -15,6 +15,6 @@
  */
 package com.googlecode.sisme.derby;
 
-public interface DatabaseHandle {
+public interface DataSourceFactory {
     void release();
 }

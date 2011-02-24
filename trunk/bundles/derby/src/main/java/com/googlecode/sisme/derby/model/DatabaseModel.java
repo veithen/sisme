@@ -15,19 +15,21 @@
  */
 package com.googlecode.sisme.derby.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="database")
 @XmlType(name="")
 public class DatabaseModel {
-    private String identifier;
+    private String name;
 
-    public String getIdentifier() {
-        return identifier;
+    @XmlElement(required=true)
+    public String getName() {
+        return name;
     }
 
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+    public void setName(String name) {
+        this.name = name;
     }
 }

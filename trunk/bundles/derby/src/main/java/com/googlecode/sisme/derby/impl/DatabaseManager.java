@@ -22,34 +22,50 @@ import java.util.Map;
 
 import org.osgi.framework.BundleContext;
 
-import com.googlecode.sisme.derby.DatabaseHandle;
-
+import com.googlecode.sisme.derby.DataSourceFactory;
 
 public class DatabaseManager {
+    private final BundleContext context;
     private final File rootDirectory;
     private final Map<String,DatabaseImpl> databases = new HashMap<String,DatabaseImpl>();
 
     public DatabaseManager(BundleContext context) {
+        this.context = context;
         rootDirectory = context.getDataFile("db");
+    }
+    
+    public void start() {
         if (rootDirectory.exists()) {
             for (File directory : rootDirectory.listFiles()) {
-                databases.put(directory.getName(), new DatabaseImpl(directory));
+                registerDatabase(new DatabaseImpl(directory.getName(), directory));
             }
         } else {
             rootDirectory.mkdir();
         }
     }
     
-    public DatabaseHandle acquireDatabase(String name) throws SQLException {
+    public void stop() {
+        for (DatabaseImpl database : databases.values()) {
+            database.unregister();
+        }
+        databases.clear();
+    }
+    
+    public DataSourceFactory acquireDatabase(String name) throws SQLException {
         DatabaseImpl database;
         synchronized (databases) {
             database = databases.get(name);
             if (database == null) {
                 File directory = new File(rootDirectory, name);
-                database = new DatabaseImpl(directory);
-                databases.put(name, database);
+                database = new DatabaseImpl(name, directory);
+                registerDatabase(database);
             }
         }
         return database.acquire();
+    }
+    
+    private void registerDatabase(DatabaseImpl database) {
+        databases.put(database.getName(), database);
+        database.register(context);
     }
 }
