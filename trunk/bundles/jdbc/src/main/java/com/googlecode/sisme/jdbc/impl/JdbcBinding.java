@@ -18,8 +18,8 @@ package com.googlecode.sisme.jdbc.impl;
 import com.googlecode.sisme.Destination;
 import com.googlecode.sisme.ImportBinding;
 import com.googlecode.sisme.Interface;
-import com.googlecode.sisme.MessageData;
 import com.googlecode.sisme.Operation;
+import com.googlecode.sisme.RequestContext;
 
 public class JdbcBinding extends ImportBinding {
     public JdbcBinding(Interface iface) {
@@ -32,7 +32,7 @@ public class JdbcBinding extends ImportBinding {
     }
 
     @Override
-    public void invoke(Operation operation, MessageData messageData, Destination destination) {
+    public void invoke(Operation operation, RequestContext requestContext, Destination destination) {
         // TODO Auto-generated method stub
         
     }
