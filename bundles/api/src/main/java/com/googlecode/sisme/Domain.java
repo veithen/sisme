@@ -13,17 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.description;
+package com.googlecode.sisme;
 
-import java.util.List;
-
-public class RPCMessage extends Message {
-    private final List<Part> parts;
-    private final Type wrapperType; // Will be useful to manage wrapper elements for JAX-WS interfaces
-
-    public RPCMessage(List<Part> parts, Type wrapperType) {
-        this.parts = parts;
-        this.wrapperType = wrapperType;
-    }
-
+public interface Domain<T extends Type> {
+    T lookup(String name);
 }

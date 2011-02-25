@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.description;
+package com.googlecode.sisme;
 
-import java.util.List;
-
-public class Interface {
-    private final List<Operation> operations;
-
-    public Interface(List<Operation> operations) {
-        this.operations = operations;
+public class Part {
+    private final String name;
+    private final Type type;
+    
+    public Part(String name, Type type) {
+        this.name = name;
+        this.type = type;
     }
 }

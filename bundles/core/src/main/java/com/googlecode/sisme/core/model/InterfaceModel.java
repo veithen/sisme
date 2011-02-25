@@ -22,9 +22,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.googlecode.sisme.description.Domain;
-import com.googlecode.sisme.description.Interface;
-import com.googlecode.sisme.description.Operation;
+import com.googlecode.sisme.Domain;
+import com.googlecode.sisme.Interface;
+import com.googlecode.sisme.Operation;
 import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectModel;
 import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
 

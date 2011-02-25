@@ -22,9 +22,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.googlecode.sisme.description.Domain;
-import com.googlecode.sisme.description.Message;
-import com.googlecode.sisme.description.Operation;
+import com.googlecode.sisme.Domain;
+import com.googlecode.sisme.Message;
+import com.googlecode.sisme.Operation;
 
 @XmlType(name="operation", propOrder={"input", "output", "faults"})
 public class OperationModel {

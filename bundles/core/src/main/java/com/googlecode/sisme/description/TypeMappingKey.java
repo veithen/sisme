@@ -15,6 +15,8 @@
  */
 package com.googlecode.sisme.description;
 
+import com.googlecode.sisme.Type;
+
 public class TypeMappingKey {
     private final Type from;
     private final Type to;

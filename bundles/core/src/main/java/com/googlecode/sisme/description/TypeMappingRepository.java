@@ -18,6 +18,8 @@ package com.googlecode.sisme.description;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.googlecode.sisme.Type;
+
 public class TypeMappingRepository {
     private final Map<TypeMappingKey,TypeMapping> mappings = new HashMap<TypeMappingKey,TypeMapping>();
     

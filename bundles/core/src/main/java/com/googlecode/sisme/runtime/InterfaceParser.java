@@ -19,9 +19,9 @@ import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleContext;
 
+import com.googlecode.sisme.Domain;
+import com.googlecode.sisme.Interface;
 import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.description.Domain;
-import com.googlecode.sisme.description.Interface;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParserContext;
 import com.googlecode.sisme.framework.parser.Dependency;

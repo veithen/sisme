@@ -21,10 +21,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.googlecode.sisme.description.Domain;
-import com.googlecode.sisme.description.Message;
-import com.googlecode.sisme.description.Part;
-import com.googlecode.sisme.description.RPCMessage;
+import com.googlecode.sisme.Domain;
+import com.googlecode.sisme.Message;
+import com.googlecode.sisme.Part;
+import com.googlecode.sisme.RPCMessage;
 
 @XmlType(name="message")
 public class MessageModel {
