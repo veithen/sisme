@@ -45,7 +45,8 @@
                 <configuration>
                     <instructions>
                         <Bundle-Name>SiSME Core</Bundle-Name>
-                        <Bundle-Activator>com.googlecode.sisme.runtime.Activator</Bundle-Activator>
+                        <Private-Package>com.googlecode.sisme.core.impl</Private-Package>
+                        <Bundle-Activator>com.googlecode.sisme.core.impl.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
