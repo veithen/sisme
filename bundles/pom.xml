@@ -34,6 +34,7 @@
         <module>framework.jaxb2</module>
         <module>help</module>
         <module>java</module>
+        <module>jdbc</module>
         <module>sample</module>
         <module>xsd</module>
     </modules>
