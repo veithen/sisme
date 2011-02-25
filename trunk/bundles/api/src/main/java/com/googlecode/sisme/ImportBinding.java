@@ -27,4 +27,6 @@ public abstract class ImportBinding {
     }
     
     public abstract boolean isCompatible(Destination destination);
+    
+    public abstract void invoke(Operation operation, MessageData messageData, Destination destination);
 }
