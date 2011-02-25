@@ -26,6 +26,7 @@
     <name>SiSME :: Bundles</name>
     <packaging>pom</packaging>
     <modules>
+        <module>api</module>
         <module>core</module>
         <module>deployer</module>
         <module>derby</module>

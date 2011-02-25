@@ -21,7 +21,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
-import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.Domain;
 import com.googlecode.sisme.java.JavaDomain;
 
 public class Activator implements BundleActivator {

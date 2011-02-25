@@ -18,7 +18,7 @@ package com.googlecode.sisme.java;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.Domain;
 
 public class JavaDomain implements Domain<JavaType> {
     private final JavaDomain parent;

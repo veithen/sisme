@@ -15,7 +15,7 @@
  */
 package com.googlecode.sisme.xsd;
 
-import com.googlecode.sisme.description.Domain;
+import com.googlecode.sisme.Domain;
 
 public class SchemaDomain implements Domain<SchemaType> {
 

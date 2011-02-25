@@ -15,7 +15,7 @@
  */
 package com.googlecode.sisme.xsd;
 
-import com.googlecode.sisme.description.Type;
+import com.googlecode.sisme.Type;
 
 public class SchemaType implements Type {
 

@@ -15,7 +15,7 @@
  */
 package com.googlecode.sisme.java;
 
-import com.googlecode.sisme.description.Type;
+import com.googlecode.sisme.Type;
 
 public class JavaType implements Type {
     private final Class<?> clazz;

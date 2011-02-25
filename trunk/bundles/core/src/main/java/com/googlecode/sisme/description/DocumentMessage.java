@@ -15,6 +15,9 @@
  */
 package com.googlecode.sisme.description;
 
+import com.googlecode.sisme.Message;
+import com.googlecode.sisme.Type;
+
 public class DocumentMessage extends Message {
     private final Type type;
 

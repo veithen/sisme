@@ -18,8 +18,8 @@ package com.googlecode.sisme.core.model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.googlecode.sisme.description.Domain;
-import com.googlecode.sisme.description.Part;
+import com.googlecode.sisme.Domain;
+import com.googlecode.sisme.Part;
 
 @XmlType(name="part")
 public class PartModel {

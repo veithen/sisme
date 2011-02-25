@@ -13,11 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.description;
+package com.googlecode.sisme;
 
 import java.util.List;
 
-public abstract class Message {
+public class Operation {
+    private final String name;
+    private final Message input;
+    private final Message output;
+    private final List<Message> faults;
     
-    
+    public Operation(String name, Message input, Message output, List<Message> faults) {
+        this.name = name;
+        this.input = input;
+        this.output = output;
+        this.faults = faults;
+    }
 }
