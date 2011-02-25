@@ -13,20 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme;
+package com.googlecode.sisme.core.model;
 
-public abstract class ImportBinding {
-    private final Interface iface;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-    public ImportBinding(Interface iface) {
-        this.iface = iface;
+import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
+
+@XmlRootElement(name="import")
+@XmlType(name="")
+public class StaticImportModel extends ImportModel {
+    private ManagedObjectRefModel destination;
+
+    public ManagedObjectRefModel getDestination() {
+        return destination;
     }
-    
-    public final Interface getInterface() {
-        return iface;
+
+    public void setDestination(ManagedObjectRefModel destination) {
+        this.destination = destination;
     }
-    
-    public abstract boolean isCompatible(Destination destination);
-    
-    public abstract void invoke(Operation operation, RequestContext requestContext, Destination destination);
 }

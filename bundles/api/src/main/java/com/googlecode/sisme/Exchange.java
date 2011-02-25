@@ -15,18 +15,6 @@
  */
 package com.googlecode.sisme;
 
-public abstract class ImportBinding {
-    private final Interface iface;
+public class Exchange {
 
-    public ImportBinding(Interface iface) {
-        this.iface = iface;
-    }
-    
-    public final Interface getInterface() {
-        return iface;
-    }
-    
-    public abstract boolean isCompatible(Destination destination);
-    
-    public abstract void invoke(Operation operation, RequestContext requestContext, Destination destination);
 }

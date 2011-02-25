@@ -15,10 +15,16 @@
  */
 package com.googlecode.sisme;
 
-public class Import {
+public abstract class Import {
     private final ImportBinding binding;
 
     public Import(ImportBinding binding) {
         this.binding = binding;
     }
+    
+    public final ImportBinding getBinding() {
+        return binding;
+    }
+
+    public abstract void invoke(Operation operation, RequestContext requestContext);
 }

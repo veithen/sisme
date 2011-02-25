@@ -13,12 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme;
+package com.googlecode.sisme.core.impl;
 
-public class DynamicImport extends Import {
+import com.googlecode.sisme.Destination;
+import com.googlecode.sisme.Import;
+import com.googlecode.sisme.ImportBinding;
+import com.googlecode.sisme.Operation;
+import com.googlecode.sisme.RequestContext;
 
-    public DynamicImport(ImportBinding binding) {
+public class StaticImport extends Import {
+    private final Destination destination;
+    
+    public StaticImport(ImportBinding binding, Destination destination) {
         super(binding);
+        this.destination = destination;
     }
 
+    @Override
+    public final void invoke(Operation operation, RequestContext requestContext) {
+        getBinding().invoke(operation, requestContext, destination);
+    }
 }

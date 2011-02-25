@@ -15,18 +15,20 @@
  */
 package com.googlecode.sisme;
 
-public abstract class ImportBinding {
-    private final Interface iface;
+public abstract class MessageContext {
+    private final Exchange exchange;
+    private final MessageData messageData;
 
-    public ImportBinding(Interface iface) {
-        this.iface = iface;
+    public MessageContext(Exchange exchange, MessageData messageData) {
+        this.exchange = exchange;
+        this.messageData = messageData;
     }
-    
-    public final Interface getInterface() {
-        return iface;
+
+    public final Exchange getExchange() {
+        return exchange;
     }
-    
-    public abstract boolean isCompatible(Destination destination);
-    
-    public abstract void invoke(Operation operation, RequestContext requestContext, Destination destination);
+
+    public final MessageData getMessageData() {
+        return messageData;
+    }
 }

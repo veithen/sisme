@@ -15,12 +15,8 @@
  */
 package com.googlecode.sisme;
 
-public class StaticImport extends Import {
-    private final Destination destination;
-    
-    public StaticImport(ImportBinding binding, Destination destination) {
-        super(binding);
-        this.destination = destination;
+public class ResponseContext extends MessageContext {
+    public ResponseContext(Exchange exchange, MessageData messageData) {
+        super(exchange, messageData);
     }
-
 }
