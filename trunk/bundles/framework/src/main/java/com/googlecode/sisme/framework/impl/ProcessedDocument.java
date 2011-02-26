@@ -13,11 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.document.processor;
+/**
+ * 
+ */
+package com.googlecode.sisme.framework.impl;
 
-import com.googlecode.sisme.framework.Processor;
-import com.googlecode.sisme.framework.document.Document;
+import java.util.Dictionary;
 
-public interface DocumentProcessor extends Processor<Document,DocumentProcessorContext> {
-    String P_SELECTOR = "selector";
+import org.osgi.framework.BundleContext;
+
+import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
+
+public class ProcessedDocument extends AbstractProcessorContext implements DocumentProcessorContext {
+    ProcessedDocument(BundleContext bundleContext) {
+        super(bundleContext);
+    }
+
+    @Override
+    protected void processProperties(Dictionary<String,Object> properties) {
+        // TODO: add a property that links the created object(s) to the document
+    }
 }

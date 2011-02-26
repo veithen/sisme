@@ -15,28 +15,24 @@
  */
 package com.googlecode.sisme.framework.impl;
 
-import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 
+import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
-public class DefinitionsProcessor implements DocumentProcessor<DefinitionSet> {
-    public DefinitionSet processDocument(DocumentProcessorContext context, Source source) {
+public class DefinitionsProcessor implements DocumentProcessor {
+    public void process(DocumentProcessorContext context, Document document) {
         DefinitionSet definitionSet = new DefinitionSet(context);
         try {
             // TODO: if an exception is thrown, we may already have registered some services
-            TransformerFactory.newInstance().newTransformer().transform(source,
+            TransformerFactory.newInstance().newTransformer().transform(document.getSource(),
                     new SAXResult(new DefinitionsContentHandler(definitionSet)));
         } catch (TransformerException ex) {
             // TODO
             throw new Error(ex);
         }
-        return definitionSet;
-    }
-
-    public void documentRemoved(DefinitionSet definitionSet) {
     }
 }

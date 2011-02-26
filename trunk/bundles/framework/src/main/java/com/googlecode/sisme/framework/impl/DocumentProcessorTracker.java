@@ -28,19 +28,19 @@ public class DocumentProcessorTracker extends ServiceTracker {
 
     @Override
     public Object addingService(ServiceReference reference) {
-        DocumentProcessor<?> processor = (DocumentProcessor<?>)context.getService(reference);
-        DocumentProcessorInvoker<?> invoker = createInvoker(processor, (String)reference.getProperty(DocumentProcessor.P_SELECTOR));
+        DocumentProcessor processor = (DocumentProcessor)context.getService(reference);
+        DocumentProcessorInvoker invoker = createInvoker(processor, (String)reference.getProperty(DocumentProcessor.P_SELECTOR));
         invoker.start();
         return invoker;
     }
     
-    private <T> DocumentProcessorInvoker<T> createInvoker(DocumentProcessor<T> processor, String selector) {
-        return new DocumentProcessorInvoker<T>(context, processor, selector);
+    private DocumentProcessorInvoker createInvoker(DocumentProcessor processor, String selector) {
+        return new DocumentProcessorInvoker(context, processor, selector);
     }
     
     @Override
     public void removedService(ServiceReference reference, Object service) {
-        ((DocumentProcessorInvoker<?>)service).stop();
+        ((DocumentProcessorInvoker)service).stop();
         context.ungetService(reference);
     }
 }
