@@ -15,10 +15,7 @@
  */
 package com.googlecode.sisme.framework.document.processor;
 
-import java.util.Dictionary;
-
 import com.googlecode.sisme.framework.ProcessorContext;
 
 public interface DocumentProcessorContext extends ProcessorContext {
-    void addService(String clazz, Object service, Dictionary<String,Object> properties);
 }

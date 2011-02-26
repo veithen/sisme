@@ -15,6 +15,8 @@
  */
 package com.googlecode.sisme.framework.impl;
 
+import java.util.Dictionary;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
@@ -38,6 +40,11 @@ public class DocumentProcessorInvoker<T> {
 
         ProcessedDocument(BundleContext bundleContext) {
             super(bundleContext);
+        }
+
+        @Override
+        protected void processProperties(Dictionary<String,Object> properties) {
+            // TODO: add a property that links the created object(s) to the document
         }
 
         T getObject() {

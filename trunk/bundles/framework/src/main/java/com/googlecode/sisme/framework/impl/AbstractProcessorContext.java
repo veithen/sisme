@@ -17,6 +17,7 @@ package com.googlecode.sisme.framework.impl;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.osgi.framework.BundleContext;
@@ -37,29 +38,31 @@ public abstract class AbstractProcessorContext implements ProcessorContext {
     }
 
     public final void addService(String clazz, Object service) {
-        addService(clazz, new InstanceWrapper(service));
+        addService(new String[] { clazz }, new InstanceWrapper(service), new Hashtable<String,Object>());
+    }
+
+    public final void addService(String clazz, ObjectFactory factory) {
+        addService(new String[] { clazz }, factory, new Hashtable<String,Object>());
     }
     
     public final void addService(String clazz, Object service, Dictionary<String,Object> properties) {
-        addService(clazz, new InstanceWrapper(service));
+        addService(new String[] { clazz }, new InstanceWrapper(service), properties);
     }
     
-    public final void addService(String clazz, ObjectFactory serviceFactory, Dictionary<String,Object> properties) {
-        services.add(new Service(this, new String[] { clazz }, serviceFactory, properties));
-    }
-    
-    // TODO: should be private or disappear
-    protected void addService(Service service) {
-        services.add(service);
+    public final void addService(String[] clazz, ObjectFactory serviceFactory, Dictionary<String,Object> properties) {
+        processProperties(properties);
+        services.add(new Service(this, clazz, serviceFactory, properties));
     }
 
+    protected abstract void processProperties(Dictionary<String,Object> properties);
+    
     protected final void registerServices() {
         for (Service service : services) {
             service.register();
         }
     }
     
-    protected void unregisterServices() {
+    protected final void unregisterServices() {
         for (Service service : services) {
             service.unregister();
         }

@@ -19,7 +19,6 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.ObjectFactory;
 import com.googlecode.sisme.framework.ProcessorContext;
 
 public interface DefinitionProcessorContext extends ProcessorContext {
@@ -28,8 +27,4 @@ public interface DefinitionProcessorContext extends ProcessorContext {
     // element must represent an XML element of type objectRef
     // TODO
 //    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
-    
-    void addService(String clazz, Object object);
-    
-    void addService(String clazz, ObjectFactory factory);
 }
