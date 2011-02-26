@@ -24,6 +24,7 @@ import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
+import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
 public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
     public DefinitionsProcessor(BundleContext context) {
@@ -31,8 +32,8 @@ public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
     }
 
     @Override
-    protected DefinitionSet processDocument(BundleContext targetContext, Source source) {
-        DefinitionSet definitionSet = new DefinitionSet(targetContext);
+    protected DefinitionSet processDocument(DocumentProcessorContext context, Source source) {
+        DefinitionSet definitionSet = new DefinitionSet(context);
         try {
             // TODO: if an exception is thrown, we may already have registered some services
             TransformerFactory.newInstance().newTransformer().transform(source,
@@ -46,6 +47,5 @@ public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
 
     @Override
     protected void documentRemoved(DefinitionSet definitionSet) {
-        definitionSet.unregister();
     }
 }

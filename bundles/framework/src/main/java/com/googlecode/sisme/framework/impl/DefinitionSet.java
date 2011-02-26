@@ -15,24 +15,20 @@
  */
 package com.googlecode.sisme.framework.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
 import com.googlecode.sisme.framework.definition.Definition;
+import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
 public class DefinitionSet {
-    private final BundleContext targetBundleContext;
-    private final List<ServiceRegistration> registrations = new ArrayList<ServiceRegistration>();
+    private final DocumentProcessorContext context;
     private String targetNamespace;
     
-    public DefinitionSet(BundleContext targetBundleContext) {
-        this.targetBundleContext = targetBundleContext;
+    public DefinitionSet(DocumentProcessorContext context) {
+        this.context = context;
     }
 
     public void setTargetNamespace(String targetNamespace) {
@@ -49,13 +45,6 @@ public class DefinitionSet {
             name = UUID.randomUUID().toString();
         }
         props.setProperty(Definition.P_NAME, name);
-        registrations.add(targetBundleContext.registerService(Definition.class.getName(), new DefinitionImpl(element), props));
-    }
-    
-    public void unregister() {
-        for (ServiceRegistration registration : registrations) {
-            registration.unregister();
-        }
-        registrations.clear();
+        context.registerService(Definition.class.getName(), new DefinitionImpl(element), props);
     }
 }

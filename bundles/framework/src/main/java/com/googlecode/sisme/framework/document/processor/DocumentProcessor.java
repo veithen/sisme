@@ -15,12 +15,17 @@
  */
 package com.googlecode.sisme.framework.document.processor;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.List;
+
 import javax.xml.transform.Source;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
@@ -33,22 +38,34 @@ import com.googlecode.sisme.framework.document.Document;
  */
 public abstract class DocumentProcessor<T> {
     // TODO: if the parsing fails, we should register a FaultyArtifact and store the service registration here
-    private class ProcessedDocument {
-        private final T object;
+    private class ProcessedDocument implements DocumentProcessorContext {
+        private final BundleContext targetContext;
+        private final List<ServiceRegistration> registrations = new ArrayList<ServiceRegistration>();
+        private T object;
 
-        public ProcessedDocument(T object) {
+        ProcessedDocument(BundleContext targetContext) {
+            this.targetContext = targetContext;
+        }
+
+        T getObject() {
+            return object;
+        }
+
+        void setObject(T object) {
             this.object = object;
         }
 
-        public T getObject() {
-            return object;
+        public void registerService(String clazz, Object service, Dictionary properties) {
+            registrations.add(targetContext.registerService(clazz, service, properties));
         }
     }
     
     private class Customizer implements ServiceTrackerCustomizer {
         public Object addingService(ServiceReference reference) {
             Document document = (Document)context.getService(reference);
-            return new ProcessedDocument(processDocument(reference.getBundle().getBundleContext(), document.getSource()));
+            ProcessedDocument processedDocument = new ProcessedDocument(reference.getBundle().getBundleContext());
+            processedDocument.setObject(processDocument(processedDocument, document.getSource()));
+            return processedDocument;
         }
 
         public void modifiedService(ServiceReference reference, Object service) {
@@ -84,15 +101,7 @@ public abstract class DocumentProcessor<T> {
         tracker.close();
     }
     
-    /**
-     * 
-     * 
-     * @param targetContext the bundle context into which all created services should be registered
-     * @param source
-     * @return
-     */
-    // TODO: maybe we should have a proxy context here, so that we can safely rollback any registrations done before a parse error occurs
-    protected abstract T processDocument(BundleContext targetContext, Source source);
+    protected abstract T processDocument(DocumentProcessorContext context, Source source);
     
     protected abstract void documentRemoved(T object);
 }
