@@ -24,11 +24,11 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import com.googlecode.sisme.framework.Processor;
 
-public abstract class ProcessorInvoker<T,C extends AbstractProcessorContext> {
+public class ProcessorInvoker<T,C extends AbstractProcessorContext> {
     private class Customizer implements ServiceTrackerCustomizer {
         public Object addingService(ServiceReference reference) {
             T artifact = artifactClass.cast(context.getService(reference));
-            C processorContext = createContext(reference.getBundle().getBundleContext());
+            C processorContext = processorTracker.createContext(reference.getBundle().getBundleContext());
             processor.process(processorContext, artifact);
             processorContext.registerServices();
             return processorContext;
@@ -46,13 +46,15 @@ public abstract class ProcessorInvoker<T,C extends AbstractProcessorContext> {
         }
     }
     
+    private final ProcessorTracker<T,C,? extends Processor<T,? super C>> processorTracker;
     private final BundleContext context;
     private final Class<T> artifactClass;
     private final Class<C> contextClass;
     private final Processor<T,? super C> processor;
     private final ServiceTracker tracker;
     
-    public ProcessorInvoker(BundleContext context, Class<T> artifactClass, Class<C> contextClass, Processor<T,? super C> processor, String selector) {
+    public ProcessorInvoker(ProcessorTracker<T,C,? extends Processor<T,? super C>> processorTracker, BundleContext context, Class<T> artifactClass, Class<C> contextClass, Processor<T,? super C> processor, String selector) {
+        this.processorTracker = processorTracker;
         this.context = context;
         this.artifactClass = artifactClass;
         this.contextClass = contextClass;
@@ -66,8 +68,6 @@ public abstract class ProcessorInvoker<T,C extends AbstractProcessorContext> {
         tracker = new ServiceTracker(context, filter, new Customizer());
     }
 
-    protected abstract C createContext(BundleContext targetContext);
-    
     public void start() {
         tracker.open();
     }
