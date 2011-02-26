@@ -17,7 +17,6 @@ package com.googlecode.sisme.framework.definition.processor;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
 
@@ -29,11 +28,9 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.ObjectFactory;
 import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.impl.AbstractProcessorContext;
 import com.googlecode.sisme.framework.impl.DefinitionImpl;
-import com.googlecode.sisme.framework.impl.Service;
 
 /**
  * Tracks a set of dependencies and automatically registers a service when every
@@ -42,14 +39,14 @@ import com.googlecode.sisme.framework.impl.Service;
  * @author Andreas Veithen
  */
 class Binder extends AbstractProcessorContext implements DefinitionProcessorContext {
-    private final QName managedObjectName;
+    private final QName objectName;
     private final List<ServiceRegistration> registeredDefinitions = new ArrayList<ServiceRegistration>();
     private final List<DependencyImpl<?>> dependencies = new ArrayList<DependencyImpl<?>>();
     private boolean started;
 
-    Binder(BundleContext bundleContext, QName managedObjectName) {
+    Binder(BundleContext bundleContext, QName objectName) {
         super(bundleContext);
-        this.managedObjectName = managedObjectName;
+        this.objectName = objectName;
     }
 
     void rebind() {
@@ -102,7 +99,7 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
         // TODO: need to report an error if both ref and content are given
         if (ref == null) {
             // Generate a new unique name
-            ref = new QName(managedObjectName.getNamespaceURI(), managedObjectName.getLocalPart() + "$" + dependencies.size());
+            ref = new QName(objectName.getNamespaceURI(), objectName.getLocalPart() + "$" + dependencies.size());
             // Register a Definition object
             Properties props = new Properties();
             props.setProperty(Definition.P_ELEMENT_NAMESPACE, content.getNamespaceURI());
@@ -123,10 +120,9 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
         return dependency;
     }
 
-    public void addService(String clazz, ObjectFactory factory) {
-        Dictionary<String,Object> properties = new Hashtable<String,Object>();
-        properties.put("namespace", managedObjectName.getNamespaceURI());
-        properties.put("name", managedObjectName.getLocalPart());
-        addService(new Service(this, new String[] { clazz }, factory, properties));
+    @Override
+    protected void processProperties(Dictionary<String, Object> properties) {
+        properties.put("namespace", objectName.getNamespaceURI());
+        properties.put("name", objectName.getLocalPart());
     }
 }

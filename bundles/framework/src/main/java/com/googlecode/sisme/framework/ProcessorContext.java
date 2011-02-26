@@ -15,6 +15,15 @@
  */
 package com.googlecode.sisme.framework;
 
-public interface ProcessorContext {
+import java.util.Dictionary;
 
+public interface ProcessorContext {
+    
+    void addService(String clazz, Object object);
+    
+    void addService(String clazz, ObjectFactory factory);
+
+    void addService(String clazz, Object service, Dictionary<String,Object> properties);
+
+    void addService(String[] clazz, ObjectFactory serviceFactory, Dictionary<String,Object> properties);
 }
