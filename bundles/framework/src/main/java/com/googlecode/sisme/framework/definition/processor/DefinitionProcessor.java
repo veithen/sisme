@@ -23,11 +23,11 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
-import org.w3c.dom.Element;
 
+import com.googlecode.sisme.framework.Processor;
 import com.googlecode.sisme.framework.definition.Definition;
 
-public abstract class DefinitionProcessor {
+public abstract class DefinitionProcessor implements Processor<Definition,DefinitionProcessorContext> {
     private final ServiceTracker tracker;
     
     public DefinitionProcessor(final BundleContext context, QName elementQName) {
@@ -43,10 +43,9 @@ public abstract class DefinitionProcessor {
                 String namespace = (String)reference.getProperty(Definition.P_NAMESPACE);
                 String name = (String)reference.getProperty(Definition.P_NAME);
                 Definition definition = (Definition)context.getService(reference);
-                Element content = definition.getContent();
                 // Managed objects are always registered into the same bundle context as the original definition
                 Binder binder = new Binder(reference.getBundle().getBundleContext(), new QName(namespace, name));
-                parse(binder, content);
+                process(binder, definition);
                 binder.start();
                 return binder;
             }
@@ -69,5 +68,5 @@ public abstract class DefinitionProcessor {
         tracker.close();
     }
     
-    protected abstract void parse(DefinitionProcessorContext context, Element content);
+    public abstract void process(DefinitionProcessorContext context, Definition definition);
 }

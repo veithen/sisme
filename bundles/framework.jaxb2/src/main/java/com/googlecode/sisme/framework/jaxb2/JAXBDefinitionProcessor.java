@@ -22,8 +22,8 @@ import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleContext;
-import org.w3c.dom.Element;
 
+import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
 
@@ -43,12 +43,12 @@ public abstract class JAXBDefinitionProcessor<T> extends DefinitionProcessor {
     }
 
     @Override
-    protected final void parse(DefinitionProcessorContext context, Element content) {
+    public final void process(DefinitionProcessorContext context, Definition definition) {
         try {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             // "Default" here refers to JAXB 1.0. JAXB 2.0 is more lenient by default.
             unmarshaller.setEventHandler(new DefaultValidationEventHandler());
-            parse(new JAXBDefinitionProcessorContext(context), elementClass.cast(unmarshaller.unmarshal(content)));
+            parse(new JAXBDefinitionProcessorContext(context), elementClass.cast(unmarshaller.unmarshal(definition.getContent())));
         } catch (JAXBException ex) {
             // TODO: implement appropriate error handling in DefinitionParser
             throw new RuntimeException(ex);
