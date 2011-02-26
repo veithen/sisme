@@ -19,21 +19,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
-import javax.xml.namespace.QName;
-
-import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
 
-public abstract class JAXBDefinitionProcessor<T> extends DefinitionProcessor {
+public abstract class JAXBDefinitionProcessor<T> implements DefinitionProcessor {
     private final JAXBContext jaxbContext;
     private final Class<T> elementClass;
     
-    // TODO: it should not be necessary to provide the element QName
-    public JAXBDefinitionProcessor(BundleContext context, QName elementQName, Class<T> elementClass) {
-        super(context, elementQName);
+    public JAXBDefinitionProcessor(Class<T> elementClass) {
         this.elementClass = elementClass;
         try {
             jaxbContext = JAXBUtil.createContext(elementClass);
@@ -42,7 +37,6 @@ public abstract class JAXBDefinitionProcessor<T> extends DefinitionProcessor {
         }
     }
 
-    @Override
     public final void process(DefinitionProcessorContext context, Definition definition) {
         try {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

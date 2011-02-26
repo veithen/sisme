@@ -15,6 +15,8 @@
  */
 package com.googlecode.sisme.core.impl;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
@@ -25,27 +27,33 @@ import com.googlecode.sisme.core.model.DynamicImportModel;
 import com.googlecode.sisme.core.model.InterfaceModel;
 import com.googlecode.sisme.core.model.StaticImportModel;
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     private ServiceRegistration schemaProviderRegistration;
-    private InterfaceParser interfaceParser;
     
     public void start(BundleContext context) throws Exception {
         String namespace = "http://sisme.googlecode.com/core";
         FrameworkSchemaProvider schemaProvider = new JAXBFrameworkSchemaProvider(namespace,
                 DynamicImportModel.class, InterfaceModel.class, StaticImportModel.class);
-        Properties props = new Properties();
-        props.put(FrameworkSchemaProvider.P_NAMESPACE, namespace);
-        props.put(FrameworkSchemaProvider.P_FILENAME, "core.xsd");
-        schemaProviderRegistration = context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
         
-        interfaceParser = new InterfaceParser(context);
-        interfaceParser.start();
+        {
+            Properties props = new Properties();
+            props.put(FrameworkSchemaProvider.P_NAMESPACE, namespace);
+            props.put(FrameworkSchemaProvider.P_FILENAME, "core.xsd");
+            schemaProviderRegistration = context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
+        }
+        
+        {
+            Dictionary<String,Object> props = new Hashtable<String,Object>();
+            props.put(DefinitionProcessor.P_ELEMENT_NAMESPACE, "http://sisme.googlecode.com/core");
+            props.put(DefinitionProcessor.P_ELEMENT_NAME, "interface");
+            context.registerService(DefinitionProcessor.class.getName(), new InterfaceDefinitionProcessor(), props);
+        }
     }
 
     public void stop(BundleContext context) throws Exception {
-        interfaceParser.stop();
         schemaProviderRegistration.unregister();
     }
 }

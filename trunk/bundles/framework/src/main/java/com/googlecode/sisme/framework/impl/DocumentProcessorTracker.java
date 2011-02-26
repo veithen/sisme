@@ -32,7 +32,7 @@ public class DocumentProcessorTracker extends ProcessorTracker<Document,Processe
     }
 
     @Override
-    protected ProcessedDocument createContext(BundleContext targetContext) {
+    protected ProcessedDocument createContext(BundleContext targetContext, ServiceReference artifactReference) {
         return new ProcessedDocument(targetContext);
     }
 }

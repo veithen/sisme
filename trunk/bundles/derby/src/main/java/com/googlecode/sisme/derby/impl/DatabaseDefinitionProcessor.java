@@ -17,20 +17,16 @@ package com.googlecode.sisme.derby.impl;
 
 import java.sql.SQLException;
 
-import javax.xml.namespace.QName;
-
-import org.osgi.framework.BundleContext;
-
 import com.googlecode.sisme.derby.DataSourceFactory;
 import com.googlecode.sisme.derby.model.DatabaseModel;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
 
-public class DatabaseDefinitionParser extends JAXBDefinitionProcessor<DatabaseModel> {
+public class DatabaseDefinitionProcessor extends JAXBDefinitionProcessor<DatabaseModel> {
     private final DatabaseManager manager;
     
-    public DatabaseDefinitionParser(BundleContext context, DatabaseManager manager) {
-        super(context, new QName("http://sisme.googlecode.com/derby", "database"), DatabaseModel.class);
+    public DatabaseDefinitionProcessor(DatabaseManager manager) {
+        super(DatabaseModel.class);
         this.manager = manager;
     }
 

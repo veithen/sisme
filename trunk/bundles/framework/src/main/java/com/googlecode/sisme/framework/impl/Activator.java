@@ -27,6 +27,7 @@ import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 
 public class Activator implements BundleActivator {
     private DocumentProcessorTracker documentProcessorTracker;
+    private DefinitionProcessorTracker definitionProcessorTracker;
     private ManagedObjectFactoryTracker managedObjectFactoryTracker;
     
     public void start(BundleContext context) throws Exception {
@@ -44,12 +45,15 @@ public class Activator implements BundleActivator {
         }
         documentProcessorTracker = new DocumentProcessorTracker(context);
         documentProcessorTracker.open();
+        definitionProcessorTracker = new DefinitionProcessorTracker(context);
+        definitionProcessorTracker.open();
         managedObjectFactoryTracker = new ManagedObjectFactoryTracker(context);
         managedObjectFactoryTracker.open();
     }
 
     public void stop(BundleContext context) throws Exception {
         documentProcessorTracker.close();
+        definitionProcessorTracker.close();
         managedObjectFactoryTracker.close();
     }
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
+package com.googlecode.sisme.framework.impl;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -29,8 +29,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
 import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.impl.AbstractProcessorContext;
-import com.googlecode.sisme.framework.impl.DefinitionImpl;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
+import com.googlecode.sisme.framework.definition.processor.Dependency;
 
 /**
  * Tracks a set of dependencies and automatically registers a service when every
@@ -72,7 +72,7 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
     	}
     }
     
-    void start() {
+    public void start() {
         if (dependencies.isEmpty()) {
             registerServices();
         } else {
@@ -82,7 +82,7 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
         }
     }
     
-    void stop() {
+    public void stop() {
         if (dependencies.isEmpty()) {
             unregisterServices();
         } else {

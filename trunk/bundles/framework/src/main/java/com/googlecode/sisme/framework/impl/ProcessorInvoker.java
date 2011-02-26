@@ -28,9 +28,9 @@ public class ProcessorInvoker<T,C extends AbstractProcessorContext> {
     private class Customizer implements ServiceTrackerCustomizer {
         public Object addingService(ServiceReference reference) {
             T artifact = artifactClass.cast(context.getService(reference));
-            C processorContext = processorTracker.createContext(reference.getBundle().getBundleContext());
+            C processorContext = processorTracker.createContext(reference.getBundle().getBundleContext(), reference);
             processor.process(processorContext, artifact);
-            processorContext.registerServices();
+            processorContext.start();
             return processorContext;
         }
 
@@ -41,7 +41,7 @@ public class ProcessorInvoker<T,C extends AbstractProcessorContext> {
 
         public void removedService(ServiceReference reference, Object service) {
             C processorContext = contextClass.cast(service);
-            processorContext.unregisterServices();
+            processorContext.stop();
             context.ungetService(reference);
         }
     }

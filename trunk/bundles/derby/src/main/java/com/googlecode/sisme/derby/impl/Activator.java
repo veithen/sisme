@@ -15,6 +15,8 @@
  */
 package com.googlecode.sisme.derby.impl;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
@@ -23,29 +25,36 @@ import org.osgi.framework.ServiceRegistration;
 
 import com.googlecode.sisme.derby.model.DatabaseModel;
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     private DatabaseManager databaseManager;
-    private DatabaseDefinitionParser databaseDefinitionParser;
     private ServiceRegistration schemaProviderRegistration;
     
 	public void start(BundleContext context) throws Exception {
 	    databaseManager = new DatabaseManager(context);
 	    databaseManager.start();
-	    databaseDefinitionParser = new DatabaseDefinitionParser(context, databaseManager);
-	    databaseDefinitionParser.start();
-	    Properties props = new Properties();
-	    props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/derby");
-	    props.put(FrameworkSchemaProvider.P_FILENAME, "derby.xsd");
-	    schemaProviderRegistration =
-    	    context.registerService(FrameworkSchemaProvider.class.getName(),
-    	            new JAXBFrameworkSchemaProvider("http://sisme.googlecode.com/derby", DatabaseModel.class), props);
+	    
+        {
+            Dictionary<String,Object> props = new Hashtable<String,Object>();
+            props.put(DefinitionProcessor.P_ELEMENT_NAMESPACE, "http://sisme.googlecode.com/derby");
+            props.put(DefinitionProcessor.P_ELEMENT_NAME, "database");
+            context.registerService(DefinitionProcessor.class.getName(), new DatabaseDefinitionProcessor(databaseManager), props);
+        }
+	    
+	    {
+    	    Properties props = new Properties();
+    	    props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/derby");
+    	    props.put(FrameworkSchemaProvider.P_FILENAME, "derby.xsd");
+    	    schemaProviderRegistration =
+        	    context.registerService(FrameworkSchemaProvider.class.getName(),
+        	            new JAXBFrameworkSchemaProvider("http://sisme.googlecode.com/derby", DatabaseModel.class), props);
+	    }
 	}
 
 	public void stop(BundleContext context) throws Exception {
 	    schemaProviderRegistration.unregister();
-	    databaseDefinitionParser.stop();
 	    databaseManager.stop();
 	}
 }
