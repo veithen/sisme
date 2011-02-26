@@ -15,7 +15,8 @@
  */
 package com.googlecode.sisme.framework.impl;
 
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.UUID;
 
 import org.w3c.dom.Element;
@@ -36,15 +37,15 @@ public class DefinitionSet {
     }
 
     public void addDefinition(Element element) {
-        Properties props = new Properties();
-        props.setProperty(Definition.P_ELEMENT_NAMESPACE, element.getNamespaceURI());
-        props.setProperty(Definition.P_ELEMENT_NAME, element.getLocalName());
-        props.setProperty(Definition.P_NAMESPACE, targetNamespace);
+        Dictionary<String,Object> props = new Hashtable<String,Object>();
+        props.put(Definition.P_ELEMENT_NAMESPACE, element.getNamespaceURI());
+        props.put(Definition.P_ELEMENT_NAME, element.getLocalName());
+        props.put(Definition.P_NAMESPACE, targetNamespace);
         String name = element.getAttributeNS(null, "name");
         if (name.length() == 0) {
             name = UUID.randomUUID().toString();
         }
-        props.setProperty(Definition.P_NAME, name);
-        context.registerService(Definition.class.getName(), new DefinitionImpl(element), props);
+        props.put(Definition.P_NAME, name);
+        context.addService(Definition.class.getName(), new DefinitionImpl(element), props);
     }
 }

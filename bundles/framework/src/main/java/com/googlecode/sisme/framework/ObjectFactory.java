@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.document.processor;
+package com.googlecode.sisme.framework;
 
-import java.util.Dictionary;
-
-import com.googlecode.sisme.framework.ProcessorContext;
-
-public interface DocumentProcessorContext extends ProcessorContext {
-    void addService(String clazz, Object service, Dictionary<String,Object> properties);
+public interface ObjectFactory {
+    Object createObject();
 }

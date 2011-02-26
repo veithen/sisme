@@ -16,6 +16,8 @@
 package com.googlecode.sisme.framework.definition.processor;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
 
@@ -27,8 +29,11 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
+import com.googlecode.sisme.framework.ObjectFactory;
 import com.googlecode.sisme.framework.definition.Definition;
+import com.googlecode.sisme.framework.impl.AbstractProcessorContext;
 import com.googlecode.sisme.framework.impl.DefinitionImpl;
+import com.googlecode.sisme.framework.impl.Service;
 
 /**
  * Tracks a set of dependencies and automatically registers a service when every
@@ -36,23 +41,17 @@ import com.googlecode.sisme.framework.impl.DefinitionImpl;
  * 
  * @author Andreas Veithen
  */
-class Binder implements DefinitionProcessorContext {
-    private final BundleContext bundleContext;
+class Binder extends AbstractProcessorContext implements DefinitionProcessorContext {
     private final QName managedObjectName;
     private final List<ServiceRegistration> registeredDefinitions = new ArrayList<ServiceRegistration>();
     private final List<DependencyImpl<?>> dependencies = new ArrayList<DependencyImpl<?>>();
-    private final List<ManagedObject> managedObjects = new ArrayList<ManagedObject>();
     private boolean started;
 
     Binder(BundleContext bundleContext, QName managedObjectName) {
-        this.bundleContext = bundleContext;
+        super(bundleContext);
         this.managedObjectName = managedObjectName;
     }
 
-    BundleContext getBundleContext() {
-        return bundleContext;
-    }
-    
     void rebind() {
     	boolean satisfied = true;
     	for (DependencyImpl<?> dependency : dependencies) {
@@ -65,10 +64,10 @@ class Binder implements DefinitionProcessorContext {
     	    for (DependencyImpl<?> dependency : dependencies) {
     	        dependency.bind();
     	    }
-    	    registerManagedObjects();
+    	    registerServices();
     	    started = true;
     	} else if (started && !satisfied) {
-    	    unregisterManagedObjects();
+    	    unregisterServices();
             for (DependencyImpl<?> dependency : dependencies) {
                 dependency.unbind();
             }
@@ -76,21 +75,9 @@ class Binder implements DefinitionProcessorContext {
     	}
     }
     
-    private void registerManagedObjects() {
-        for (ManagedObject managedObject : managedObjects) {
-            managedObject.register();
-        }
-    }
-    
-    private void unregisterManagedObjects() {
-        for (ManagedObject managedObject : managedObjects) {
-            managedObject.unregister();
-        }
-    }
-    
     void start() {
         if (dependencies.isEmpty()) {
-            registerManagedObjects();
+            registerServices();
         } else {
             for (DependencyImpl<?> dependency : dependencies) {
                 dependency.open();
@@ -100,7 +87,7 @@ class Binder implements DefinitionProcessorContext {
     
     void stop() {
         if (dependencies.isEmpty()) {
-            unregisterManagedObjects();
+            unregisterServices();
         } else {
             for (DependencyImpl<?> dependency : dependencies) {
                 dependency.close();
@@ -136,14 +123,10 @@ class Binder implements DefinitionProcessorContext {
         return dependency;
     }
 
-    public void addManagedObject(String clazz, Object object) {
-        addManagedObject(clazz, new ManagedObjectWrapper(object));
-    }
-
-    public void addManagedObject(String clazz, ManagedObjectFactory factory) {
-        Properties properties = new Properties();
-        properties.setProperty("namespace", managedObjectName.getNamespaceURI());
-        properties.setProperty("name", managedObjectName.getLocalPart());
-        managedObjects.add(new ManagedObject(this, new String[] { clazz }, factory, properties));
+    public void addService(String clazz, ObjectFactory factory) {
+        Dictionary<String,Object> properties = new Hashtable<String,Object>();
+        properties.put("namespace", managedObjectName.getNamespaceURI());
+        properties.put("name", managedObjectName.getLocalPart());
+        addService(new Service(this, new String[] { clazz }, factory, properties));
     }
 }

@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
+package com.googlecode.sisme.framework.impl;
 
-class ManagedObjectWrapper implements ManagedObjectFactory {
+import com.googlecode.sisme.framework.ObjectFactory;
+
+public class InstanceWrapper implements ObjectFactory {
     private final Object object;
     
-    public ManagedObjectWrapper(Object object) {
+    public InstanceWrapper(Object object) {
         this.object = object;
     }
 
