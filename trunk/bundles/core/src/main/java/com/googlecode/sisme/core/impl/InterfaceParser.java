@@ -22,18 +22,18 @@ import org.osgi.framework.BundleContext;
 import com.googlecode.sisme.Domain;
 import com.googlecode.sisme.Interface;
 import com.googlecode.sisme.core.model.InterfaceModel;
-import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
-import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParserContext;
-import com.googlecode.sisme.framework.parser.Dependency;
-import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
+import com.googlecode.sisme.framework.definition.processor.Dependency;
+import com.googlecode.sisme.framework.definition.processor.ManagedObjectFactory;
+import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
+import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
 
-public class InterfaceParser extends JAXBDefinitionParser<InterfaceModel> {
+public class InterfaceParser extends JAXBDefinitionProcessor<InterfaceModel> {
     public InterfaceParser(BundleContext context) {
         super(context, new QName("http://sisme.googlecode.com/core", "interface"), InterfaceModel.class);
     }
 
     @Override
-    protected void parse(JAXBDefinitionParserContext context, final InterfaceModel model) {
+    protected void parse(JAXBDefinitionProcessorContext context, final InterfaceModel model) {
         // TODO: Java 5 generics issue here!
         final Dependency<Domain> domain = context.createDependency(Domain.class, model.getDomain());
         context.addManagedObject(Interface.class.getName(), new ManagedObjectFactory() {

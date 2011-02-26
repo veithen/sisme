@@ -23,10 +23,10 @@ import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.derby.DataSourceFactory;
 import com.googlecode.sisme.derby.model.DatabaseModel;
-import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParser;
-import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionParserContext;
+import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
+import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
 
-public class DatabaseDefinitionParser extends JAXBDefinitionParser<DatabaseModel> {
+public class DatabaseDefinitionParser extends JAXBDefinitionProcessor<DatabaseModel> {
     private final DatabaseManager manager;
     
     public DatabaseDefinitionParser(BundleContext context, DatabaseManager manager) {
@@ -35,7 +35,7 @@ public class DatabaseDefinitionParser extends JAXBDefinitionParser<DatabaseModel
     }
 
     @Override
-    protected void parse(JAXBDefinitionParserContext context, DatabaseModel model) {
+    protected void parse(JAXBDefinitionProcessorContext context, DatabaseModel model) {
         // TODO: need to handle the lifecycle here
         try {
             context.addManagedObject(DataSourceFactory.class.getName(), manager.acquireDatabase(model.getDatabaseName()));

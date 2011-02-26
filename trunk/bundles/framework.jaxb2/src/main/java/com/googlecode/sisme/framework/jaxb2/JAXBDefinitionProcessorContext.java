@@ -15,15 +15,15 @@
  */
 package com.googlecode.sisme.framework.jaxb2;
 
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
+import com.googlecode.sisme.framework.definition.processor.Dependency;
+import com.googlecode.sisme.framework.definition.processor.ManagedObjectFactory;
 import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
-import com.googlecode.sisme.framework.parser.DefinitionParserContext;
-import com.googlecode.sisme.framework.parser.Dependency;
-import com.googlecode.sisme.framework.parser.ManagedObjectFactory;
 
-public class JAXBDefinitionParserContext {
-    private DefinitionParserContext parent;
+public class JAXBDefinitionProcessorContext {
+    private DefinitionProcessorContext parent;
 
-    public JAXBDefinitionParserContext(DefinitionParserContext parent) {
+    public JAXBDefinitionProcessorContext(DefinitionProcessorContext parent) {
         this.parent = parent;
     }
     

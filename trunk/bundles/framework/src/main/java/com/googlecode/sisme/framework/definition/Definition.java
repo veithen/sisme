@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.parser;
+package com.googlecode.sisme.framework.definition;
 
-public interface ManagedObjectFactory {
-    Object createObject();
+import org.w3c.dom.Element;
+
+public interface Definition {
+    String P_ELEMENT_NAMESPACE = "elementNamespace";
+    String P_ELEMENT_NAME = "elementName";
+    String P_NAMESPACE = "namespace";
+    String P_NAME = "name";
+    
+    Element getContent();
 }

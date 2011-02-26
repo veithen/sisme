@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.parser;
+package com.googlecode.sisme.framework.definition.processor;
 
 import javax.xml.namespace.QName;
 
@@ -25,12 +25,12 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.Definition;
+import com.googlecode.sisme.framework.definition.Definition;
 
-public abstract class DefinitionParser {
+public abstract class DefinitionProcessor {
     private final ServiceTracker tracker;
     
-    public DefinitionParser(final BundleContext context, QName elementQName) {
+    public DefinitionProcessor(final BundleContext context, QName elementQName) {
         Filter filter;
         try {
             filter = context.createFilter("(&(objectClass=" + Definition.class.getName() + ")(" + Definition.P_ELEMENT_NAMESPACE + "="
@@ -69,5 +69,5 @@ public abstract class DefinitionParser {
         tracker.close();
     }
     
-    protected abstract void parse(DefinitionParserContext context, Element content);
+    protected abstract void parse(DefinitionProcessorContext context, Element content);
 }

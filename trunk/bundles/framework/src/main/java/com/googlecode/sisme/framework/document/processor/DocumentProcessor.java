@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.document.processor;
 
 import javax.xml.transform.Source;
 
@@ -23,6 +23,8 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
+
+import com.googlecode.sisme.framework.document.Document;
 
 /**
  * Tracks documents with a given content type and processes them.

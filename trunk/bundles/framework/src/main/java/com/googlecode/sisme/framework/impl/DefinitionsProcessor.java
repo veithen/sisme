@@ -22,8 +22,8 @@ import javax.xml.transform.sax.SAXResult;
 
 import org.osgi.framework.BundleContext;
 
-import com.googlecode.sisme.framework.Document;
-import com.googlecode.sisme.framework.DocumentProcessor;
+import com.googlecode.sisme.framework.document.Document;
+import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 
 public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
     public DefinitionsProcessor(BundleContext context) {

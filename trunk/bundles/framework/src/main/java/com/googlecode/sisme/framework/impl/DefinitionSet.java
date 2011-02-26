@@ -24,7 +24,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.Definition;
+import com.googlecode.sisme.framework.definition.Definition;
 
 public class DefinitionSet {
     private final BundleContext targetBundleContext;
