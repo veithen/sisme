@@ -27,6 +27,8 @@ import javax.xml.transform.Source;
  * @author Andreas Veithen
  */
 public interface Document {
+    String P_LOCATION = "location";
+    String P_FILE_TYPE = "fileType";
     String P_CONTENT_TYPE = "contentType";
     
     String CT_DEFINITIONS = "application/x-sisme-definitions";
