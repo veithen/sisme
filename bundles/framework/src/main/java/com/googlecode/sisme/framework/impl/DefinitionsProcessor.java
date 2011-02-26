@@ -15,29 +15,27 @@
  */
 package com.googlecode.sisme.framework.impl;
 
+import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import com.googlecode.sisme.framework.Document;
+import com.googlecode.sisme.framework.DocumentProcessor;
 
-public class DefinitionsTrackerCustomizer implements ServiceTrackerCustomizer {
-    private final BundleContext context;
-    
-    public DefinitionsTrackerCustomizer(BundleContext context) {
-        this.context = context;
+public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
+    public DefinitionsProcessor(BundleContext context) {
+        super(context, Document.CT_DEFINITIONS);
     }
 
-    public Object addingService(ServiceReference reference) {
-        Document definitions = (Document)context.getService(reference);
-        DefinitionSet definitionSet = new DefinitionSet(reference.getBundle().getBundleContext());
+    @Override
+    protected DefinitionSet processDocument(BundleContext targetContext, Source source) {
+        DefinitionSet definitionSet = new DefinitionSet(targetContext);
         try {
             // TODO: if an exception is thrown, we may already have registered some services
-            TransformerFactory.newInstance().newTransformer().transform(definitions.getSource(),
+            TransformerFactory.newInstance().newTransformer().transform(source,
                     new SAXResult(new DefinitionsContentHandler(definitionSet)));
         } catch (TransformerException ex) {
             // TODO
@@ -46,13 +44,8 @@ public class DefinitionsTrackerCustomizer implements ServiceTrackerCustomizer {
         return definitionSet;
     }
 
-    public void modifiedService(ServiceReference reference, Object service) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void removedService(ServiceReference reference, Object service) {
-        ((DefinitionSet)service).unregister();
-        context.ungetService(reference);
+    @Override
+    protected void documentRemoved(DefinitionSet definitionSet) {
+        definitionSet.unregister();
     }
 }
