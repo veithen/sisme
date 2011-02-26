@@ -17,11 +17,19 @@ package com.googlecode.sisme.framework.definition;
 
 import org.w3c.dom.Element;
 
-public interface Definition {
-    String P_ELEMENT_NAMESPACE = "elementNamespace";
-    String P_ELEMENT_NAME = "elementName";
-    String P_NAMESPACE = "namespace";
-    String P_NAME = "name";
+public final class Definition {
+    public static final String P_ELEMENT_NAMESPACE = "elementNamespace";
+    public static final String P_ELEMENT_NAME = "elementName";
+    public static final String P_NAMESPACE = "namespace";
+    public static final String P_NAME = "name";
     
-    Element getContent();
+    private final Element element;
+
+    public Definition(Element element) {
+        this.element = element;
+    }
+
+    public Element getContent() {
+        return element;
+    }
 }

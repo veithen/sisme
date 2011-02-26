@@ -15,13 +15,23 @@
  */
 package com.googlecode.sisme.xsd.impl;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import com.googlecode.sisme.framework.document.Document;
+import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
+
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
-        // TODO Auto-generated method stub
-        
+        Dictionary<String,Object> props = new Hashtable<String,Object>();
+        props.put(DocumentProcessor.P_SELECTOR, "(" + Document.P_FILE_TYPE + "=" + "xsd)");
+        context.registerService(DocumentProcessor.class.getName(), new SchemaDocumentProcessor(), props);
+
+//        props.put(DefinitionProcessor.P_ELEMENT_NAMESPACE, "http://www.w3.org/2001/XMLSchema");
+//        props.put(DefinitionProcessor.P_ELEMENT_NAME, "schema");
     }
 
     public void stop(BundleContext context) throws Exception {
