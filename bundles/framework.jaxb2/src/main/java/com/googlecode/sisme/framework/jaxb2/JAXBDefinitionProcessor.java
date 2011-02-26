@@ -24,15 +24,15 @@ import javax.xml.namespace.QName;
 import org.osgi.framework.BundleContext;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.parser.DefinitionParser;
-import com.googlecode.sisme.framework.parser.DefinitionParserContext;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
 
-public abstract class JAXBDefinitionParser<T> extends DefinitionParser {
+public abstract class JAXBDefinitionProcessor<T> extends DefinitionProcessor {
     private final JAXBContext jaxbContext;
     private final Class<T> elementClass;
     
     // TODO: it should not be necessary to provide the element QName
-    public JAXBDefinitionParser(BundleContext context, QName elementQName, Class<T> elementClass) {
+    public JAXBDefinitionProcessor(BundleContext context, QName elementQName, Class<T> elementClass) {
         super(context, elementQName);
         this.elementClass = elementClass;
         try {
@@ -43,17 +43,17 @@ public abstract class JAXBDefinitionParser<T> extends DefinitionParser {
     }
 
     @Override
-    protected final void parse(DefinitionParserContext context, Element content) {
+    protected final void parse(DefinitionProcessorContext context, Element content) {
         try {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             // "Default" here refers to JAXB 1.0. JAXB 2.0 is more lenient by default.
             unmarshaller.setEventHandler(new DefaultValidationEventHandler());
-            parse(new JAXBDefinitionParserContext(context), elementClass.cast(unmarshaller.unmarshal(content)));
+            parse(new JAXBDefinitionProcessorContext(context), elementClass.cast(unmarshaller.unmarshal(content)));
         } catch (JAXBException ex) {
             // TODO: implement appropriate error handling in DefinitionParser
             throw new RuntimeException(ex);
         }
     }
     
-    protected abstract void parse(JAXBDefinitionParserContext context, T model);
+    protected abstract void parse(JAXBDefinitionProcessorContext context, T model);
 }

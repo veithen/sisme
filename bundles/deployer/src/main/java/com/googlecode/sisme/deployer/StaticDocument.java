@@ -20,7 +20,7 @@ import java.net.URL;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
-import com.googlecode.sisme.framework.Document;
+import com.googlecode.sisme.framework.document.Document;
 
 public class StaticDocument implements Document {
     private final URL url;

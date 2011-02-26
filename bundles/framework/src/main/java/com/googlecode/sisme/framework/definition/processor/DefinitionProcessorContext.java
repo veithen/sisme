@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.parser;
+package com.googlecode.sisme.framework.definition.processor;
 
-class ManagedObjectWrapper implements ManagedObjectFactory {
-    private final Object object;
+import javax.xml.namespace.QName;
+
+import org.w3c.dom.Element;
+
+public interface DefinitionProcessorContext {
+    <T> Dependency<T> createDependency(Class<T> clazz, QName ref, Element content);
     
-    public ManagedObjectWrapper(Object object) {
-        this.object = object;
-    }
-
-    public Object createObject() {
-        return object;
-    }
+    // element must represent an XML element of type objectRef
+    // TODO
+//    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
+    
+    void addManagedObject(String clazz, Object object);
+    
+    void addManagedObject(String clazz, ManagedObjectFactory factory);
 }

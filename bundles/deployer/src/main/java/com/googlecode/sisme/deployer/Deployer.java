@@ -24,7 +24,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.util.tracker.BundleTracker;
 
-import com.googlecode.sisme.framework.Document;
+import com.googlecode.sisme.framework.document.Document;
 
 public class Deployer extends BundleTracker {
     public Deployer(BundleContext context) {

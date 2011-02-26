@@ -1,4 +1,4 @@
-package com.googlecode.sisme.framework.parser;
+package com.googlecode.sisme.framework.definition.processor;
 
 import java.util.Dictionary;
 

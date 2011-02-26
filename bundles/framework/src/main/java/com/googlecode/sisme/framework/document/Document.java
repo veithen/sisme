@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.document;
 
 import javax.xml.transform.Source;
+
+import com.googlecode.sisme.framework.definition.Definition;
 
 /**
  * A reference to a SiSME definitions file. Instances of this class are created and registered into

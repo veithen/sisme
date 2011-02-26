@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.parser;
+package com.googlecode.sisme.framework.definition.processor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.Definition;
+import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.impl.DefinitionImpl;
 
 /**
@@ -36,7 +36,7 @@ import com.googlecode.sisme.framework.impl.DefinitionImpl;
  * 
  * @author Andreas Veithen
  */
-class Binder implements DefinitionParserContext {
+class Binder implements DefinitionProcessorContext {
     private final BundleContext bundleContext;
     private final QName managedObjectName;
     private final List<ServiceRegistration> registeredDefinitions = new ArrayList<ServiceRegistration>();

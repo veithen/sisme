@@ -17,7 +17,7 @@ package com.googlecode.sisme.framework.impl;
 
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.Definition;
+import com.googlecode.sisme.framework.definition.Definition;
 
 public class DefinitionImpl implements Definition {
     private final Element element;
