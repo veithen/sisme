@@ -15,10 +15,6 @@
  */
 package com.googlecode.sisme.core.impl;
 
-import javax.xml.namespace.QName;
-
-import org.osgi.framework.BundleContext;
-
 import com.googlecode.sisme.Domain;
 import com.googlecode.sisme.Interface;
 import com.googlecode.sisme.core.model.InterfaceModel;
@@ -27,9 +23,9 @@ import com.googlecode.sisme.framework.definition.processor.Dependency;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
 
-public class InterfaceParser extends JAXBDefinitionProcessor<InterfaceModel> {
-    public InterfaceParser(BundleContext context) {
-        super(context, new QName("http://sisme.googlecode.com/core", "interface"), InterfaceModel.class);
+public class InterfaceDefinitionProcessor extends JAXBDefinitionProcessor<InterfaceModel> {
+    public InterfaceDefinitionProcessor() {
+        super(InterfaceModel.class);
     }
 
     @Override

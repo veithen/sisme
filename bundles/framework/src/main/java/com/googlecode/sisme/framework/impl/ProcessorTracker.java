@@ -43,7 +43,7 @@ public abstract class ProcessorTracker<T,C extends AbstractProcessorContext,P ex
 
     protected abstract String getSelector(ServiceReference reference);
     
-    protected abstract C createContext(BundleContext targetContext);
+    protected abstract C createContext(BundleContext targetContext, ServiceReference artifactReference);
     
     @Override
     public void removedService(ServiceReference reference, Object service) {

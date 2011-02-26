@@ -67,4 +67,8 @@ public abstract class AbstractProcessorContext implements ProcessorContext {
             service.unregister();
         }
     }
+    
+    public abstract void start();
+    
+    public abstract void stop();
 }

@@ -33,4 +33,14 @@ public class ProcessedDocument extends AbstractProcessorContext implements Docum
     protected void processProperties(Dictionary<String,Object> properties) {
         // TODO: add a property that links the created object(s) to the document
     }
+
+    @Override
+    public void start() {
+        registerServices();
+    }
+
+    @Override
+    public void stop() {
+        unregisterServices();
+    }
 }
