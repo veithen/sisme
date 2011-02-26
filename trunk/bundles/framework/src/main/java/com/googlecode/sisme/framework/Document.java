@@ -20,13 +20,17 @@ import javax.xml.transform.Source;
 /**
  * A reference to a SiSME definitions file. Instances of this class are created and registered into
  * the OSGi runtime by deployers, from static resources or definition files retrieved from a remote
- * location. The SiSME framework listens for new {@link Definitions} being registered, automatically
+ * location. The SiSME framework listens for new {@link Document} being registered, automatically
  * parses them and registers a set of {@link Definition} objects for the individual definitions
  * found in the file.
  * 
  * @author Andreas Veithen
  */
-public interface Definitions {
+public interface Document {
+    String P_CONTENT_TYPE = "contentType";
+    
+    String CT_DEFINITIONS = "application/x-sisme-definitions";
+    
     /**
      * Get the source of the definitions file.
      * 

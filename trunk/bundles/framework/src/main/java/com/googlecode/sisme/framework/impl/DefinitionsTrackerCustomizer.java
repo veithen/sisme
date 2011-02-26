@@ -21,18 +21,19 @@ import javax.xml.transform.sax.SAXResult;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
-import com.googlecode.sisme.framework.Definitions;
+import com.googlecode.sisme.framework.Document;
 
-public class DefinitionsTracker extends ServiceTracker {
-    public DefinitionsTracker(BundleContext context) {
-        super(context, Definitions.class.getName(), null);
+public class DefinitionsTrackerCustomizer implements ServiceTrackerCustomizer {
+    private final BundleContext context;
+    
+    public DefinitionsTrackerCustomizer(BundleContext context) {
+        this.context = context;
     }
 
-    @Override
     public Object addingService(ServiceReference reference) {
-        Definitions definitions = (Definitions)context.getService(reference);
+        Document definitions = (Document)context.getService(reference);
         DefinitionSet definitionSet = new DefinitionSet(reference.getBundle().getBundleContext());
         try {
             // TODO: if an exception is thrown, we may already have registered some services
@@ -45,7 +46,11 @@ public class DefinitionsTracker extends ServiceTracker {
         return definitionSet;
     }
 
-    @Override
+    public void modifiedService(ServiceReference reference, Object service) {
+        // TODO Auto-generated method stub
+        
+    }
+
     public void removedService(ServiceReference reference, Object service) {
         ((DefinitionSet)service).unregister();
         context.ungetService(reference);
