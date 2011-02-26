@@ -19,14 +19,12 @@ import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
 
-import com.googlecode.sisme.framework.Document;
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
-    private ServiceTracker definitionsTracker;
+    private DefinitionsProcessor definitionsProcessor;
     
     public void start(BundleContext context) throws Exception {
         FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider(Activator.class.getResource("framework.xsd"));
@@ -34,13 +32,11 @@ public class Activator implements BundleActivator {
         props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/framework");
         props.put(FrameworkSchemaProvider.P_FILENAME, "framework.xsd");
         context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
-        definitionsTracker = new ServiceTracker(context,
-                context.createFilter("(&(objectClass=" + Document.class.getName() + ")(" + Document.P_CONTENT_TYPE + "=" + Document.CT_DEFINITIONS + "))"),
-                new DefinitionsTrackerCustomizer(context));
-        definitionsTracker.open();
+        definitionsProcessor = new DefinitionsProcessor(context);
+        definitionsProcessor.start();
     }
 
     public void stop(BundleContext context) throws Exception {
-        definitionsTracker.close();
+        definitionsProcessor.stop();
     }
 }
