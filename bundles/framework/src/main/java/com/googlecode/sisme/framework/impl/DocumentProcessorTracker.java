@@ -17,30 +17,22 @@ package com.googlecode.sisme.framework.impl;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.osgi.util.tracker.ServiceTracker;
 
+import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 
-public class DocumentProcessorTracker extends ServiceTracker {
+public class DocumentProcessorTracker extends ProcessorTracker<Document,ProcessedDocument,DocumentProcessor> {
     public DocumentProcessorTracker(BundleContext context) {
-        super(context, DocumentProcessor.class.getName(), null);
+        super(context, Document.class, ProcessedDocument.class, DocumentProcessor.class);
     }
 
     @Override
-    public Object addingService(ServiceReference reference) {
-        DocumentProcessor processor = (DocumentProcessor)context.getService(reference);
-        DocumentProcessorInvoker invoker = createInvoker(processor, (String)reference.getProperty(DocumentProcessor.P_SELECTOR));
-        invoker.start();
-        return invoker;
+    protected String getSelector(ServiceReference reference) {
+        return (String)reference.getProperty(DocumentProcessor.P_SELECTOR);
     }
-    
-    private DocumentProcessorInvoker createInvoker(DocumentProcessor processor, String selector) {
-        return new DocumentProcessorInvoker(context, processor, selector);
-    }
-    
+
     @Override
-    public void removedService(ServiceReference reference, Object service) {
-        ((DocumentProcessorInvoker)service).stop();
-        context.ungetService(reference);
+    protected ProcessedDocument createContext(BundleContext targetContext) {
+        return new ProcessedDocument(targetContext);
     }
 }
