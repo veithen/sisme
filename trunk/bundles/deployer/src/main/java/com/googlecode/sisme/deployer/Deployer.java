@@ -16,6 +16,7 @@
 package com.googlecode.sisme.deployer;
 
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Properties;
 
 import org.osgi.framework.Bundle;
@@ -34,11 +35,24 @@ public class Deployer extends BundleTracker {
     public Object addingBundle(Bundle bundle, BundleEvent event) {
         // No need to unregister the service; this will be done anyway by the OSGi runtime
         // when the bundle is stopped.
-        URL url = bundle.getEntry("META-INF/sisme.xml");
-        if (url != null) {
-            Properties props = new Properties();
-            props.setProperty(Document.P_CONTENT_TYPE, Document.CT_DEFINITIONS);
-            bundle.getBundleContext().registerService(Document.class.getName(), new StaticDocument(url), props);
+        Enumeration<?> e = bundle.getEntryPaths("META-INF/sisme/");
+        if (e != null) {
+            while (e.hasMoreElements()) {
+                String path = (String)e.nextElement();
+                if (!path.endsWith("/")) {
+                    int idx = path.lastIndexOf('.');
+                    if (idx != -1) {
+                        Properties props = new Properties();
+                        URL url = bundle.getEntry(path);
+                        props.setProperty(Document.P_LOCATION, url.toExternalForm());
+                        props.setProperty(Document.P_FILE_TYPE, path.substring(idx+1));
+                        if (path.endsWith("/sisme.xml")) {
+                            props.setProperty(Document.P_CONTENT_TYPE, Document.CT_DEFINITIONS);
+                        }
+                        bundle.getBundleContext().registerService(Document.class.getName(), new StaticDocument(url), props);
+                    }
+                }
+            }
         }
         return bundle;
     }
