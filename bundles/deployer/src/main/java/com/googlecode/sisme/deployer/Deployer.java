@@ -23,7 +23,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.util.tracker.BundleTracker;
 
-import com.googlecode.sisme.framework.Definitions;
+import com.googlecode.sisme.framework.Document;
 
 public class Deployer extends BundleTracker {
     public Deployer(BundleContext context) {
@@ -36,7 +36,9 @@ public class Deployer extends BundleTracker {
         // when the bundle is stopped.
         URL url = bundle.getEntry("META-INF/sisme.xml");
         if (url != null) {
-            bundle.getBundleContext().registerService(Definitions.class.getName(), new StaticDefinitions(url), new Properties());
+            Properties props = new Properties();
+            props.setProperty(Document.P_CONTENT_TYPE, Document.CT_DEFINITIONS);
+            bundle.getBundleContext().registerService(Document.class.getName(), new StaticDocument(url), props);
         }
         return bundle;
     }

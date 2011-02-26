@@ -20,12 +20,12 @@ import java.net.URL;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
-import com.googlecode.sisme.framework.Definitions;
+import com.googlecode.sisme.framework.Document;
 
-public class StaticDefinitions implements Definitions {
+public class StaticDocument implements Document {
     private final URL url;
 
-    public StaticDefinitions(URL url) {
+    public StaticDocument(URL url) {
         this.url = url;
     }
 
