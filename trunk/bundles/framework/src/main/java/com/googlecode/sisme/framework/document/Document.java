@@ -15,7 +15,7 @@
  */
 package com.googlecode.sisme.framework.document;
 
-import javax.xml.transform.Source;
+import java.io.InputStream;
 
 import com.googlecode.sisme.framework.definition.Definition;
 
@@ -36,9 +36,9 @@ public interface Document {
     String CT_DEFINITIONS = "application/x-sisme-definitions";
     
     /**
-     * Get the source of the definitions file.
+     * Get the content of the document.
      * 
-     * @return the source of the definitions file
+     * @return an input stream with the content of the document
      */
-    Source getSource();
+    InputStream getInputStream();
 }

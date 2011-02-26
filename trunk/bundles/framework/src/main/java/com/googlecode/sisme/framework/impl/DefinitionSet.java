@@ -46,6 +46,6 @@ public class DefinitionSet {
             name = UUID.randomUUID().toString();
         }
         props.put(Definition.P_NAME, name);
-        context.addService(Definition.class.getName(), new DefinitionImpl(element), props);
+        context.addService(Definition.class.getName(), new Definition(element), props);
     }
 }

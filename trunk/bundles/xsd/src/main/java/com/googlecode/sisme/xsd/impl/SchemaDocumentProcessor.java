@@ -13,35 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.impl;
+package com.googlecode.sisme.xsd.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXResult;
-import javax.xml.transform.stream.StreamSource;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+
+import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
-public class DefinitionsProcessor implements DocumentProcessor {
+public class SchemaDocumentProcessor implements DocumentProcessor {
     public void process(DocumentProcessorContext context, Document document) {
-        DefinitionSet definitionSet = new DefinitionSet(context);
         try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
             InputStream in = document.getInputStream();
             try {
-                TransformerFactory.newInstance().newTransformer().transform(new StreamSource(in),
-                        new SAXResult(new DefinitionsContentHandler(definitionSet)));
+                Element element = factory.newDocumentBuilder().parse(in).getDocumentElement();
+                // TODO: check that the document actually contains a schema!
+                Dictionary<String,Object> props = new Hashtable<String,Object>();
+                props.put(Definition.P_ELEMENT_NAMESPACE, "http://www.w3.org/2001/XMLSchema");
+                props.put(Definition.P_ELEMENT_NAME, "schema");
+                context.addService(Definition.class.getName(), new Definition(element), props);
             } finally {
                 in.close();
             }
-        } catch (TransformerException ex) {
+        } catch (IOException ex) {
             // TODO
             throw new Error(ex);
-        } catch (IOException ex) {
+        } catch (ParserConfigurationException ex) {
+            // TODO
+            throw new Error(ex);
+        } catch (SAXException ex) {
             // TODO
             throw new Error(ex);
         }

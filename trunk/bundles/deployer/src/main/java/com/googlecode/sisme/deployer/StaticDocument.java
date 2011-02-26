@@ -15,10 +15,9 @@
  */
 package com.googlecode.sisme.deployer;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
 
 import com.googlecode.sisme.framework.document.Document;
 
@@ -29,7 +28,12 @@ public class StaticDocument implements Document {
         this.url = url;
     }
 
-    public Source getSource() {
-        return new StreamSource(url.toExternalForm());
+    public InputStream getInputStream() {
+        try {
+            return url.openStream();
+        } catch (IOException ex) {
+            // TODO
+            throw new Error(ex);
+        }
     }
 }

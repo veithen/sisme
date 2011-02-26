@@ -106,7 +106,7 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
             props.setProperty(Definition.P_ELEMENT_NAME, content.getLocalName());
             props.setProperty(Definition.P_NAMESPACE, ref.getNamespaceURI());
             props.setProperty(Definition.P_NAME, ref.getLocalPart());
-            registeredDefinitions.add(bundleContext.registerService(Definition.class.getName(), new DefinitionImpl(content), props));
+            registeredDefinitions.add(bundleContext.registerService(Definition.class.getName(), new Definition(content), props));
         }
         Filter filter;
         try {
