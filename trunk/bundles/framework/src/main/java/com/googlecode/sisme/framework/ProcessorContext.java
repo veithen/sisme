@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
+package com.googlecode.sisme.framework;
 
-public interface ManagedObjectFactory {
-    Object createObject();
+public interface ProcessorContext {
+
 }

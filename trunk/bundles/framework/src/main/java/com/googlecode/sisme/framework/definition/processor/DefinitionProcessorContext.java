@@ -19,14 +19,17 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
-public interface DefinitionProcessorContext {
+import com.googlecode.sisme.framework.ObjectFactory;
+import com.googlecode.sisme.framework.ProcessorContext;
+
+public interface DefinitionProcessorContext extends ProcessorContext {
     <T> Dependency<T> createDependency(Class<T> clazz, QName ref, Element content);
     
     // element must represent an XML element of type objectRef
     // TODO
 //    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
     
-    void addManagedObject(String clazz, Object object);
+    void addService(String clazz, Object object);
     
-    void addManagedObject(String clazz, ManagedObjectFactory factory);
+    void addService(String clazz, ObjectFactory factory);
 }

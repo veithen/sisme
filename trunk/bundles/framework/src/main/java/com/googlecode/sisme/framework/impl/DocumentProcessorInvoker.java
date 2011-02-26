@@ -15,15 +15,10 @@
  */
 package com.googlecode.sisme.framework.impl;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.List;
-
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
-import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
@@ -38,13 +33,11 @@ import com.googlecode.sisme.framework.document.processor.DocumentProcessorContex
  */
 public class DocumentProcessorInvoker<T> {
     // TODO: if the parsing fails, we should register a FaultyArtifact and store the service registration here
-    private class ProcessedDocument implements DocumentProcessorContext {
-        private final BundleContext targetContext;
-        private final List<ServiceRegistration> registrations = new ArrayList<ServiceRegistration>();
+    private class ProcessedDocument extends AbstractProcessorContext implements DocumentProcessorContext {
         private T object;
 
-        ProcessedDocument(BundleContext targetContext) {
-            this.targetContext = targetContext;
+        ProcessedDocument(BundleContext bundleContext) {
+            super(bundleContext);
         }
 
         T getObject() {
@@ -54,10 +47,6 @@ public class DocumentProcessorInvoker<T> {
         void setObject(T object) {
             this.object = object;
         }
-
-        public void registerService(String clazz, Object service, Dictionary properties) {
-            registrations.add(targetContext.registerService(clazz, service, properties));
-        }
     }
     
     private class Customizer implements ServiceTrackerCustomizer {
@@ -65,6 +54,7 @@ public class DocumentProcessorInvoker<T> {
             Document document = (Document)context.getService(reference);
             ProcessedDocument processedDocument = new ProcessedDocument(reference.getBundle().getBundleContext());
             processedDocument.setObject(processor.processDocument(processedDocument, document.getSource()));
+            processedDocument.registerServices();
             return processedDocument;
         }
 
@@ -74,7 +64,9 @@ public class DocumentProcessorInvoker<T> {
         }
 
         public void removedService(ServiceReference reference, Object service) {
-            processor.documentRemoved(((ProcessedDocument)service).getObject());
+            ProcessedDocument processedDocument = (ProcessedDocument)service;
+            processedDocument.unregisterServices();
+            processor.documentRemoved(processedDocument.getObject());
             context.ungetService(reference);
         }
     }
