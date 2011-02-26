@@ -22,21 +22,30 @@ import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
+import com.googlecode.sisme.framework.document.Document;
+import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 
 public class Activator implements BundleActivator {
-    private DefinitionsProcessor definitionsProcessor;
+    private DocumentProcessorTracker documentProcessorTracker;
     
     public void start(BundleContext context) throws Exception {
-        FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider(Activator.class.getResource("framework.xsd"));
-        Properties props = new Properties();
-        props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/framework");
-        props.put(FrameworkSchemaProvider.P_FILENAME, "framework.xsd");
-        context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
-        definitionsProcessor = new DefinitionsProcessor(context);
-        definitionsProcessor.start();
+        {
+            FrameworkSchemaProvider schemaProvider = new StaticFrameworkSchemaProvider(Activator.class.getResource("framework.xsd"));
+            Properties props = new Properties();
+            props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/framework");
+            props.put(FrameworkSchemaProvider.P_FILENAME, "framework.xsd");
+            context.registerService(FrameworkSchemaProvider.class.getName(), schemaProvider, props);
+        }
+        {
+            Properties props = new Properties();
+            props.put(DocumentProcessor.P_SELECTOR, "(" + Document.P_CONTENT_TYPE + "=" + Document.CT_DEFINITIONS + ")");
+            context.registerService(DocumentProcessor.class.getName(), new DefinitionsProcessor(), props);
+        }
+        documentProcessorTracker = new DocumentProcessorTracker(context);
+        documentProcessorTracker.open();
     }
 
     public void stop(BundleContext context) throws Exception {
-        definitionsProcessor.stop();
+        documentProcessorTracker.close();
     }
 }

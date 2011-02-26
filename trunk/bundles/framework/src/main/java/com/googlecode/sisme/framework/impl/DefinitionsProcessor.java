@@ -20,19 +20,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 
-import org.osgi.framework.BundleContext;
-
-import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
-public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
-    public DefinitionsProcessor(BundleContext context) {
-        super(context, Document.CT_DEFINITIONS);
-    }
-
-    @Override
-    protected DefinitionSet processDocument(DocumentProcessorContext context, Source source) {
+public class DefinitionsProcessor implements DocumentProcessor<DefinitionSet> {
+    public DefinitionSet processDocument(DocumentProcessorContext context, Source source) {
         DefinitionSet definitionSet = new DefinitionSet(context);
         try {
             // TODO: if an exception is thrown, we may already have registered some services
@@ -45,7 +37,6 @@ public class DefinitionsProcessor extends DocumentProcessor<DefinitionSet> {
         return definitionSet;
     }
 
-    @Override
-    protected void documentRemoved(DefinitionSet definitionSet) {
+    public void documentRemoved(DefinitionSet definitionSet) {
     }
 }
