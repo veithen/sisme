@@ -18,47 +18,24 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.googlecode.sisme</groupId>
-        <artifactId>sisme</artifactId>
+        <artifactId>bundles</artifactId>
         <version>0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>bundles</artifactId>
-    <name>SiSME :: Bundles</name>
-    <packaging>pom</packaging>
-    <modules>
-        <module>api</module>
-        <module>catalog.w3c</module>
-        <module>core</module>
-        <module>deployer</module>
-        <module>derby</module>
-        <module>framework</module>
-        <module>framework.jaxb2</module>
-        <module>help</module>
-        <module>java</module>
-        <module>jdbc</module>
-        <module>sample</module>
-        <module>xsd</module>
-    </modules>
-    <dependencies>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-    </dependencies>
+    <artifactId>catalog.w3c</artifactId>
+    <name>SiSME :: Bundles :: Catalog w3.org</name>
+    <packaging>bundle</packaging>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.4</version>
-                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>SiSME Catalog w3.org</Bundle-Name>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>
- </project>
+</project>
