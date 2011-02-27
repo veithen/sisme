@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>derby</artifactId>
-    <name>SiSME :: Bundles :: Derby</name>
+    <name>SiSME Derby Database</name>
     <packaging>bundle</packaging>
     <properties>
         <derby.version>10.7.1.1</derby.version>
@@ -57,7 +57,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME Derby Database</Bundle-Name>
                         <Embed-Dependency>derby*</Embed-Dependency>
                         <Import-Package>
                             <!-- Exclude some optional Derby dependencies -->

@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>xsd</artifactId>
-    <name>SiSME :: Bundles :: XML Schema</name>
+    <name>SiSME XML Schema Support</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -44,7 +44,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME XML Schema Support</Bundle-Name>
                         <Private-Package>com.googlecode.sisme.xsd.impl</Private-Package>
                         <Bundle-Activator>com.googlecode.sisme.xsd.impl.Activator</Bundle-Activator>
                     </instructions>

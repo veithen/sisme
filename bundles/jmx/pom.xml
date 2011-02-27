@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>jmx</artifactId>
-    <name>SiSME :: Bundles :: JMX</name>
+    <name>SiSME JMX Support</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -39,7 +39,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME JMX Support</Bundle-Name>
                         <Export-Package>com.googlecode.sisme.jmx</Export-Package>
                         <Bundle-Activator>com.googlecode.sisme.jmx.impl.Activator</Bundle-Activator>
                     </instructions>
