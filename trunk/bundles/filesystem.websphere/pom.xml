@@ -18,41 +18,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.googlecode.sisme</groupId>
-        <artifactId>sisme</artifactId>
+        <artifactId>bundles</artifactId>
         <version>0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>bundles</artifactId>
-    <name>SiSME :: Bundles</name>
-    <packaging>pom</packaging>
-    <modules>
-        <module>api</module>
-        <module>catalog.w3c</module>
-        <module>core</module>
-        <module>deployer</module>
-        <module>derby</module>
-        <module>filesystem</module>
-        <module>filesystem.websphere</module>
-        <module>framework</module>
-        <module>framework.jaxb2</module>
-        <module>help</module>
-        <module>java</module>
-        <module>jdbc</module>
-        <module>jmx</module>
-        <module>jmx.websphere</module>
-        <module>sample</module>
-        <module>xsd</module>
-    </modules>
+    <artifactId>filesystem.websphere</artifactId>
+    <name>SiSME WebSphere ConfigRepository File System</name>
+    <packaging>bundle</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>4.2.0</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>framework.jaxb2</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-            <version>4.2.0</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jmx</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -60,9 +42,13 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.4</version>
-                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package></Export-Package>
+                        <Bundle-Activator>com.googlecode.sisme.filesystem.websphere.impl.Activator</Bundle-Activator>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>
- </project>
+</project>
