@@ -40,13 +40,15 @@ import com.googlecode.sisme.framework.definition.processor.Dependency;
  */
 class Binder extends AbstractProcessorContext implements DefinitionProcessorContext {
     private final QName objectName;
+    private final Long definitionId;
     private final List<ServiceRegistration> registeredDefinitions = new ArrayList<ServiceRegistration>();
     private final List<DependencyImpl<?>> dependencies = new ArrayList<DependencyImpl<?>>();
     private boolean started;
 
-    Binder(BundleContext bundleContext, QName objectName) {
+    Binder(BundleContext bundleContext, QName objectName, Long definitionId) {
         super(bundleContext);
         this.objectName = objectName;
+        this.definitionId = definitionId;
     }
 
     void rebind() {
@@ -124,5 +126,7 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
     protected void processProperties(Dictionary<String, Object> properties) {
         properties.put("namespace", objectName.getNamespaceURI());
         properties.put("name", objectName.getLocalPart());
+        // TODO: use constant here
+        properties.put("definition.id", definitionId);
     }
 }
