@@ -34,7 +34,7 @@ public class DatabaseDefinitionProcessor extends JAXBDefinitionProcessor<Databas
     protected void parse(JAXBDefinitionProcessorContext context, DatabaseModel model) {
         // TODO: need to handle the lifecycle here
         try {
-            context.addManagedObject(DataSourceFactory.class.getName(), manager.acquireDatabase(model.getDatabaseName()));
+            context.addService(DataSourceFactory.class.getName(), manager.acquireDatabase(model.getDatabaseName()));
         } catch (SQLException ex) {
             // TODO Auto-generated catch block
             throw new Error(ex);

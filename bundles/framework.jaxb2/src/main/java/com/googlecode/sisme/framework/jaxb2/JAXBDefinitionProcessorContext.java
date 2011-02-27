@@ -18,7 +18,7 @@ package com.googlecode.sisme.framework.jaxb2;
 import com.googlecode.sisme.framework.ObjectFactory;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
 import com.googlecode.sisme.framework.definition.processor.Dependency;
-import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
 
 public class JAXBDefinitionProcessorContext {
     private DefinitionProcessorContext parent;
@@ -27,15 +27,15 @@ public class JAXBDefinitionProcessorContext {
         this.parent = parent;
     }
     
-    public <T> Dependency<T> createDependency(Class<T> clazz, ManagedObjectRefModel model) {
+    public <T> Dependency<T> createDependency(Class<T> clazz, ComponentRefModel model) {
         return parent.createDependency(clazz, model.getRef(), model.getDefinition());
     }
 
-    public void addManagedObject(String clazz, Object object) {
+    public void addService(String clazz, Object object) {
         parent.addService(clazz, object);
     }
 
-    public void addManagedObject(String clazz, ObjectFactory factory) {
+    public void addService(String clazz, ObjectFactory factory) {
         parent.addService(clazz, factory);
     }
 }

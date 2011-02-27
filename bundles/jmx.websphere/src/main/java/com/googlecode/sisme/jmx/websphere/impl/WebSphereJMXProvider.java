@@ -13,23 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.core.model;
+package com.googlecode.sisme.jmx.websphere.impl;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
-
-@XmlRootElement(name="dynamicImport")
-@XmlType(name="")
-public class DynamicImportModel extends ImportModel {
-    private ComponentRefModel destinationSelector;
-
-    public ComponentRefModel getDestinationSelector() {
-        return destinationSelector;
-    }
-
-    public void setDestinationSelector(ComponentRefModel destinationSelector) {
-        this.destinationSelector = destinationSelector;
+public class WebSphereJMXProvider {
+    public WebSphereJMXProvider(String wasHome) {
+        
     }
 }

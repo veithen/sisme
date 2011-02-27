@@ -15,19 +15,33 @@
  */
 package com.googlecode.sisme.framework.jaxb2.model;
 
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.namespace.QName;
 
-@XmlType(name="object")
-public abstract class ManagedObjectModel {
-    private String name;
+import org.w3c.dom.Element;
+
+@XmlType(name="componentRef")
+public class ComponentRefModel {
+    private QName ref;
+    private Element definition;
 
     @XmlAttribute
-    public String getName() {
-        return name;
+    public QName getRef() {
+        return ref;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRef(QName ref) {
+        this.ref = ref;
+    }
+
+    @XmlAnyElement
+    public Element getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(Element definition) {
+        this.definition = definition;
     }
 }

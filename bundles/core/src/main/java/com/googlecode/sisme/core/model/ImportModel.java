@@ -17,18 +17,18 @@ package com.googlecode.sisme.core.model;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectModel;
-import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
 
 @XmlType(name="importBase")
-public class ImportModel extends ManagedObjectModel {
-    private ManagedObjectRefModel binding;
+public class ImportModel extends ComponentModel {
+    private ComponentRefModel binding;
 
-    public ManagedObjectRefModel getBinding() {
+    public ComponentRefModel getBinding() {
         return binding;
     }
 
-    public void setBinding(ManagedObjectRefModel binding) {
+    public void setBinding(ComponentRefModel binding) {
         this.binding = binding;
     }
 }

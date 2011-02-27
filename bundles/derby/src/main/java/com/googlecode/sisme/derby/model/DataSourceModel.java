@@ -19,19 +19,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
 
 @XmlRootElement(name="datasource")
 @XmlType(name="")
 public class DataSourceModel {
-    private ManagedObjectRefModel database;
+    private ComponentRefModel database;
     private String user;
 
-    public ManagedObjectRefModel getDatabase() {
+    public ComponentRefModel getDatabase() {
         return database;
     }
 
-    public void setDatabase(ManagedObjectRefModel database) {
+    public void setDatabase(ComponentRefModel database) {
         this.database = database;
     }
 
