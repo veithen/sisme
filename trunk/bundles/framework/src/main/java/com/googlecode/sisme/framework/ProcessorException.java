@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.core.model;
+package com.googlecode.sisme.framework;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+public class ProcessorException extends Exception {
+    private static final long serialVersionUID = -7343264813196139529L;
 
-import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
-
-@XmlRootElement(name="dynamicImport")
-@XmlType(name="")
-public class DynamicImportModel extends ImportModel {
-    private ComponentRefModel destinationSelector;
-
-    public ComponentRefModel getDestinationSelector() {
-        return destinationSelector;
+    public ProcessorException() {
+        super();
     }
 
-    public void setDestinationSelector(ComponentRefModel destinationSelector) {
-        this.destinationSelector = destinationSelector;
+    public ProcessorException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ProcessorException(String message) {
+        super(message);
+    }
+
+    public ProcessorException(Throwable cause) {
+        super(cause);
     }
 }

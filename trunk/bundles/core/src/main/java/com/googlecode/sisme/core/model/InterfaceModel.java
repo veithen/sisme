@@ -25,21 +25,21 @@ import javax.xml.bind.annotation.XmlType;
 import com.googlecode.sisme.Domain;
 import com.googlecode.sisme.Interface;
 import com.googlecode.sisme.Operation;
-import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectModel;
-import com.googlecode.sisme.framework.jaxb2.model.ManagedObjectRefModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
 
 @XmlRootElement(name="interface")
 @XmlType(name="", propOrder={"domain", "operations"})
-public class InterfaceModel extends ManagedObjectModel {
-    private ManagedObjectRefModel domain;
+public class InterfaceModel extends ComponentModel {
+    private ComponentRefModel domain;
     private List<OperationModel> operations;
 
     @XmlElement
-    public ManagedObjectRefModel getDomain() {
+    public ComponentRefModel getDomain() {
         return domain;
     }
 
-    public void setDomain(ManagedObjectRefModel domain) {
+    public void setDomain(ComponentRefModel domain) {
         this.domain = domain;
     }
 

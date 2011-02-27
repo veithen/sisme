@@ -32,7 +32,7 @@ public class InterfaceDefinitionProcessor extends JAXBDefinitionProcessor<Interf
     protected void parse(JAXBDefinitionProcessorContext context, final InterfaceModel model) {
         // TODO: Java 5 generics issue here!
         final Dependency<Domain> domain = context.createDependency(Domain.class, model.getDomain());
-        context.addManagedObject(Interface.class.getName(), new ObjectFactory() {
+        context.addService(Interface.class.getName(), new ObjectFactory() {
             public Object createObject() {
                 return model.build(domain.get());
             }

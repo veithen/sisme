@@ -13,23 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.core.model;
-
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
-
-@XmlRootElement(name="import")
-@XmlType(name="")
-public class StaticImportModel extends ImportModel {
-    private ComponentRefModel destination;
-
-    public ComponentRefModel getDestination() {
-        return destination;
-    }
-
-    public void setDestination(ComponentRefModel destination) {
-        this.destination = destination;
-    }
-}
+@javax.xml.bind.annotation.XmlSchema(namespace="http://sisme.googlecode.com/jmx/websphere")
+package com.googlecode.sisme.jmx.websphere.model;
