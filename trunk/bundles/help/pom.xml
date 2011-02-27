@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>help</artifactId>
-    <name>SiSME :: Bundles :: Help</name>
+    <name>SiSME Help</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -44,7 +44,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME Help</Bundle-Name>
                         <Bundle-Activator>com.googlecode.sisme.help.Activator</Bundle-Activator>
                         <Export-Package></Export-Package>
                     </instructions>

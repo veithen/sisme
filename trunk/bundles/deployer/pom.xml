@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>deployer</artifactId>
-    <name>SiSME :: Bundles :: Bundle Deployer</name>
+    <name>SiSME Bundle Deployer</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -39,7 +39,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME Bundle Deployer</Bundle-Name>
                         <Bundle-Activator>com.googlecode.sisme.deployer.Activator</Bundle-Activator>
                         <Export-Package></Export-Package>
                     </instructions>

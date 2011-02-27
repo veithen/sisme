@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>jdbc</artifactId>
-    <name>SiSME :: Bundles :: JDBC</name>
+    <name>SiSME JDBC Support</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -44,7 +44,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME JDBC Support</Bundle-Name>
                         <Export-Package></Export-Package>
                         <Bundle-Activator>com.googlecode.sisme.jdbc.impl.Activator</Bundle-Activator>
                     </instructions>

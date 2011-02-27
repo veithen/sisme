@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>jmx.websphere</artifactId>
-    <name>SiSME :: Bundles :: WebSphere JMX</name>
+    <name>SiSME WebSphere JMX Support</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -44,7 +44,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME WebSphere JMX Support</Bundle-Name>
                         <Export-Package></Export-Package>
                         <Bundle-Activator>com.googlecode.sisme.jmx.websphere.impl.Activator</Bundle-Activator>
                     </instructions>

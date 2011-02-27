@@ -23,7 +23,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core</artifactId>
-    <name>SiSME :: Bundles :: Core</name>
+    <name>SiSME Core</name>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -44,7 +44,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>SiSME Core</Bundle-Name>
                         <!-- TODO: actually, com.googlecode.sisme.core.model should also be a private package -->
                         <Private-Package>com.googlecode.sisme.core.impl</Private-Package>
                         <Bundle-Activator>com.googlecode.sisme.core.impl.Activator</Bundle-Activator>

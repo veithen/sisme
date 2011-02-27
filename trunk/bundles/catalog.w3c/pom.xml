@@ -23,19 +23,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>catalog.w3c</artifactId>
-    <name>SiSME :: Bundles :: Catalog w3.org</name>
+    <name>SiSME Catalog w3.org</name>
     <packaging>bundle</packaging>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Bundle-Name>SiSME Catalog w3.org</Bundle-Name>
-                    </instructions>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
