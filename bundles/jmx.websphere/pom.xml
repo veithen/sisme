@@ -31,6 +31,11 @@
             <artifactId>framework.jaxb2</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jmx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -40,7 +45,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-Name>SiSME WebSphere JMX Support</Bundle-Name>
-                        <Private-Package>com.googlecode.sisme.jmx.websphere.impl</Private-Package>
+                        <Export-Package></Export-Package>
                         <Bundle-Activator>com.googlecode.sisme.jmx.websphere.impl.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>

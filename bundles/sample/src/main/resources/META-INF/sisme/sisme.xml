@@ -20,10 +20,14 @@
                    xmlns:core="http://sisme.googlecode.com/core"
                    xmlns:java="http://sisme.googlecode.com/java"
                    xmlns:derby="http://sisme.googlecode.com/derby"
+                   xmlns:jmx="http://sisme.googlecode.com/jmx"
+                   xmlns:wsjmx="http://sisme.googlecode.com/jmx/websphere"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://sisme.googlecode.com/framework http://localhost:8080/sisme/schema/framework.xsd
                                        http://sisme.googlecode.com/core http://localhost:8080/sisme/schema/core.xsd
-                                       http://sisme.googlecode.com/derby http://localhost:8080/sisme/schema/derby.xsd">
+                                       http://sisme.googlecode.com/derby http://localhost:8080/sisme/schema/derby.xsd
+                                       http://sisme.googlecode.com/jmx http://localhost:8080/sisme/schema/jmx.xsd
+                                       http://sisme.googlecode.com/jmx/websphere http://localhost:8080/sisme/schema/websphere-jmx.xsd">
     <derby:database name="sample">
         <databaseName>sample</databaseName>
     </derby:database>
@@ -39,4 +43,12 @@
             </output>
         </operation>
     </core:interface>
+    <jmx:connection>
+        <provider>
+            <wsjmx:provider>
+                <wasHome>C:\opt\IBM\WebSphere\AppServer</wasHome>
+            </wsjmx:provider>
+        </provider>
+        <url>service:jmx:iiop://localhost:2810/jndi/JMXConnector</url>
+    </jmx:connection>
 </sisme:definitions>

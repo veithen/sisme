@@ -26,13 +26,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import com.googlecode.sisme.framework.ProcessorException;
 import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
 public class SchemaDocumentProcessor implements DocumentProcessor {
-    public void process(DocumentProcessorContext context, Document document) {
+    public void process(DocumentProcessorContext context, Document document) throws ProcessorException {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -48,14 +49,11 @@ public class SchemaDocumentProcessor implements DocumentProcessor {
                 in.close();
             }
         } catch (IOException ex) {
-            // TODO
-            throw new Error(ex);
+            throw new ProcessorException(ex);
         } catch (ParserConfigurationException ex) {
-            // TODO
-            throw new Error(ex);
+            throw new ProcessorException(ex);
         } catch (SAXException ex) {
-            // TODO
-            throw new Error(ex);
+            throw new ProcessorException(ex);
         }
     }
 }

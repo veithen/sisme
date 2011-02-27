@@ -23,12 +23,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import com.googlecode.sisme.framework.ProcessorException;
 import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
 
 public class DefinitionsProcessor implements DocumentProcessor {
-    public void process(DocumentProcessorContext context, Document document) {
+    public void process(DocumentProcessorContext context, Document document) throws ProcessorException {
         DefinitionSet definitionSet = new DefinitionSet(context);
         try {
             InputStream in = document.getInputStream();
@@ -39,11 +40,9 @@ public class DefinitionsProcessor implements DocumentProcessor {
                 in.close();
             }
         } catch (TransformerException ex) {
-            // TODO
-            throw new Error(ex);
+            throw new ProcessorException(ex);
         } catch (IOException ex) {
-            // TODO
-            throw new Error(ex);
+            throw new ProcessorException(ex);
         }
     }
 }

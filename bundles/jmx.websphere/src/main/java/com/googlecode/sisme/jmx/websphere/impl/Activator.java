@@ -15,19 +15,34 @@
  */
 package com.googlecode.sisme.jmx.websphere.impl;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator implements BundleActivator {
+import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
+import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
+import com.googlecode.sisme.jmx.websphere.model.ProviderModel;
 
+public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
-        // TODO Auto-generated method stub
-        
+        {
+            Dictionary<String,Object> props = new Hashtable<String,Object>();
+            props.put(DefinitionProcessor.P_ELEMENT_NAMESPACE, "http://sisme.googlecode.com/jmx/websphere");
+            props.put(DefinitionProcessor.P_ELEMENT_NAME, "provider");
+            context.registerService(DefinitionProcessor.class.getName(), new ProviderDefinitionProcessor(), props);
+        }
+        {
+            Dictionary<String,Object> props = new Hashtable<String,Object>();
+            props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/jmx/websphere");
+            props.put(FrameworkSchemaProvider.P_FILENAME, "websphere-jmx.xsd");
+            context.registerService(FrameworkSchemaProvider.class.getName(),
+                    new JAXBFrameworkSchemaProvider("http://sisme.googlecode.com/jmx/websphere", ProviderModel.class), props);
+        }
     }
 
     public void stop(BundleContext context) throws Exception {
-        // TODO Auto-generated method stub
-        
     }
-
 }

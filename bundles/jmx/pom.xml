@@ -28,7 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>framework</artifactId>
+            <artifactId>framework.jaxb2</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -40,7 +40,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-Name>SiSME JMX Support</Bundle-Name>
-                        <Private-Package>com.googlecode.sisme.jmx.impl</Private-Package>
+                        <Export-Package>com.googlecode.sisme.jmx</Export-Package>
                         <Bundle-Activator>com.googlecode.sisme.jmx.impl.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>

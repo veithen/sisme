@@ -13,8 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.jmx;
 
-public interface Processor<T,C extends ProcessorContext> {
-    void process(C context, T object) throws ProcessorException;
+import java.io.IOException;
+
+import javax.management.remote.JMXConnector;
+import javax.management.remote.JMXServiceURL;
+
+public interface JMXProvider {
+    JMXConnector newJMXConnector(JMXServiceURL serviceURL) throws IOException;
 }

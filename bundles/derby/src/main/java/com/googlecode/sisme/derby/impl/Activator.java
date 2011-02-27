@@ -17,7 +17,6 @@ package com.googlecode.sisme.derby.impl;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -44,7 +43,7 @@ public class Activator implements BundleActivator {
         }
 	    
 	    {
-    	    Properties props = new Properties();
+            Dictionary<String,Object> props = new Hashtable<String,Object>();
     	    props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/derby");
     	    props.put(FrameworkSchemaProvider.P_FILENAME, "derby.xsd");
     	    schemaProviderRegistration =

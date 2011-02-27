@@ -20,6 +20,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
+import com.googlecode.sisme.framework.ProcessorException;
 import com.googlecode.sisme.framework.definition.Definition;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
@@ -37,17 +38,16 @@ public abstract class JAXBDefinitionProcessor<T> implements DefinitionProcessor 
         }
     }
 
-    public final void process(DefinitionProcessorContext context, Definition definition) {
+    public final void process(DefinitionProcessorContext context, Definition definition) throws ProcessorException {
         try {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             // "Default" here refers to JAXB 1.0. JAXB 2.0 is more lenient by default.
             unmarshaller.setEventHandler(new DefaultValidationEventHandler());
             parse(new JAXBDefinitionProcessorContext(context), elementClass.cast(unmarshaller.unmarshal(definition.getContent())));
         } catch (JAXBException ex) {
-            // TODO: implement appropriate error handling in DefinitionParser
-            throw new RuntimeException(ex);
+            throw new ProcessorException(ex);
         }
     }
     
-    protected abstract void parse(JAXBDefinitionProcessorContext context, T model);
+    protected abstract void parse(JAXBDefinitionProcessorContext context, T model) throws ProcessorException;
 }
