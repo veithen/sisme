@@ -18,6 +18,7 @@ package com.googlecode.sisme.framework.impl;
 import javax.xml.namespace.QName;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
 
 import com.googlecode.sisme.framework.definition.Definition;
@@ -35,9 +36,9 @@ public class DefinitionProcessorTracker extends ProcessorTracker<Definition,Bind
     }
 
     @Override
-    protected Binder createContext(BundleContext targetContext, ServiceReference artifactReference) {
-        String namespace = (String)artifactReference.getProperty(Definition.P_NAMESPACE);
-        String name = (String)artifactReference.getProperty(Definition.P_NAME);
-        return new Binder(targetContext, new QName(namespace, name));
+    protected Binder createContext(BundleContext targetContext, ServiceReference definitionReference) {
+        String namespace = (String)definitionReference.getProperty(Definition.P_NAMESPACE);
+        String name = (String)definitionReference.getProperty(Definition.P_NAME);
+        return new Binder(targetContext, new QName(namespace, name), (Long)definitionReference.getProperty(Constants.SERVICE_ID));
     }
 }
