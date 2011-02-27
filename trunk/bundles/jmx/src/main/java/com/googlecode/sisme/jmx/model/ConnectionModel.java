@@ -13,25 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.jmx.websphere.model;
+package com.googlecode.sisme.jmx.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.googlecode.sisme.framework.jaxb2.model.ComponentModel;
+import com.googlecode.sisme.framework.jaxb2.model.ComponentRefModel;
 
-@XmlRootElement(name="provider")
+@XmlRootElement(name="connection")
 @XmlType(name="")
-public class ProviderModel extends ComponentModel {
-    private String wasHome;
+public class ConnectionModel extends ComponentModel {
+    private ComponentRefModel provider;
+    private String url;
 
     @XmlElement(required=true)
-    public String getWasHome() {
-        return wasHome;
+    public ComponentRefModel getProvider() {
+        return provider;
     }
 
-    public void setWasHome(String wasHome) {
-        this.wasHome = wasHome;
+    public void setProvider(ComponentRefModel provider) {
+        this.provider = provider;
+    }
+
+    @XmlElement(required=true)
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

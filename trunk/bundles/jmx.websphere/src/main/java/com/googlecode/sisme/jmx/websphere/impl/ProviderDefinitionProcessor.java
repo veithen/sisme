@@ -15,8 +15,12 @@
  */
 package com.googlecode.sisme.jmx.websphere.impl;
 
+import java.io.File;
+
+import com.googlecode.sisme.framework.ProcessorException;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
+import com.googlecode.sisme.jmx.JMXProvider;
 import com.googlecode.sisme.jmx.websphere.model.ProviderModel;
 
 public class ProviderDefinitionProcessor extends JAXBDefinitionProcessor<ProviderModel> {
@@ -25,7 +29,12 @@ public class ProviderDefinitionProcessor extends JAXBDefinitionProcessor<Provide
     }
 
     @Override
-    protected void parse(JAXBDefinitionProcessorContext context, ProviderModel model) {
-        context.addService(WebSphereJMXProvider.class.getName(), new WebSphereJMXProvider(model.getWasHome()));
+    protected void parse(JAXBDefinitionProcessorContext context, ProviderModel model) throws ProcessorException {
+        File wasHome = new File(model.getWasHome()).getAbsoluteFile();
+        if (wasHome.exists() && wasHome.isDirectory()) {
+            context.addService(JMXProvider.class.getName(), new WebSphereJMXProvider(wasHome));
+        } else {
+            throw new ProcessorException(wasHome + " doesn't exist or is not a directory");
+        }
     }
 }

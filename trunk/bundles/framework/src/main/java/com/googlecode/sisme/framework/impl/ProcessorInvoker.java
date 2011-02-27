@@ -23,13 +23,19 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import com.googlecode.sisme.framework.Processor;
+import com.googlecode.sisme.framework.ProcessorException;
 
 public class ProcessorInvoker<T,C extends AbstractProcessorContext> {
     private class Customizer implements ServiceTrackerCustomizer {
         public Object addingService(ServiceReference reference) {
             T artifact = artifactClass.cast(context.getService(reference));
             C processorContext = processorTracker.createContext(reference.getBundle().getBundleContext(), reference);
-            processor.process(processorContext, artifact);
+            try {
+                processor.process(processorContext, artifact);
+            } catch (ProcessorException ex) {
+                // TODO Auto-generated catch block
+                throw new RuntimeException(ex);
+            }
             processorContext.start();
             return processorContext;
         }
