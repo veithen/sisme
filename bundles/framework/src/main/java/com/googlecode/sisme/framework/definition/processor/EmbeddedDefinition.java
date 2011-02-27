@@ -16,21 +16,20 @@
 package com.googlecode.sisme.framework.definition.processor;
 
 /**
- * A dependency on a particular facet of a component. A component facet is an interface that
- * provides access to specific component methods.
- * 
- * @param <T>
- *            the facet class
+ * Represents a definition that is embedded in another definition.
  * 
  * @author Andreas Veithen
  */
-public interface Dependency<T> {
+public interface EmbeddedDefinition {
     /**
-     * Get a reference to the component facet.
+     * Create a dependency on a particular facet of the component described by the embedded
+     * definition.
      * 
-     * @return the reference to the component facet
-     * @throws IllegalStateException
-     *             if the dependency has not been resolved yet
+     * @param <T>
+     *            the facet class
+     * @param facetClass
+     *            the facet class
+     * @return the dependency
      */
-    T get();
+    <T> Dependency<T> getDependency(Class<T> facetClass);
 }
