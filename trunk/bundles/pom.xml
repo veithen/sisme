@@ -41,6 +41,7 @@
         <module>jmx</module>
         <module>jmx.websphere</module>
         <module>sample</module>
+        <module>stream</module>
         <module>xsd</module>
     </modules>
     <dependencies>

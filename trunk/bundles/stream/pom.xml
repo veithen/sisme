@@ -22,14 +22,7 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>filesystem</artifactId>
-    <name>SiSME Virtual File System API</name>
+    <artifactId>stream</artifactId>
+    <name>SiSME Stream API</name>
     <packaging>bundle</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>stream</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
 </project>
