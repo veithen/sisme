@@ -52,31 +52,31 @@ public interface Connection {
     }
     
     /**
-     * Get an input stream for this connection. The returned stream can be used to read data send by
+     * Get a stream source for this connection. The returned object can be used to read data sent by
      * the other end of the connection.
      * 
-     * @return The input stream for the connection. For a given connection, multiple calls to this
+     * @return The stream source for the connection. For a given connection, multiple calls to this
      * method will return the same instance.
      * @throws IOException 
      */
-    InputStream getInputStream() throws IOException;
+    StreamSource getStreamSource() throws IOException;
     
     /**
-     * Get an output stream for this connection. The returned stream can be used to transmit data to
+     * Get a stream sink for this connection. The returned object can be used to transmit data to
      * the other end of the connection.
      * 
-     * @return The output stream for the connection. For a given connection, multiple calls to this
+     * @return The stream sink for the connection. For a given connection, multiple calls to this
      * method will return the same instance.
      * @throws IOException 
      */
-    OutputStream getOutputStream() throws IOException;
+    StreamSink getStreamSink() throws IOException;
     
     /**
      * Close this connection. This will first put the connection into state {@link State#CLOSING}
      * and then attempt to close the connection. After successful completion of the close operation,
      * the state will be {@link State#CLOSED}.
      * <p>
-     * Any thread blocked reading from the input stream returned by {@link #getInputStream()} will
+     * Any thread blocked reading from the input stream returned by {@link #getStreamSource()} will
      * receive a {@link ConnectionClosedLocallyException}.
      * 
      * @throws IOException
