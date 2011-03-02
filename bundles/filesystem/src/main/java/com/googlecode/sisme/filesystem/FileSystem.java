@@ -15,6 +15,9 @@
  */
 package com.googlecode.sisme.filesystem;
 
+import com.googlecode.sisme.stream.StreamSink;
+import com.googlecode.sisme.stream.StreamSource;
+
 /**
  * A view on a particular file system. Depending on the type of the underlying
  * file system and how the instance was created, a {@link FileSystem} object may
@@ -46,5 +49,19 @@ public interface FileSystem {
      */
     <T> T getExtension(Class<T> extensionClass);
     
+    /**
+     * Open the given file for reading.
+     * 
+     * @param path the path to the file
+     * @return a stream source to read the file content
+     */
+    StreamSource read(Path path);
     
+    /**
+     * Open the given file for writing.
+     * 
+     * @param path the path to the file
+     * @return a stream source to write the file content
+     */
+    StreamSink write(Path path);
 }
