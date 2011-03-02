@@ -27,4 +27,7 @@ public interface DefinitionProcessorContext extends ProcessorContext {
     // element must represent an XML element of type objectRef
     // TODO
 //    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
+    
+    // TODO: this makes perfect sense for definitions loaded from bundles, but not for other contexts
+    Class<?> loadClass(String name) throws ClassNotFoundException;
 }

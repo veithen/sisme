@@ -22,18 +22,11 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
 import com.googlecode.sisme.jmx.model.ConnectionModel;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
-        {
-            Dictionary<String,Object> props = new Hashtable<String,Object>();
-            props.put(DefinitionProcessor.P_ELEMENT_NAMESPACE, "http://sisme.googlecode.com/jmx");
-            props.put(DefinitionProcessor.P_ELEMENT_NAME, "connection");
-            context.registerService(DefinitionProcessor.class.getName(), new ConnectionDefinitionProcessor(), props);
-        }
         {
             Dictionary<String,Object> props = new Hashtable<String,Object>();
             props.put(FrameworkSchemaProvider.P_NAMESPACE, "http://sisme.googlecode.com/jmx");

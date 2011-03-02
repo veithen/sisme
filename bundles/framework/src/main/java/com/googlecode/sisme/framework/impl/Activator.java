@@ -15,6 +15,8 @@
  */
 package com.googlecode.sisme.framework.impl;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
@@ -22,6 +24,7 @@ import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
+import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
 import com.googlecode.sisme.framework.document.Document;
 import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
 
@@ -50,6 +53,12 @@ public class Activator implements BundleActivator {
         managedObjectFactoryTracker = new ManagedObjectFactoryTracker(context);
         managedObjectFactoryTracker.open();
         new Deployer(context).open();
+        {
+            Dictionary<String,Object> props = new Hashtable<String,Object>();
+            props.put(DefinitionProcessor.P_ELEMENT_NAMESPACE, "http://sisme.googlecode.com/framework");
+            props.put(DefinitionProcessor.P_ELEMENT_NAME, "definitionProcessor");
+            context.registerService(DefinitionProcessor.class.getName(), new DefinitionProcessorDefinitionProcessor(), props);
+        }
     }
 
     public void stop(BundleContext context) throws Exception {

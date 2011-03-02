@@ -129,4 +129,8 @@ class Binder extends AbstractProcessorContext implements DefinitionProcessorCont
         // TODO: use constant here
         properties.put("component.id", componentId);
     }
+
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        return bundleContext.getBundle().loadClass(name);
+    }
 }
