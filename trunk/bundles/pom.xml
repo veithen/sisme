@@ -29,7 +29,6 @@
         <module>api</module>
         <module>catalog.w3c</module>
         <module>core</module>
-        <module>deployer</module>
         <module>derby</module>
         <module>ehcache</module>
         <module>filesystem</module>

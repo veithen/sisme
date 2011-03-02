@@ -49,6 +49,7 @@ public class Activator implements BundleActivator {
         definitionProcessorTracker.open();
         managedObjectFactoryTracker = new ManagedObjectFactoryTracker(context);
         managedObjectFactoryTracker.open();
+        new Deployer(context).open();
     }
 
     public void stop(BundleContext context) throws Exception {
