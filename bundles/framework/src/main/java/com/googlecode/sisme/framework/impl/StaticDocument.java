@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.deployer;
+package com.googlecode.sisme.framework.impl;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
-public class Activator implements BundleActivator {
-    public void start(BundleContext context) throws Exception {
-        new Deployer(context).open();
+import com.googlecode.sisme.framework.document.Document;
+
+public class StaticDocument implements Document {
+    private final URL url;
+
+    public StaticDocument(URL url) {
+        this.url = url;
     }
 
-    public void stop(BundleContext context) throws Exception {
+    public InputStream getInputStream() {
+        try {
+            return url.openStream();
+        } catch (IOException ex) {
+            // TODO
+            throw new Error(ex);
+        }
     }
 }
