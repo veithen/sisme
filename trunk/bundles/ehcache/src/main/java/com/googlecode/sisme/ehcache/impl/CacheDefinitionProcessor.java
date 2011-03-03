@@ -15,8 +15,13 @@
  */
 package com.googlecode.sisme.ehcache.impl;
 
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.config.CacheConfiguration;
+
 import com.googlecode.sisme.ehcache.model.CacheModel;
 import com.googlecode.sisme.framework.ProcessorException;
+import com.googlecode.sisme.framework.component.Dependency;
+import com.googlecode.sisme.framework.component.ManagedComponentFactory;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
 
@@ -27,7 +32,16 @@ public class CacheDefinitionProcessor extends JAXBDefinitionProcessor<CacheModel
     
     @Override
     protected void parse(JAXBDefinitionProcessorContext context, CacheModel model) throws ProcessorException {
-        // TODO Auto-generated method stub
-        
+        Dependency<CacheManager> cacheManager = context.createDependency(CacheManager.class, model.getManager());
+        CacheConfiguration configuration = new CacheConfiguration();
+        // TODO: this is not correct; we need to compose a name that also includes the namespace URI
+        configuration.setName(model.getName());
+        configuration.setEternal(model.isEternal());
+        configuration.setMaxElementsInMemory(model.getMaxElementsInMemory());
+        configuration.setOverflowToDisk(model.isOverflowToDisk());
+        if (model.getMaxElementsOnDisk() != null) {
+            configuration.setMaxElementsOnDisk(model.getMaxElementsOnDisk());
+        }
+        context.addService(ManagedComponentFactory.class.getName(), new CacheFactory(cacheManager, configuration));
     }
 }
