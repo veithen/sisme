@@ -22,11 +22,11 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
-import com.googlecode.sisme.framework.ManagedObjectFactory;
+import com.googlecode.sisme.framework.component.ManagedComponentFactory;
 
-public class ManagedObjectFactoryTracker extends ServiceTracker {
-    public ManagedObjectFactoryTracker(BundleContext context) {
-        super(context, ManagedObjectFactory.class.getName(), null);
+public class ManagedComponentFactoryTracker extends ServiceTracker {
+    public ManagedComponentFactoryTracker(BundleContext context) {
+        super(context, ManagedComponentFactory.class.getName(), null);
     }
 
     @Override
@@ -35,20 +35,20 @@ public class ManagedObjectFactoryTracker extends ServiceTracker {
         String clazz = null;
         for (String key : reference.getPropertyKeys()) {
             Object value = reference.getProperty(key);
-            if (key.equals(ManagedObjectFactory.P_OBJECTCLASS)) {
+            if (key.equals(ManagedComponentFactory.P_OBJECTCLASS)) {
                 clazz = (String)value;
             } else {
                 props.put(key, value);
             }
         }
-        ManagedObjectImpl<?> managedObject = new ManagedObjectImpl((ManagedObjectFactory)context.getService(reference), reference.getBundle().getBundleContext(), clazz, props);
+        ManagedComponentImpl<?> managedObject = new ManagedComponentImpl((ManagedComponentFactory)context.getService(reference), reference.getBundle().getBundleContext(), clazz, props);
         managedObject.start();
         return managedObject;
     }
 
     @Override
     public void removedService(ServiceReference reference, Object service) {
-        ((ManagedObjectImpl<?>)service).stop();
+        ((ManagedComponentImpl<?>)service).stop();
         context.ungetService(reference);
     }
 }
