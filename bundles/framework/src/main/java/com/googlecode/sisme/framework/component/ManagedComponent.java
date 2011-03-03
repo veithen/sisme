@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.component;
 
-public interface ManagedObject {
+public interface ManagedComponent {
     int STOPPED = 0;
     int STARTING = 1;
     int STARTED = 2;

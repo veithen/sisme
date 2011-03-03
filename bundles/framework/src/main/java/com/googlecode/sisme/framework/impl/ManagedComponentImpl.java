@@ -20,11 +20,11 @@ import java.util.Dictionary;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
-import com.googlecode.sisme.framework.ManagedObject;
-import com.googlecode.sisme.framework.ManagedObjectFactory;
+import com.googlecode.sisme.framework.component.ManagedComponent;
+import com.googlecode.sisme.framework.component.ManagedComponentFactory;
 
-public class ManagedObjectImpl<T> implements ManagedObject {
-    private final ManagedObjectFactory<T> factory;
+public class ManagedComponentImpl<T> implements ManagedComponent {
+    private final ManagedComponentFactory<T> factory;
     private final BundleContext targetContext;
     private final String clazz;
     private final Dictionary<String,Object> properties;
@@ -32,7 +32,7 @@ public class ManagedObjectImpl<T> implements ManagedObject {
     private T instance;
     private ServiceRegistration registration;
 
-    public ManagedObjectImpl(ManagedObjectFactory<T> factory, BundleContext targetContext, String clazz, Dictionary<String,Object> properties) {
+    public ManagedComponentImpl(ManagedComponentFactory<T> factory, BundleContext targetContext, String clazz, Dictionary<String,Object> properties) {
         this.factory = factory;
         this.targetContext = targetContext;
         this.clazz = clazz;

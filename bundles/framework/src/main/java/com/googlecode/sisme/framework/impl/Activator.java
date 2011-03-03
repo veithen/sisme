@@ -31,7 +31,7 @@ import com.googlecode.sisme.framework.schema.StaticFrameworkSchemaProvider;
 public class Activator implements BundleActivator {
     private DocumentProcessorTracker documentProcessorTracker;
     private DefinitionProcessorTracker definitionProcessorTracker;
-    private ManagedObjectFactoryTracker managedObjectFactoryTracker;
+    private ManagedComponentFactoryTracker managedComponentFactoryTracker;
     
     public void start(BundleContext context) throws Exception {
         {
@@ -50,8 +50,8 @@ public class Activator implements BundleActivator {
         documentProcessorTracker.open();
         definitionProcessorTracker = new DefinitionProcessorTracker(context);
         definitionProcessorTracker.open();
-        managedObjectFactoryTracker = new ManagedObjectFactoryTracker(context);
-        managedObjectFactoryTracker.open();
+        managedComponentFactoryTracker = new ManagedComponentFactoryTracker(context);
+        managedComponentFactoryTracker.open();
         new Deployer(context).open();
         {
             Dictionary<String,Object> props = new Hashtable<String,Object>();
@@ -64,6 +64,6 @@ public class Activator implements BundleActivator {
     public void stop(BundleContext context) throws Exception {
         documentProcessorTracker.close();
         definitionProcessorTracker.close();
-        managedObjectFactoryTracker.close();
+        managedComponentFactoryTracker.close();
     }
 }
