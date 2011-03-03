@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
+package com.googlecode.sisme.framework.component;
 
 /**
- * Represents a definition that is embedded in another definition.
+ * A dependency on a particular facet of a component. A component facet is an interface that
+ * provides access to specific component methods.
+ * 
+ * @param <T>
+ *            the facet class
  * 
  * @author Andreas Veithen
  */
-public interface EmbeddedDefinition {
+public interface Dependency<T> {
     /**
-     * Create a dependency on a particular facet of the component described by the embedded
-     * definition.
+     * Get a reference to the component facet.
      * 
-     * @param <T>
-     *            the facet class
-     * @param facetClass
-     *            the facet class
-     * @return the dependency
+     * @return the reference to the component facet
+     * @throws IllegalStateException
+     *             if the dependency has not been resolved yet
      */
-    <T> Dependency<T> getDependency(Class<T> facetClass);
+    T get();
 }

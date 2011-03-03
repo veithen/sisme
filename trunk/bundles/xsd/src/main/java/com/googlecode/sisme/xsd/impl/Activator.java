@@ -22,7 +22,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import com.googlecode.sisme.framework.document.Document;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
+import com.googlecode.sisme.framework.document.DocumentProcessor;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {

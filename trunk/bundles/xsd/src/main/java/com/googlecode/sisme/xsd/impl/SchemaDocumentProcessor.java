@@ -27,10 +27,10 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import com.googlecode.sisme.framework.ProcessorException;
-import com.googlecode.sisme.framework.definition.Definition;
+import com.googlecode.sisme.framework.component.Definition;
 import com.googlecode.sisme.framework.document.Document;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
+import com.googlecode.sisme.framework.document.DocumentProcessor;
+import com.googlecode.sisme.framework.document.DocumentProcessorContext;
 
 public class SchemaDocumentProcessor implements DocumentProcessor {
     public void process(DocumentProcessorContext context, Document document) throws ProcessorException {

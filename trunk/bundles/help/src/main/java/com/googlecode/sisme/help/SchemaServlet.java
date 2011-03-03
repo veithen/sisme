@@ -33,8 +33,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
-import com.googlecode.sisme.framework.FrameworkSchemaProviderException;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProviderException;
 
 @SuppressWarnings("serial")
 public class SchemaServlet extends HttpServlet {

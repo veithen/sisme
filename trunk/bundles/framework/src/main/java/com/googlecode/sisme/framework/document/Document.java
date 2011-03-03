@@ -17,7 +17,7 @@ package com.googlecode.sisme.framework.document;
 
 import java.io.InputStream;
 
-import com.googlecode.sisme.framework.definition.Definition;
+import com.googlecode.sisme.framework.component.Definition;
 
 /**
  * A reference to a SiSME definitions file. Instances of this class are created and registered into

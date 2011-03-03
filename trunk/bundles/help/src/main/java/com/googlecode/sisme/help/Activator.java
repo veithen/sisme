@@ -23,7 +23,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {

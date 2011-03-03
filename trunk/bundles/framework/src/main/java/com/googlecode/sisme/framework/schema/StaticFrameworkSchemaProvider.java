@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.schema;
 
 import java.net.URL;
 
@@ -25,6 +25,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
+
 
 // TODO: doesn't support ImportResolver yet
 public class StaticFrameworkSchemaProvider implements FrameworkSchemaProvider {

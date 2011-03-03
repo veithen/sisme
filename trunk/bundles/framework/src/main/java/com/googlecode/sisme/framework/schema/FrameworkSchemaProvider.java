@@ -13,23 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition;
+package com.googlecode.sisme.framework.schema;
 
-import org.w3c.dom.Element;
+import org.w3c.dom.Document;
 
-public final class Definition {
-    public static final String P_ELEMENT_NAMESPACE = "elementNamespace";
-    public static final String P_ELEMENT_NAME = "elementName";
-    public static final String P_NAMESPACE = "namespace";
-    public static final String P_NAME = "name";
-    
-    private final Element element;
-
-    public Definition(Element element) {
-        this.element = element;
-    }
-
-    public Element getContent() {
-        return element;
-    }
+public interface FrameworkSchemaProvider {
+	String P_NAMESPACE = "namespace";
+	
+    /**
+     * The property for the (suggested) filename of the schema. Note that
+     * {@link #getSchema(ImportResolver)} must always make use of the {@link ImportResolver} to
+     * determine the actual file name used for the schema.
+     */
+	String P_FILENAME = "filename";
+	
+    Document getSchema(ImportResolver resolver) throws FrameworkSchemaProviderException;
 }

@@ -21,8 +21,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
 
-import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
+import com.googlecode.sisme.framework.component.Definition;
+import com.googlecode.sisme.framework.component.DefinitionProcessor;
 
 public class DefinitionProcessorTracker extends ProcessorTracker<Definition,Binder,DefinitionProcessor>{
     public DefinitionProcessorTracker(BundleContext context) {

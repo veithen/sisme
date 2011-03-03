@@ -23,9 +23,9 @@ import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
 
 import com.googlecode.sisme.framework.ProcessorException;
-import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
+import com.googlecode.sisme.framework.component.Definition;
+import com.googlecode.sisme.framework.component.DefinitionProcessor;
+import com.googlecode.sisme.framework.component.DefinitionProcessorContext;
 
 /**
  * The processor for <code>definitionProcessor</code> definitions. This is one of the bootstrap

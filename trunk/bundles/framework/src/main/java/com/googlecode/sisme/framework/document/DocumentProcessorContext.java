@@ -13,21 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
-
-import javax.xml.namespace.QName;
-
-import org.w3c.dom.Element;
+package com.googlecode.sisme.framework.document;
 
 import com.googlecode.sisme.framework.ProcessorContext;
 
-public interface DefinitionProcessorContext extends ProcessorContext {
-    <T> Dependency<T> createDependency(Class<T> clazz, QName ref, Element content);
-    
-    // element must represent an XML element of type objectRef
-    // TODO
-//    <T> Dependency<T> createDependency(Class<T> clazz, Element element);
-    
-    // TODO: this makes perfect sense for definitions loaded from bundles, but not for other contexts
-    Class<?> loadClass(String name) throws ClassNotFoundException;
+public interface DocumentProcessorContext extends ProcessorContext {
 }

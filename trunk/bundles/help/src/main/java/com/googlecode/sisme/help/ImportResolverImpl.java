@@ -18,7 +18,7 @@ package com.googlecode.sisme.help;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.googlecode.sisme.framework.ImportResolver;
+import com.googlecode.sisme.framework.schema.ImportResolver;
 
 public class ImportResolverImpl implements ImportResolver {
     private final Map<String,String> locations = new HashMap<String,String>();

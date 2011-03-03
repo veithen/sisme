@@ -22,7 +22,7 @@ import org.osgi.framework.Filter;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
-import com.googlecode.sisme.framework.definition.processor.Dependency;
+import com.googlecode.sisme.framework.component.Dependency;
 
 class DependencyImpl<T> extends ServiceTracker implements Dependency<T> {
     private final Class<T> clazz;
