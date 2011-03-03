@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
+package com.googlecode.sisme.framework.component;
 
-/**
- * A dependency on a particular facet of a component. A component facet is an interface that
- * provides access to specific component methods.
- * 
- * @param <T>
- *            the facet class
- * 
- * @author Andreas Veithen
- */
-public interface Dependency<T> {
-    /**
-     * Get a reference to the component facet.
-     * 
-     * @return the reference to the component facet
-     * @throws IllegalStateException
-     *             if the dependency has not been resolved yet
-     */
-    T get();
+import org.w3c.dom.Element;
+
+public final class Definition {
+    public static final String P_ELEMENT_NAMESPACE = "elementNamespace";
+    public static final String P_ELEMENT_NAME = "elementName";
+    public static final String P_NAMESPACE = "namespace";
+    public static final String P_NAME = "name";
+    
+    private final Element element;
+
+    public Definition(Element element) {
+        this.element = element;
+    }
+
+    public Element getContent() {
+        return element;
+    }
 }

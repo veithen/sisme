@@ -22,11 +22,11 @@ import java.util.Properties;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
-import com.googlecode.sisme.framework.StaticFrameworkSchemaProvider;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
+import com.googlecode.sisme.framework.component.DefinitionProcessor;
 import com.googlecode.sisme.framework.document.Document;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
+import com.googlecode.sisme.framework.document.DocumentProcessor;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.StaticFrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     private DocumentProcessorTracker documentProcessorTracker;

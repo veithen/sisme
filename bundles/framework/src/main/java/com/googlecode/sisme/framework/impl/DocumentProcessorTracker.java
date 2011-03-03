@@ -19,7 +19,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import com.googlecode.sisme.framework.document.Document;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
+import com.googlecode.sisme.framework.document.DocumentProcessor;
 
 public class DocumentProcessorTracker extends ProcessorTracker<Document,ProcessedDocument,DocumentProcessor> {
     public DocumentProcessorTracker(BundleContext context) {

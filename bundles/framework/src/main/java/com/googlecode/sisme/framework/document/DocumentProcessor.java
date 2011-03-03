@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.document.processor;
+package com.googlecode.sisme.framework.document;
 
-import com.googlecode.sisme.framework.ProcessorContext;
+import com.googlecode.sisme.framework.Processor;
 
-public interface DocumentProcessorContext extends ProcessorContext {
+public interface DocumentProcessor extends Processor<Document,DocumentProcessorContext> {
+    String P_SELECTOR = "selector";
 }

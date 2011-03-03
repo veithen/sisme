@@ -24,8 +24,8 @@ import org.osgi.framework.ServiceRegistration;
 import com.googlecode.sisme.core.model.DynamicImportModel;
 import com.googlecode.sisme.core.model.InterfaceModel;
 import com.googlecode.sisme.core.model.StaticImportModel;
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     private ServiceRegistration schemaProviderRegistration;

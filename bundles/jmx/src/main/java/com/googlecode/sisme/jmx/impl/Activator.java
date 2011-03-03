@@ -21,8 +21,8 @@ import java.util.Hashtable;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
 import com.googlecode.sisme.jmx.model.ConnectionModel;
 
 public class Activator implements BundleActivator {

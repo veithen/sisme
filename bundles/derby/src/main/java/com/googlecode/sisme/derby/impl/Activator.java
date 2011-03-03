@@ -23,9 +23,9 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 import com.googlecode.sisme.derby.model.DatabaseModel;
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
+import com.googlecode.sisme.framework.component.DefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBFrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
 
 public class Activator implements BundleActivator {
     private DatabaseManager databaseManager;

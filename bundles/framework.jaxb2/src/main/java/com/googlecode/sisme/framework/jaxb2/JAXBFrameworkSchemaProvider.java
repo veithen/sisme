@@ -29,8 +29,8 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
-import com.googlecode.sisme.framework.FrameworkSchemaProvider;
-import com.googlecode.sisme.framework.ImportResolver;
+import com.googlecode.sisme.framework.schema.FrameworkSchemaProvider;
+import com.googlecode.sisme.framework.schema.ImportResolver;
 
 public class JAXBFrameworkSchemaProvider implements FrameworkSchemaProvider {
     private static class SchemaOutput extends SchemaOutputResolver {

@@ -22,7 +22,7 @@ import java.util.Dictionary;
 
 import org.osgi.framework.BundleContext;
 
-import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
+import com.googlecode.sisme.framework.document.DocumentProcessorContext;
 
 public class ProcessedDocument extends AbstractProcessorContext implements DocumentProcessorContext {
     ProcessedDocument(BundleContext bundleContext) {

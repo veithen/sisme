@@ -21,9 +21,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
 import com.googlecode.sisme.framework.ProcessorException;
-import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
+import com.googlecode.sisme.framework.component.Definition;
+import com.googlecode.sisme.framework.component.DefinitionProcessor;
+import com.googlecode.sisme.framework.component.DefinitionProcessorContext;
 
 public abstract class JAXBDefinitionProcessor<T> implements DefinitionProcessor {
     private final JAXBContext jaxbContext;

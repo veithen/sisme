@@ -19,7 +19,7 @@ import com.googlecode.sisme.Domain;
 import com.googlecode.sisme.Interface;
 import com.googlecode.sisme.core.model.InterfaceModel;
 import com.googlecode.sisme.framework.ObjectFactory;
-import com.googlecode.sisme.framework.definition.processor.Dependency;
+import com.googlecode.sisme.framework.component.Dependency;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessor;
 import com.googlecode.sisme.framework.jaxb2.JAXBDefinitionProcessorContext;
 

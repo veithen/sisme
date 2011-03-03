@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework;
+package com.googlecode.sisme.framework.component;
 
-public class FrameworkSchemaProviderException extends Exception {
-    private static final long serialVersionUID = -4330582092278501600L;
-
-    public FrameworkSchemaProviderException() {
-    }
-
-    public FrameworkSchemaProviderException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public FrameworkSchemaProviderException(String message) {
-        super(message);
-    }
-
-    public FrameworkSchemaProviderException(Throwable cause) {
-        super(cause);
-    }
+/**
+ * Represents a definition that is embedded in another definition.
+ * 
+ * @author Andreas Veithen
+ */
+public interface EmbeddedDefinition {
+    /**
+     * Create a dependency on a particular facet of the component described by the embedded
+     * definition.
+     * 
+     * @param <T>
+     *            the facet class
+     * @param facetClass
+     *            the facet class
+     * @return the dependency
+     */
+    <T> Dependency<T> getDependency(Class<T> facetClass);
 }

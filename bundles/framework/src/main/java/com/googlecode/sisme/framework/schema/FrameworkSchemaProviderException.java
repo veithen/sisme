@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.sisme.framework.definition.processor;
+package com.googlecode.sisme.framework.schema;
 
-import com.googlecode.sisme.framework.Processor;
-import com.googlecode.sisme.framework.definition.Definition;
+public class FrameworkSchemaProviderException extends Exception {
+    private static final long serialVersionUID = -4330582092278501600L;
 
-public interface DefinitionProcessor extends Processor<Definition,DefinitionProcessorContext> {
-    String P_ELEMENT_NAMESPACE = "elementNamespace";
-    String P_ELEMENT_NAME = "elementName";
+    public FrameworkSchemaProviderException() {
+    }
+
+    public FrameworkSchemaProviderException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public FrameworkSchemaProviderException(String message) {
+        super(message);
+    }
+
+    public FrameworkSchemaProviderException(Throwable cause) {
+        super(cause);
+    }
 }

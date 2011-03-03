@@ -18,9 +18,9 @@ package com.googlecode.sisme.xsd.impl;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaCollection;
 
-import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessor;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
+import com.googlecode.sisme.framework.component.Definition;
+import com.googlecode.sisme.framework.component.DefinitionProcessor;
+import com.googlecode.sisme.framework.component.DefinitionProcessorContext;
 
 public class SchemaDefinitionProcessor implements DefinitionProcessor {
     public void process(DefinitionProcessorContext context, Definition definition) {

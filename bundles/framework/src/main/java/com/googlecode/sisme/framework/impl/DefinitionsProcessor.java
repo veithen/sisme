@@ -25,8 +25,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import com.googlecode.sisme.framework.ProcessorException;
 import com.googlecode.sisme.framework.document.Document;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessor;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
+import com.googlecode.sisme.framework.document.DocumentProcessor;
+import com.googlecode.sisme.framework.document.DocumentProcessorContext;
 
 public class DefinitionsProcessor implements DocumentProcessor {
     public void process(DocumentProcessorContext context, Document document) throws ProcessorException {

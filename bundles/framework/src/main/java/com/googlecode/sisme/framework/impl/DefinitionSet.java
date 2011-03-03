@@ -21,8 +21,8 @@ import java.util.UUID;
 
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.document.processor.DocumentProcessorContext;
+import com.googlecode.sisme.framework.component.Definition;
+import com.googlecode.sisme.framework.document.DocumentProcessorContext;
 
 public class DefinitionSet {
     private final DocumentProcessorContext context;

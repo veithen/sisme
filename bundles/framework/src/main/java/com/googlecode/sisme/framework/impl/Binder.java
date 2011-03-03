@@ -28,9 +28,9 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceRegistration;
 import org.w3c.dom.Element;
 
-import com.googlecode.sisme.framework.definition.Definition;
-import com.googlecode.sisme.framework.definition.processor.DefinitionProcessorContext;
-import com.googlecode.sisme.framework.definition.processor.Dependency;
+import com.googlecode.sisme.framework.component.Definition;
+import com.googlecode.sisme.framework.component.DefinitionProcessorContext;
+import com.googlecode.sisme.framework.component.Dependency;
 
 /**
  * Tracks a set of dependencies and automatically registers a service when every
